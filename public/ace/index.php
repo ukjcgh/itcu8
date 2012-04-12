@@ -11,5 +11,3 @@ $modelConfig = simplexml_load_file(ACE_DIR.'ide/'.$model, 'AceXMLElement');
 $modelData = simplexml_load_file(ACE_DIR.$model, 'AceXMLElement');
 
 echo template('areas.phtml', array('config'=>$modelConfig, 'data'=>$modelData));
-
-//test
