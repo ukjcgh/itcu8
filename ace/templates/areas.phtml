@@ -1,0 +1,69 @@
+<html>
+	<head>
+		<script type="text/javascript" src="/ace/js/jquery-1.7.2.min.js"></script>
+		<script type="text/javascript" src="/ace/js/main.js"></script>
+		<link rel="stylesheet"href="/ace/css/styles.css"/>
+	</head>
+</html>
+<body>
+
+	<script type="text/javascript">
+		config = <?= json_encode($config) ?>;
+		data = <?= json_encode($data) ?>;
+	</script>
+
+<b><?= html($config->grid->title) ?></b>
+<table>
+	<tr>
+		<? foreach($config->fields->field as $field): ?>
+		<th><?= html($field->code) ?></th>
+		<? endforeach ?>
+		<th></th>
+	</tr>
+<? foreach($data->area as $area): ?>
+	<tr>
+		<? foreach($config->fields->field as $field): ?>
+		<td><?= html($area->{$field->code}) ?></td>
+		<? endforeach ?>
+		<td>
+			<a href="#" onclick="edit_click(); return false">edit</a>
+			/
+			<a href="#" onclick="return false">delete</a>
+		</td>
+	</tr>
+<? endforeach ?>
+</table>
+<a href="#" onclick="return false">add</a>
+
+
+<div id="modal-shadow" style="display:none;position:absolute; width: 100%; height: 100%; left:0; top: 0; background: #000; opacity:0.2"></div>
+<div id="modal-form" style="display:none;position:absolute; width: 100%; height: 100%; left:0; top: 0;">
+	<div style="overflow:auto; position:relative; border:1px solid black; background-color: #fff; width:600px; margin: 0 auto; top:20%; padding:0 10px 10px 10px">
+		<div style="text-align:right"><a href="#" onclick="modal_close_click(); return false;">close</a></div>
+		<table style="border-spacing: 0px;">
+			<tr>
+				<td>code</td>
+				<td><input type="text"/></td>
+			</tr>
+			<tr>
+				<td>default</td>
+				<td>
+					<select>
+						<option>Yes</option>
+						<option>No</option>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td>url</td>
+				<td><input type="text"/></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td><button>save</button></td>
+			</tr>
+		</table>
+	</div>
+</div>
+
+</body>

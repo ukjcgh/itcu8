@@ -1,0 +1,18 @@
+<areas>
+	<fields>
+		<field>
+			<code>code</code>
+			<unique>1</unique>
+		</field>
+		<field>
+			<code>url</code>
+			<unique>1</unique>
+		</field>
+	</fields>
+	<grid>
+		<title>Areas</title>
+	</grid>
+	<form>
+		<title>Area</title>
+	</form>
+</areas>
