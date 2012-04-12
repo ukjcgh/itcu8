@@ -11,10 +11,4 @@ $xslt->importStylesheet($xslt_string);
 $xml = new DOMDocument;
 $xml->load('xml.xml');
 
-//echo $xslt->transformToDoc($xml)->firstChild->wholeText;
 echo $xslt->transformToXml($xml);
-
-
-#tree??????
-#xsl highlighting
-#recursion
