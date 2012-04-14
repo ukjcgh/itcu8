@@ -1,10 +1,10 @@
 <areas>
-	<area>
+	<item>
 		<code>front</code>
 		<url></url>
-	</area>
-	<area>
+	</item>
+	<item>
 		<code>backOffice</code>
 		<url>admin</url>
-	</area>
+	</item>
 </areas>

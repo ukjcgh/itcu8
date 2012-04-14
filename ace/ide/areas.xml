@@ -1,5 +1,5 @@
 <areas>
-	<fields>
+	<structure>
 		<field>
 			<code>code</code>
 			<unique>1</unique>
@@ -8,9 +8,13 @@
 			<code>url</code>
 			<unique>1</unique>
 		</field>
-	</fields>
+	</structure>
 	<grid>
 		<title>Areas</title>
+		<columns>
+			<code/>
+			<url/>
+		</columns>
 	</grid>
 	<form>
 		<title>Area</title>

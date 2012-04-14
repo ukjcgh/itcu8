@@ -2,46 +2,65 @@
 
 class AceXMLElement extends SimpleXMLElement {
 
-	//TODO: <emptyNode/>, attributes
+	//TODO: render attributes (don't forget about root node) - not necessary now
+	//TODO: render value which is midst childs - not necessary now
 	public function asNiceXML($element = null, $level = 1) {
 
 		$xml = '';
 		if(is_null($element)) $element = $this;
+		
 		foreach ($element as $node){
 			$indent = str_repeat("\t", $level);
-			$xml .= "\n$indent<" . $node->getName() . '>';
+			$nodeXml = '';
+			
 			if($node->count()){
-				$xml .= $this->asNiceXML($node, $level + 1);
-				$xml .= "\n$indent";
+				$nodeXml .= $this->asNiceXML($node, $level + 1);
+				$nodeXml .= "\n" . $indent;
 			} else {
-				$xml .= htmlspecialchars($node);
+				$nodeXml .= htmlspecialchars($node);
 			}
-			$xml .= '</' . $node->getName() . '>';
+			
+			if($nodeXml === ''){
+				$nodeXml = '<' . $node->getName() . '/>';
+			} else {
+				$nodeXml = '<' . $node->getName() . '>' . $nodeXml . '</' . $node->getName() . '>';
+			}
+			
+			$xml .= "\n" . $indent . $nodeXml;
 		}
 
-		//wrap
+		//add root element
 		if($level === 1){
-			$xml = "<?xml version=\"1.0\"?>\n<ace>$xml\n</ace>";
+			$name = $element->getName();
+			$xml = "<?xml version=\"1.0\"?>\n<$name>$xml\n</$name>";
 		}
 
 		return $xml;
 	}
-
-	public function addChild($name, $value = null, $namespace = null) {
-		if ($value instanceof AceXMLElement) {
-			if ($value->children()->count() > 0) {
-				$node = parent::addChild($name);
-				foreach($value->children() as $child) {
-					$node->addChild($child->getName(), $child);
-				}
-			} else {
-				$node = parent::addChild($value->getName(), $value);
+	
+	public function insertXmlElement($xmlElem, $tagName = null){
+		if ($xmlElem->children()->count() > 0) {
+			$node = $this->addChild($tagName ?: $xmlElem->getName());
+			foreach($xmlElem->children() as $child) {
+				$node->insertXmlElement($child);
 			}
-			foreach($value->attributes() as $n => $v) $node->addAttribute($n, $v);
-			return $node;
 		} else {
-			return parent::addChild($name, $value, $namespace);
+			$node = $this->addChild($xmlElem->getName(), (string)$xmlElem);
 		}
+		foreach($xmlElem->attributes() as $name => $value) $node->addAttribute($name, $value);
+		return $node;
+	}
+	
+	public function insertXmlString($xml, $replaceRootTag = null){
+		//don't use __CLASS__ coz it may contain parent value instead of $this if class is extended
+		$class = get_class($this);
+		$xmlElem = new $class($xml);
+		return $this->insertXmlElement($xmlElem, $replaceRootTag);
+	}
+	
+	public function insertXmlFile($filename, $replaceRootTag = null){
+		$xml = file_get_contents($filename);
+		return $this->insertXmlString($xml, $replaceRootTag);
 	}
 
 }

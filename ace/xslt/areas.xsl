@@ -1,22 +1,22 @@
 <xsl:transform version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
-    <xsl:template match="/">
+    <xsl:template match="/data">
         <html>
             <body>
+            	<b><xsl:value-of select="grid/title"/></b>
                 <table border="1">
 					
                     <tr>
-                        <xsl:for-each select="data/fields/*">
-                        <th><xsl:value-of select="."/> (<xsl:value-of select="name()"/>)</th>
+                        <xsl:for-each select="grid/columns/*">
+                        <th><xsl:value-of select="name()"/></th>
                         </xsl:for-each>
                     </tr>
 
-                    <xsl:for-each select="data/item">
-					<xsl:sort select="./*[local-name()=/data/sort/field]" order="{/data/sort/direction}"/>
+                    <xsl:for-each select="items/item">
                     <tr>
                         <xsl:variable name="item" select="." />
-                        <xsl:for-each select="/data/fields/*">
-							<xsl:variable name="field" select="name()" />
-                            <td><xsl:value-of select="$item/*[local-name()=$field]"/></td>
+                        <xsl:for-each select="//grid/columns/*">
+							<xsl:variable name="fieldCode" select="name()" />
+                            <td><xsl:value-of select="$item/*[local-name()=$fieldCode]"/></td>
                         </xsl:for-each>
                     </tr>
                     </xsl:for-each>
