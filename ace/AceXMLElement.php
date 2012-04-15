@@ -2,6 +2,7 @@
 
 class AceXMLElement extends SimpleXMLElement {
 
+	//TODO: don't work with namespaces e.g. xsl
 	//TODO: render attributes (don't forget about root node) - not necessary now
 	//TODO: render value which is midst childs - not necessary now
 	public function asNiceXML($element = null, $level = 1) {
@@ -9,7 +10,7 @@ class AceXMLElement extends SimpleXMLElement {
 		$xml = '';
 		if(is_null($element)) $element = $this;
 		
-		foreach ($element as $node){
+		foreach ($element->children() as $node){
 			$indent = str_repeat("\t", $level);
 			$nodeXml = '';
 			
