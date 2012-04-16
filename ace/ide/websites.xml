@@ -3,10 +3,12 @@
 		<field>
 			<code>code</code>
 			<unique>1</unique>
+			<type>code</type>
 		</field>
 		<field>
 			<code>domain</code>
 			<unique>1</unique>
+			<type>url</type>
 		</field>
 		<field>
 			<code>path</code>
