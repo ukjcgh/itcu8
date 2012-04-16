@@ -1,0 +1,27 @@
+<config>
+	<structure>
+		<field>
+			<code>code</code>
+			<unique>1</unique>
+		</field>
+		<field>
+			<code>domain</code>
+			<unique>1</unique>
+		</field>
+		<field>
+			<code>path</code>
+			<unique>1 per domain</unique>
+		</field>
+	</structure>
+	<grid>
+		<title>Websites</title>
+		<columns>
+			<code />
+			<domain />
+			<path />
+		</columns>
+	</grid>
+	<form>
+		<title>Website</title>
+	</form>
+</config>

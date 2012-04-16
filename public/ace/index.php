@@ -9,7 +9,7 @@ define('XSLT_DIR', ACE_DIR.'ide/xslt/');
 require_once ACE_DIR.'lib/functions.php';
 require_once ACE_DIR.'lib/AceXMLElement.php';
 
-$model = 'areas.xml';
+$model = 'websites.xml';
 $data = new AceXMLElement('<data/>');
 $modelConfig = new AceXMLElement(ACE_DIR.'ide/'.$model, 0, true);
 $data->insertXmlElement($modelConfig->grid);
