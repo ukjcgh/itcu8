@@ -16,5 +16,3 @@ $data->insertXmlElement($modelConfig->grid);
 $data->insertXmlFile(ACE_DIR.$model, 'items');
 
 echo templateXSL(XSLT_DIR.'areas.xsl', $data);
-
-//
