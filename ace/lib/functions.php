@@ -9,6 +9,7 @@ function templateXSL($xslFile, $xmlElem) {
 	
 	$outputNode = $xsltElem->addChild('output');
 	$outputNode->addAttribute('method', 'html');
+	$outputNode->addAttribute('indent', 'no');
 	
 	$xslProc->importStylesheet($xsltElem);
 	
