@@ -1,0 +1,17 @@
+<items>
+	<item>
+		<code>main</code>
+		<domain>ace.local</domain>
+		<path/>
+	</item>
+	<item>
+		<code>test</code>
+		<domain>ace2.local</domain>
+		<path/>
+	</item>
+	<item>
+		<code>test2</code>
+		<domain>ace2.local</domain>
+		<path>test</path>
+	</item>
+</items>
