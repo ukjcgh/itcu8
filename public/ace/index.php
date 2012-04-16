@@ -15,4 +15,4 @@ $modelConfig = new AceXMLElement(ACE_DIR.'ide/'.$model, 0, true);
 $data->insertXmlElement($modelConfig->grid);
 $data->insertXmlFile(ACE_DIR."engine/$model", 'items');
 
-echo templateXSL('areas.xsl', $data);
+echo templateXSL('grid.xsl', $data);
