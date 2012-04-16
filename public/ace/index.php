@@ -14,5 +14,9 @@ $data = new AceXMLElement('<data/>');
 $modelConfig = new AceXMLElement(ACE_DIR.'ide/'.$model, 0, true);
 $data->insertXmlElement($modelConfig->grid);
 $data->insertXmlFile(ACE_DIR."engine/$model", 'items');
+$body = templateXSL('grid.xsl', $data);
 
-echo templateXSL('grid.xsl', $data);
+$data = new AceXMLElement('<data/>');
+$data->title = 'title';
+$data->body = $body;
+echo templateXSL('main.xsl', $data);

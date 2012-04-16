@@ -3,10 +3,10 @@
     	<xsl:value-of disable-output-escaping="yes" select="'&lt;!doctype html&gt;'"/>
         <html>
         	<head>
-        		<title>title</title>
+        		<title><xsl:value-of select="title"/></title>
         	</head>
             <body>
-            	<xsl:value-of select="body"/>
+            	<xsl:value-of select="body" disable-output-escaping="yes"/>
             </body>
         </html>
     </xsl:template>
