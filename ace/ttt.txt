@@ -1,5 +1,6 @@
-XSL: safe, supported by browser and server, possible output raw xml, FED on FE can see whole input (xml) and template, good FED and DEV separation
+XSL: safe (auto escaping, valid html), supported by browser and server, possible output raw xml, FED on FE can see whole input (xml) and template, good FED and DEV separation
  	but: slower, not convenient (problems with highlight, verbose), new language to learn
 
 
-стайлю таблицу, редактирование и удаление
+стайлю таблицу, кнопки редактирование и удаление
+сейчас надо сделать $page->head->addCss

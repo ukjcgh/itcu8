@@ -1,15 +1,18 @@
 <?php
 
-function templateXSL($xslFile, $xmlElem) {
+function templateXSL($xslFile, $xmlElem = null) {
+	
+	if(is_null($xmlElem)) $xmlElem = new AceXMLElement('<data/>');
 	
 	$xslProc = new XSLTProcessor();
 	
-	//use simplexml_load_string coz faster
+	// use simplexml_load_string coz faster
 	$xsltElem = simplexml_load_string(file_get_contents(XSLT_DIR . $xslFile), 'AceXMLElement');
 	
 	$outputNode = $xsltElem->addChild('output');
 	$outputNode->addAttribute('method', 'html');
-	$outputNode->addAttribute('indent', 'no');
+// 	$outputNode->addAttribute('omit-xml-declaration', 'yes');
+// 	$outputNode->addAttribute('indent', 'no');
 	
 	$xslProc->importStylesheet($xsltElem);
 	
