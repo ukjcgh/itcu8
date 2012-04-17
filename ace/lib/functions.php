@@ -19,3 +19,11 @@ function templateXSL($xslFile, $xmlElem = null) {
 	return $xslProc->transformToXml($xmlElem);
 	
 }
+
+
+function aceAutoload($className){
+	include ACE_DIR.'ide/'.str_replace('_', '/', $className . '.php');
+}
+
+spl_autoload_register('aceAutoload');
+

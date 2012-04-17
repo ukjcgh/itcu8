@@ -1,6 +1,10 @@
-XSL: safe (auto escaping, valid html), supported by browser and server, possible output raw xml, FED on FE can see whole input (xml) and template, good FED and DEV separation
+XSL: safe (auto escaping, valid html), supported by browser and server, possible output raw xml, FED on FE can see whole input (xml) and template, good FED and DEV separation, force to pass convenient data to the template
  	but: slower, not convenient (problems with highlight, verbose), new language to learn
 
 
 стайлю таблицу, кнопки редактирование и удаление
 сейчас надо сделать $page->head->addCss
+ссылка для цсс захардкожена в темплейте
+
+
+атоматизация разворачивания, аплоад базы, медиа, конфигурация, может и других данных?

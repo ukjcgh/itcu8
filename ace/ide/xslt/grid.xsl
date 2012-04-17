@@ -5,7 +5,7 @@
 		<b>
 			<xsl:value-of select="grid/title" />
 		</b>
-		<table border="1">
+		<table>
 
 			<tr>
 				<xsl:for-each select="grid/columns/*">
