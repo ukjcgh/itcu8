@@ -7,7 +7,9 @@ make grid also as block, remove templateXSL from index.php, automate getXslData,
 как избавится от Warning: It is not yet possible to assign complex types to properties
 
 
-
+################ questions
+а почему бы клиентский теплейт формы не сделать обычным, а внего данные просто сетить скриптом, в поле.value = value
+where to place ace avents management
 
 
 ################ in future
