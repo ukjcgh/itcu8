@@ -13,6 +13,7 @@
 						<xsl:value-of select="name()" />
 					</th>
 				</xsl:for-each>
+				<th></th>
 			</tr>
 
 			<xsl:for-each select="items/item">

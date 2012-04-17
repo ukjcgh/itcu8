@@ -20,7 +20,6 @@ function templateXSL($xslFile, $xmlElem = null) {
 	
 }
 
-
 function aceAutoload($className){
 	include ACE_DIR.'ide/'.str_replace('_', '/', $className . '.php');
 }

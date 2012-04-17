@@ -5,10 +5,10 @@
 			select="'&lt;!DOCTYPE html&gt;'" />
 		<html>
 			<head>
-				<xsl:value-of select="headHTML" disable-output-escaping="yes" />
+				<xsl:value-of select="head" disable-output-escaping="yes" />
 			</head>
 			<body>
-				<xsl:value-of select="bodyHTML" disable-output-escaping="yes" />
+				<xsl:value-of select="body" disable-output-escaping="yes" />
 			</body>
 		</html>
 	</xsl:template>

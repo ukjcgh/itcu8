@@ -3,8 +3,12 @@ XSL: safe (auto escaping, valid html), supported by browser and server, possible
 
 
 стайлю таблицу, кнопки редактирование и удаление
-сейчас надо сделать $page->head->addCss
-ссылка для цсс захардкожена в темплейте
+make grid also as block, remove templateXSL from index.php, automate getXslData, creta abstract class with __tostring method
+как избавится от Warning: It is not yet possible to assign complex types to properties
 
 
+
+
+
+################ in future
 атоматизация разворачивания, аплоад базы, медиа, конфигурация, может и других данных?

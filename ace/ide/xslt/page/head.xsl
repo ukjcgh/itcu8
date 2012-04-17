@@ -5,7 +5,7 @@
 
 		<title><xsl:value-of select="title" /></title>
 		
-		<xsl:for-each select="css/item">
+		<xsl:for-each select="styles/*">
 			<link rel="stylesheet" href="/ace/css/{.}" />
 		</xsl:for-each>
 

@@ -17,12 +17,10 @@ $modelConfig = new AceXMLElement(ACE_DIR.'ide/'.$model, 0, true);
 $data->insertXmlElement($modelConfig->grid);
 $data->insertXmlFile(ACE_DIR."engine/$model", 'items');
 
-$head = new block_page_head;
-$head->title = "TTITLEE";
-$head->addCss('styles.css');
+$page = new block_page;
+$page->head = new block_page_head;
+$page->head->title = "TTITLEE";
+$page->head->styles[] = 'styles.css';
+$page->body = templateXSL('grid.xsl', $data);
 
-$page = new AceXMLElement('<data/>');
-$page->headHTML = templateXSL('page/head.xsl', $head->getXslData());
-$page->bodyHTML = templateXSL('grid.xsl', $data);
-
-echo templateXSL('page.xsl', $page);
+echo templateXSL('page.xsl', $page->getXslData());
