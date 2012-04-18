@@ -13,4 +13,27 @@ abstract class block_abstract {
 		return $blockPath . '.xsl';
 	}
 
+
+	protected $_xslData = array();
+
+	public function __set($name, $value) {
+		$this->_xslData[$name] = $value;
+	}
+
+	public function __get($name) {
+		return @$this->_xslData[$name];
+	}
+
+	public function getXslData(){
+		$data = new AceXMLElement('<data/>');
+		foreach ($this->_xslData as $key => $value) {
+			if($value instanceof ArrayObject || gettype($value) == 'array') {
+				$data->insertArray($key, $value);
+			} else {
+				$data->$key = (string)$value;
+			}
+		}
+		return $data;
+	}
+
 }

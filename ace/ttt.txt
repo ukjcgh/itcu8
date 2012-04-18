@@ -1,6 +1,6 @@
 
 стайлю таблицу, кнопки редактирование и удаление
-automate getXslData, creta abstract class with __tostring method
+block_grid::getXslData, просто конструкторы с дефолтными значениями.. может нафиг надо? это надо для дефолтный значений и магический метод __set для "styles[]=" работает только с ArrayObject
 
 DNA!
 
@@ -19,3 +19,7 @@ where to place ace avents management
 
 XSL: safe (auto escaping, valid html), supported by browser and server, possible output raw xml, FED on FE can see whole input (xml) and template, good FED and DEV separation, force to pass convenient data to the template
  	but: slower, not convenient (problems with highlight, verbose), new language to learn
+
+ 	
+я хочу быть автором, будет сайт посвященный этому фрему и я должен быть там автором
+я хочу иметь право использовать его в своих целях, в том состоянии когда я еще брал участие в его разработке

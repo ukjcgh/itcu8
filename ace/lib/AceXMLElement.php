@@ -9,24 +9,24 @@ class AceXMLElement extends SimpleXMLElement {
 
 		$xml = '';
 		if(is_null($element)) $element = $this;
-		
+
 		foreach ($element->children() as $node){
 			$indent = str_repeat("\t", $level);
 			$nodeXml = '';
-			
+
 			if($node->count()){
 				$nodeXml .= $this->asNiceXML($node, $level + 1);
 				$nodeXml .= "\n" . $indent;
 			} else {
 				$nodeXml .= htmlspecialchars($node);
 			}
-			
+
 			if($nodeXml === ''){
 				$nodeXml = '<' . $node->getName() . '/>';
 			} else {
 				$nodeXml = '<' . $node->getName() . '>' . $nodeXml . '</' . $node->getName() . '>';
 			}
-			
+
 			$xml .= "\n" . $indent . $nodeXml;
 		}
 
@@ -38,7 +38,7 @@ class AceXMLElement extends SimpleXMLElement {
 
 		return $xml;
 	}
-	
+
 	public function insertXmlElement($xmlElem, $tagName = null){
 		if ($xmlElem->children()->count() > 0) {
 			$node = $this->addChild($tagName ?: $xmlElem->getName());
@@ -51,17 +51,30 @@ class AceXMLElement extends SimpleXMLElement {
 		foreach($xmlElem->attributes() as $name => $value) $node->addAttribute($name, $value);
 		return $node;
 	}
-	
+
 	public function insertXmlString($xml, $replaceRootTag = null){
 		//don't use __CLASS__ coz it may contain parent value instead of $this if class is extended
 		$class = get_class($this);
 		$xmlElem = new $class($xml);
 		return $this->insertXmlElement($xmlElem, $replaceRootTag);
 	}
-	
+
 	public function insertXmlFile($filename, $replaceRootTag = null){
 		$xml = file_get_contents($filename);
 		return $this->insertXmlString($xml, $replaceRootTag);
+	}
+
+	public function insertArray($name, $array, $currNode = null) {
+		if(is_null($currNode)) $currNode = $this;
+		$arrayNode = $currNode->addChild($name);
+		foreach ($array as $key => $value) {
+			$arrayTag = is_numeric($key) ? 'item' : $key;
+			if($value instanceof ArrayObject || gettype($value) == 'array') {
+				$currNode->insertArray($arrayTag, $value, $arrayNode);
+			} else {
+				$arrayNode->addChild($arrayTag, $value);
+			}
+		}
 	}
 
 }
