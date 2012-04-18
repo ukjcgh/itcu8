@@ -1,11 +1,8 @@
-XSL: safe (auto escaping, valid html), supported by browser and server, possible output raw xml, FED on FE can see whole input (xml) and template, good FED and DEV separation, force to pass convenient data to the template
- 	but: slower, not convenient (problems with highlight, verbose), new language to learn
-
 
 стайлю таблицу, кнопки редактирование и удаление
-make grid also as block, remove templateXSL from index.php, automate getXslData, creta abstract class with __tostring method
-как избавится от Warning: It is not yet possible to assign complex types to properties
+automate getXslData, creta abstract class with __tostring method
 
+DNA!
 
 ################ questions
 а почему бы клиентский теплейт формы не сделать обычным, а внего данные просто сетить скриптом, в поле.value = value
@@ -14,3 +11,11 @@ where to place ace avents management
 
 ################ in future
 атоматизация разворачивания, аплоад базы, медиа, конфигурация, может и других данных?
+при инсталяции показвать недостающие экстеншены и модуля апача
+компиляция, так что данные из хмл прямо в коде и не надо тягать все
+лог действий а ide.. что бы они тоже коммитились?
+
+
+
+XSL: safe (auto escaping, valid html), supported by browser and server, possible output raw xml, FED on FE can see whole input (xml) and template, good FED and DEV separation, force to pass convenient data to the template
+ 	but: slower, not convenient (problems with highlight, verbose), new language to learn
