@@ -1,6 +1,6 @@
 <?php
 
-class block_grid {
+class block_grid extends block_abstract {
 
 	public function getXslData(){
 		$model = 'websites.xml';
@@ -11,7 +11,4 @@ class block_grid {
 		return $data;
 	}
 
-	public function __toString(){
-		return templateXSL('grid.xsl', $this->getXslData());
-	}
 }

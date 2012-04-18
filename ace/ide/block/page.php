@@ -1,6 +1,6 @@
 <?php
 
-class block_page {
+class block_page extends block_abstract {
 	
 	public $doctype = 'html';
 	public $head;
@@ -13,8 +13,5 @@ class block_page {
 		$data->body = (string)$this->body;
 		return $data;
 	}
-
-	public function __toString(){
-		return templateXSL('page.xsl', $this->getXslData());
-	}
+	
 }
