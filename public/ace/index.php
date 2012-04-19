@@ -19,5 +19,6 @@ $page->body = new block_grid;
 $page->doctype = 'html';
 $page->head->title = "TTITLEE";
 $page->head->styles[] = 'styles.css';
+$page->head->scripts[] = 'grid.js';
 
 echo $page;

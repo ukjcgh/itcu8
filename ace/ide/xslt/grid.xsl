@@ -26,7 +26,7 @@
 						</td>
 					</xsl:for-each>
 					<td>
-						<a href="#">edit</a>
+						<a href="#" onclick="grid_edit_action('{$item/code}'); return false;">edit</a>
 						/
 						<a href="#">delete</a>
 					</td>
