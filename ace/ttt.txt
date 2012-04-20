@@ -20,6 +20,7 @@ where to place ace avents management
 loadlimiter
 grab design - simplify, automate
 unittesting
+все длительные операции (импорт/компиляция) делать независимо от соеденения на случай если пропадет интеренет 
 
 
 
