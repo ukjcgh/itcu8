@@ -1,6 +1,7 @@
 
 кнопки редактирование и удаление
 походу конструктов в блоках надо заменить на xml и указывать там тип и дефолное значение
+styles & script as individual blocks?
 
 DNA!
 
@@ -10,6 +11,7 @@ where to place ace avents management
 
 
 ################ in future
+переименовать папку /ace там где ide и профиксить все
 атоматизация разворачивания, аплоад базы, медиа, конфигурация, может и других данных?
 при инсталяции показвать недостающие экстеншены и модуля апача
 компиляция, так что данные из хмл прямо в коде и не надо тягать все
@@ -27,6 +29,7 @@ fastCgi
 реклама в бо и админке и опционально на фронте?
 sanity check + add check for obsolete indexes by time of table modification
 merging css and js
+configure error alert, maybe nagios
 
 
 

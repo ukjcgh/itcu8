@@ -35,5 +35,8 @@
 
 		</table>
 		<a href="#">add</a>
+		<br/>
+		<br/>
+		<button onclick="ace.action('edit', 'test2')">asdf</button>
 	</xsl:template>
 </xsl:transform>
