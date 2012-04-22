@@ -1,5 +1,5 @@
 
-стайлю таблицу, кнопки редактирование и удаление
+кнопки редактирование и удаление
 походу конструктов в блоках надо заменить на xml и указывать там тип и дефолное значение
 
 DNA!
@@ -21,7 +21,12 @@ loadlimiter
 grab design - simplify, automate
 unittesting
 все длительные операции (импорт/компиляция) делать независимо от соеденения на случай если пропадет интеренет
-шедулер 
+шедулер
+protection from CSR (cross site request) by referrer check
+fastCgi
+реклама в бо и админке и опционально на фронте?
+sanity check + add check for obsolete indexes by time of table modification
+merging css and js
 
 
 

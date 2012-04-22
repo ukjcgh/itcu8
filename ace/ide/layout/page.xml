@@ -1,0 +1,17 @@
+<page>
+	<doctype>html</doctype>
+	<head>
+		<title>TTITLEE</title>
+		<styles>
+			<item>styles.css</item>
+		</styles>
+		<scripts>
+			<item>grid.js</item>
+		</scripts>
+	</head>
+	<body>
+		<grid>
+		....
+		</grid>
+	</body>
+</page>
