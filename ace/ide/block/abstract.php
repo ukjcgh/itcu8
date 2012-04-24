@@ -29,6 +29,8 @@ abstract class block_abstract {
 		foreach ($this->_xslData as $key => $value) {
 			if($value instanceof ArrayObject || gettype($value) == 'array') {
 				$data->insertArray($key, $value);
+			} elseif($value instanceof SimpleXMLElement) {
+				$data->insertXmlElement($value, $key);
 			} else {
 				$data->$key = (string)$value;
 			}

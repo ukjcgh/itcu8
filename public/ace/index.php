@@ -10,17 +10,40 @@ define('XSLT_DIR', ACE_DIR.'ide/xslt/');
 require_once ACE_DIR.'lib/functions.php';
 require_once ACE_DIR.'lib/AceXMLElement.php';
 
-//struct
-$page = new block_page;
-$page->head = new block_page_head;
-$page->body = new block_grid;
 
-//filling
-$page->doctype = 'html';
-$page->head->title = "TTITLEE";
-$page->head->styles[] = 'styles.css';
-$page->head->scripts[] = 'jquery-1.7.2.min.js';
-$page->head->scripts[] = 'ace.js';
-$page->head->scripts[] = 'grid.js';
+$action = isset($_GET['action']) ? $_GET['action'] : '';
 
-echo $page;
+switch($action){
+	case 'edit':
+		$form = new block_grid_form;
+		$modelData = new AceXMLElement('<data/>');
+		$modelData->insertXmlFile(ACE_DIR."engine/websites.xml", 'items');
+		$itemCode = $_POST['code'];
+		$result = $modelData->xpath('items/item[./code=' . xpath_escape_var($itemCode) . ']');
+		$form->item = $result[0];
+		
+		$modelConfig = new AceXMLElement(ACE_DIR.'ide/websites.xml', 0, true);
+		$form->config = $modelConfig->form;
+// 		echo $form->getXslData()->asnicexml();
+		echo $form;
+		break;
+
+	default:
+		//struct
+		$page = new block_page;
+	$page->head = new block_page_head;
+	$page->body = new block_grid;
+
+	//filling
+	$page->doctype = 'html';
+	$page->head->title = "TTITLEE";
+	$page->head->styles[] = 'styles.css';
+	$page->head->styles[] = 'popup.css';
+	$page->head->scripts[] = 'jquery-1.7.2.min.js';
+	$page->head->scripts[] = 'ace.js';
+	$page->head->scripts[] = 'popup.js';
+	$page->head->scripts[] = 'grid.js';
+
+	echo $page;
+	break;
+}

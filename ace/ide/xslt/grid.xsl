@@ -22,11 +22,11 @@
 					<xsl:for-each select="//grid/columns/*">
 						<xsl:variable name="fieldCode" select="name()" />
 						<td>
-							<xsl:value-of select="$item/*[local-name()=$fieldCode]" />
+							<xsl:value-of select="$item/*[name()=$fieldCode]" />
 						</td>
 					</xsl:for-each>
 					<td>
-						<a href="#" onclick="grid_edit_action('{$item/code}'); return false;">edit</a>
+						<a href="#" onclick="return grid_edit_action('{$item/code}');">edit</a>
 						/
 						<a href="#">delete</a>
 					</td>
@@ -35,8 +35,5 @@
 
 		</table>
 		<a href="#">add</a>
-		<br/>
-		<br/>
-		<button onclick="ace.action('edit', 'test2')">asdf</button>
 	</xsl:template>
 </xsl:transform>

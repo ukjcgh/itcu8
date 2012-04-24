@@ -1,5 +1,5 @@
 table {
-	background-color: #000;
+	background-color: #ccc;
 	border-spacing: 1px;
 }
 table td, table th {
@@ -9,4 +9,8 @@ table td, table th {
 a {
 	color: rgb(40,40,198);
 	text-decoration: none;
+}
+
+table.form {
+	background-color: #fff;
 }

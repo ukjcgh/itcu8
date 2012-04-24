@@ -1,7 +1,11 @@
 
+light style
+проверить ескейпы в форме когда заработает
 кнопки редактирование и удаление
 походу конструктов в блоках надо заменить на xml и указывать там тип и дефолное значение
 styles & script as individual blocks?
+block_abstract::getXslData - move to acexmlelement::insert (with type check)
+trim?
 
 DNA!
 
@@ -30,6 +34,7 @@ fastCgi
 sanity check + add check for obsolete indexes by time of table modification
 merging css and js
 configure error alert, maybe nagios
+debug: profiler + track to exit;
 
 
 

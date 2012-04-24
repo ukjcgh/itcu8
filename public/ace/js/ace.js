@@ -1,17 +1,15 @@
 ace = {
-	action : function(action, param) {
+	action : function(action, data) {
 		$.ajax({
 			type : "POST",
-			url : '/ace/' + action,
-			data : {
-				name : "John",
-				location : "Boston"
-			}
+			url : '/ace/?action=' + action,
+			'data' : data
 		}).done(function(msg) {
-			alert("Data Saved: " + msg);
+			popup.show(msg);
 		}).fail(function(e) {
-			msg = "Error during ajax request";
-			if(e.status) msg += ': ' + e.status + ' ' + e.statusText;
+			msg = "Error during request";
+			if (e.status)
+				msg += ': ' + e.status + ' ' + e.statusText;
 			alert(msg);
 		});
 	}

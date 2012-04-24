@@ -1,3 +1,4 @@
-function grid_edit_action(code) {
-	alert('edit for \'' + code + '\' row');
+function grid_edit_action(code){
+	ace.action('edit', {'code': code});
+	return false;
 }

@@ -2,6 +2,10 @@
 
 class AceXMLElement extends SimpleXMLElement {
 
+	public function addChild($name, $value = null, $namespace = null) {
+		return parent::addChild($name, html($value), $namespace);
+	}
+
 	//TODO: don't work with namespaces e.g. xsl
 	//TODO: render attributes (don't forget about root node) - not necessary now
 	//TODO: render value which is midst childs - not necessary now
@@ -46,7 +50,7 @@ class AceXMLElement extends SimpleXMLElement {
 				$node->insertXmlElement($child);
 			}
 		} else {
-			$node = $this->addChild($xmlElem->getName(), (string)$xmlElem);
+			$node = $this->addChild($xmlElem->getName(), $xmlElem);
 		}
 		foreach($xmlElem->attributes() as $name => $value) $node->addAttribute($name, $value);
 		return $node;
@@ -68,7 +72,7 @@ class AceXMLElement extends SimpleXMLElement {
 		if(is_null($currNode)) $currNode = $this;
 		$arrayNode = $currNode->addChild($name);
 		foreach ($array as $key => $value) {
-			$arrayTag = is_numeric($key) ? 'item' : $key;
+			$arrayTag = is_numeric($key) ? "item$key" : $key;
 			if($value instanceof ArrayObject || gettype($value) == 'array') {
 				$currNode->insertArray($arrayTag, $value, $arrayNode);
 			} else {

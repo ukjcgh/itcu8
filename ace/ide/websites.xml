@@ -25,5 +25,10 @@
 	</grid>
 	<form>
 		<title>Website</title>
+		<fields>
+			<code />
+			<domain />
+			<path />
+		</fields>
 	</form>
 </config>
