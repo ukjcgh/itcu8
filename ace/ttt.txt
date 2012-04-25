@@ -10,6 +10,7 @@
 styles & script as individual blocks?
 block_abstract::getXslData - move to acexmlelement::insert (with type check)
 trim from xml when edit?
+алиасы для сайтов, с алиасов не редиректить
 
 DNA!
 
