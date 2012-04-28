@@ -1,3 +1,4 @@
+<?xml version="1.0"?>
 <items>
 	<item>
 		<code>main</code>
@@ -12,6 +13,6 @@
 	<item>
 		<code>test2</code>
 		<domain>ace22.local</domain>
-		<path>test</path>
+		<path>test&amp;&gt;&lt;&quot;' *&amp;amp;</path>
 	</item>
 </items>

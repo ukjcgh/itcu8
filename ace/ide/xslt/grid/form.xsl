@@ -21,7 +21,7 @@
 			<tr>
 				<td></td>
 				<td>
-					<button>save</button>
+					<button class="form-save-button">save</button>
 				</td>
 			</tr>
 		</table>
