@@ -15,7 +15,6 @@ popup = {
 		$('.popup .content').html(html);
 		$('.popup-back').show();
 		$('.popup').show();
-		$('.popup *[name]:first').focus();
 	},
 
 	hide : function() {

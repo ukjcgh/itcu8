@@ -3,7 +3,7 @@
 	<item>
 		<code>main</code>
 		<domain>ace.local</domain>
-		<path/>
+		<path>tyty</path>
 	</item>
 	<item>
 		<code>test</code>
@@ -13,6 +13,6 @@
 	<item>
 		<code>test2</code>
 		<domain>ace22.local</domain>
-		<path>test&amp;&gt;&lt;&quot;' *&amp;amp;</path>
+		<path>test</path>
 	</item>
 </items>

@@ -7,13 +7,26 @@ function grid_edit_action(code) {
 		}
 	}).done(function(msg) {
 		popup.show(msg);
+		$('.popup *[name]:first').focus();
 
-		var data = {};
-		$('.form-save-button').bind('click', function() {
+		var submit_func = function() {
+			var data = {};
 			$('.form *[name]').each(function(i, el) {
 				data[el.name] = el.value;
 			});
 			grid_save_action(data);
+		}
+
+		$('.popup input[type="text"]').each(function(i, el) {
+			$(el).bind('keypress', function(e) {
+				if (e.keyCode == 13) {
+					submit_func();
+				}
+			});
+		});
+
+		$('.form-save-button').bind('click', function() {
+			submit_func();
 		});
 
 	}).fail(function(e) {
@@ -31,9 +44,9 @@ function grid_save_action(data) {
 		url : '/ace/?action=save',
 		'data' : data
 	}).done(function(msg) {
-		
+
 		document.location.reload();
-		
+
 	}).fail(function(e) {
 		msg = "Error during request";
 		if (e.status)
