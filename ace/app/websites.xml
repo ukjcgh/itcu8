@@ -2,7 +2,7 @@
 <items>
 	<item>
 		<code>main</code>
-		<domain>ace.local</domain>
+		<domain>ace.local$</domain>
 		<path/>
 	</item>
 	<item>
@@ -14,5 +14,10 @@
 		<code>asdf</code>
 		<domain>asdf3456</domain>
 		<path>asdf</path>
+	</item>
+	<item>
+		<code>44</code>
+		<domain/>
+		<path/>
 	</item>
 </items>
