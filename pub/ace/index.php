@@ -6,7 +6,7 @@ error_reporting(E_ALL);
 
 define('DS', DIRECTORY_SEPARATOR);
 define('ACE_DIR', realpath('..'.DS.'..'.DS.'ace').DS);
-define('XSLT_DIR', ACE_DIR.'ide'.DS.'xslt'.DS);
+define('TPL_DIR', ACE_DIR.'ide'.DS.'templates'.DS);
 
 require_once ACE_DIR.'ide'.DS.'lib'.DS.'functions.php';
 require_once ACE_DIR.'ide'.DS.'lib'.DS.'AceXMLElement.php';

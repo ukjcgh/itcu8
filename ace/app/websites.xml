@@ -13,16 +13,6 @@
 	<item>
 		<code>asdf</code>
 		<domain>asdf3456</domain>
-		<path>asdf</path>
-	</item>
-	<item>
-		<code>44</code>
-		<domain/>
-		<path/>
-	</item>
-	<item>
-		<code>12345</code>
-		<domain/>
-		<path/>
+		<path>asdfа</path>
 	</item>
 </items>
