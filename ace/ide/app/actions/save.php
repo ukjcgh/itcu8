@@ -7,7 +7,7 @@ $item = $result[0];
 
 $modelConfig = new AceXMLElement(ACE_DIR.'ide/websites.xml', 0, true);
 foreach($modelConfig->forms->edit->fields->children() as $field=>$stuff) {
-	$item->$field = $_POST[$field];
+	$item->$field = trim($_POST[$field]);
 }
 
 file_put_contents(ACE_DIR."app/websites.xml", $modelData->asNiceXml());

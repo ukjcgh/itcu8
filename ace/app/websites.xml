@@ -3,7 +3,7 @@
 	<item>
 		<code>main</code>
 		<domain>ace.local</domain>
-		<path>:</path>
+		<path/>
 	</item>
 	<item>
 		<code>second</code>
