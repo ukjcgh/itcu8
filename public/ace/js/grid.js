@@ -14,6 +14,9 @@ function grid_edit_action(code) {
 			$('.form *[name]').each(function(i, el) {
 				data[el.name] = el.value;
 			});
+
+			$('.form-save-button').html('saving..');
+
 			grid_save_action(data);
 		}
 
