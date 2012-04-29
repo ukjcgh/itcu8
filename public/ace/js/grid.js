@@ -18,7 +18,7 @@ function grid_edit_action(code) {
 			$('.form-save-button').html('saving..');
 
 			grid_save_action(data);
-		}
+		};
 
 		$('.popup input[type="text"]').each(function(i, el) {
 			$(el).bind('keypress', function(e) {
