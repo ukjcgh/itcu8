@@ -11,4 +11,4 @@ define('TPL_DIR', ACE_DIR.'ide'.DS.'templates'.DS);
 require_once ACE_DIR.'ide'.DS.'lib'.DS.'functions.php';
 require_once ACE_DIR.'ide'.DS.'lib'.DS.'AceXMLElement.php';
 
-require_once ACE_DIR.'ide'.DS.'app'.DS.'router.php';
+require_once ACE_DIR.'ide'.DS.'app'.DS.'dispatch.php';
