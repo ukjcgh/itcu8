@@ -2,7 +2,7 @@
 
 $form = new block_grid_form;
 $modelData = new AceXMLElement('<data/>');
-$modelData->insertXmlFile(ACE_DIR."engine/websites.xml", 'items');
+$modelData->insertXmlFile(ACE_DIR."app/websites.xml", 'items');
 $itemCode = $_POST['code'];
 $result = $modelData->xpath('items/item[./code=' . xpath_escape_var($itemCode) . ']');
 $form->item = $result[0];
