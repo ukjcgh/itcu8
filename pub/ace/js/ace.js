@@ -1,10 +1,27 @@
 ace = {
 	'request' : function(action, data) {
+
+		var reqData = {};
+
+		// check for action on client
+		if (window[action] == null) {
+			reqData.actionIsNotLoaded = 1;
+		} else {
+			if (typeof (window[action]) != 'function') {
+				console.error('No place to load action, window.' + action
+						+ ' must be null. Use other name for this action');
+				return;
+			}
+		}
+
+		reqData.data = data;
+
 		$.ajax({
 			type : "POST",
 			url : '/ace/?action=' + encodeURIComponent(action),
-			'data' : data
+			'data' : reqData
 		}).done(function(resp) {
+			//TODO: eval attached action, run
 			console.log(resp);
 		}).fail(
 				function(xhr, jError, jsError) {
@@ -12,7 +29,7 @@ ace = {
 					msg += '\n      Status: ' + xhr.status + ' '
 							+ xhr.statusText + '\n      jQuery: ' + jError
 							+ '\n      JS: ' + jsError;
-					alert(msg + '\n');
+					console.error(msg);
 				});
 	}
 };
