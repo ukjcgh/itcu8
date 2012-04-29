@@ -15,6 +15,7 @@ styles & script as individual blocks?
 block_abstract::getXslData - move to acexmlelement::insert (with type check)
 trim from xml when edit?
 алиасы для сайтов, с алиасов не редиректить
+перехват ошибок при аяксе
 
 DNA!
 
@@ -22,7 +23,6 @@ DNA!
 может все-таки в базе хранить данные, и хмл юзать только для деплойментов?
 а почему бы клиентский теплейт формы не сделать обычным, а внего данные просто сетить скриптом, в поле.value = value
 where to place ace avents management
-перехват ошибок при аяксе
 
 
 ################ in future
@@ -50,6 +50,7 @@ ace mudule and ide extensions, extensions server, any installation can be the se
 компиляция с темплейтами и данными в файле!!!
 хранить сессии в оперативке
 возможность форматирования хтмл на выходе, для дебага
+allow chrome only for ide
 
 
 
