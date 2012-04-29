@@ -12,7 +12,9 @@
 	top: 120px;
 	left: 300px;
 	background-color: White;
-	border: 1px outset #000;
+	border: 1px solid Gray;
+	border-top-color: #ddd;
+	border-left-color: #ddd;
 	min-width: 250px;
 }
 
