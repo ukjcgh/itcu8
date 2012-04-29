@@ -6,7 +6,7 @@ $result = $modelData->xpath('item[./code=' . xpath_escape_var($itemCode) . ']');
 $item = $result[0];
 
 $modelConfig = new AceXMLElement(ACE_DIR.'ide/websites.xml', 0, true);
-foreach($modelConfig->form->fields->children() as $field=>$stuff) {
+foreach($modelConfig->forms->edit->fields->children() as $field=>$stuff) {
 	$item->$field = $_POST[$field];
 }
 

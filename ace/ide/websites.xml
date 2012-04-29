@@ -23,12 +23,22 @@
 			<path />
 		</columns>
 	</grid>
-	<form>
-		<title>Website</title>
-		<fields>
-			<code />
-			<domain />
-			<path />
-		</fields>
-	</form>
+	<forms>
+		<edit>
+			<title>Edit Website</title>
+			<fields>
+				<code />
+				<domain />
+				<path />
+			</fields>
+		</edit>
+		<add>
+			<title>Add Website</title>
+			<fields>
+				<code />
+				<domain />
+				<path />
+			</fields>
+		</add>
+	</forms>
 </config>
