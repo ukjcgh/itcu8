@@ -3,7 +3,7 @@
 	<item>
 		<code>main</code>
 		<domain>ace.local</domain>
-		<path/>
+		<path>-</path>
 	</item>
 	<item>
 		<code>second</code>
@@ -12,7 +12,7 @@
 	</item>
 	<item>
 		<code>asdf</code>
-		<domain>asdf3456</domain>
-		<path>asdfа</path>
+		<domain/>
+		<path/>
 	</item>
 </items>
