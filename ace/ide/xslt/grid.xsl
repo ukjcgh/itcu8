@@ -26,14 +26,14 @@
 						</td>
 					</xsl:for-each>
 					<td>
-						<a href="#" onclick="return grid_edit_action('{$item/code}');">edit</a>
+						<a class="edit-link" code="{$item/code}">edit</a>
 						/
-						<a href="#">delete</a>
+						<a class="delete-link" code="{$item/code}">delete</a>
 					</td>
 				</tr>
 			</xsl:for-each>
 
 		</table>
-		<a href="#">add</a>
+		<a class="add-link">add</a>
 	</xsl:template>
 </xsl:transform>

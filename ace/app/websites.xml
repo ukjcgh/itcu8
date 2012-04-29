@@ -3,16 +3,21 @@
 	<item>
 		<code>main</code>
 		<domain>ace.local</domain>
-		<path>rr</path>
-	</item>
-	<item>
-		<code>test</code>
-		<domain>ace2.local</domain>
 		<path/>
 	</item>
 	<item>
-		<code>test2</code>
-		<domain>ace22.local</domain>
-		<path>test</path>
+		<code>second</code>
+		<domain>ace.local.com</domain>
+		<path/>
+	</item>
+	<item>
+		<code>zz</code>
+		<domain/>
+		<path/>
+	</item>
+	<item>
+		<code>99</code>
+		<domain>uu</domain>
+		<path>0</path>
 	</item>
 </items>
