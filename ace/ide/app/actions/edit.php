@@ -7,6 +7,6 @@ $itemCode = $_POST['code'];
 $result = $modelData->xpath('items/item[./code=' . xpath_escape_var($itemCode) . ']');
 $form->item = $result[0];
 
-$modelConfig = new AceXMLElement(ACE_DIR.'ide/websites.xml', 0, true);
+$modelConfig = new AceXMLElement(ACE_DIR.'ide/config/websites.xml', 0, true);
 $form->config = $modelConfig->forms->edit;
 echo $form;

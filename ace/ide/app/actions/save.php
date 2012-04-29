@@ -5,7 +5,7 @@ $itemCode = $_POST['code'];
 $result = $modelData->xpath('item[./code=' . xpath_escape_var($itemCode) . ']');
 $item = $result[0];
 
-$modelConfig = new AceXMLElement(ACE_DIR.'ide/websites.xml', 0, true);
+$modelConfig = new AceXMLElement(ACE_DIR.'ide/config/websites.xml', 0, true);
 foreach($modelConfig->forms->edit->fields->children() as $field=>$stuff) {
 	$item->$field = trim($_POST[$field]);
 }
