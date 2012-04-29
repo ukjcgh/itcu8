@@ -25,7 +25,7 @@ popup = {
 	}
 }
 
-$(document).bind('keypress', function(e) {
+$(document).bind('keyup', function(e) {
 	if (e.keyCode == 27) {
 		popup.hide();
 	}
