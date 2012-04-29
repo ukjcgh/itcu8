@@ -1,6 +1,8 @@
 <?php
 
-class block_page extends block_abstract {
+namespace blocks;
+
+class page extends \blocks\master {
 
 	public function __construct() {
 		$this->_xslData = array(

@@ -1,6 +1,8 @@
 <?php
 
-abstract class block_abstract {
+namespace blocks;
+
+abstract class master {
 
 	public function __toString() {
 		return templateXSL($this->getTemplateFileName(), $this->getXslData());
@@ -8,8 +10,8 @@ abstract class block_abstract {
 
 	public function getTemplateFileName(){
 		$className = get_class($this);
-		$blockName = substr($className, strpos($className, '_') + 1);
-		$blockPath = str_replace('_', '/', $blockName);
+		$blockName = substr($className, strpos($className, '\\') + 1);
+		$blockPath = str_replace('\\', DS, $blockName);
 		return $blockPath . '.xsl';
 	}
 
@@ -25,11 +27,11 @@ abstract class block_abstract {
 	}
 
 	public function getXslData(){
-		$data = new AceXMLElement('<data/>');
+		$data = new \AceXMLElement('<data/>');
 		foreach ($this->_xslData as $key => $value) {
-			if($value instanceof ArrayObject || gettype($value) == 'array') {
+			if($value instanceof \ArrayObject || gettype($value) == 'array') {
 				$data->insertArray($key, $value);
-			} elseif($value instanceof SimpleXMLElement) {
+			} elseif($value instanceof \SimpleXMLElement) {
 				$data->insertXmlElement($value, $key);
 			} else {
 				$data->$key = (string)$value;

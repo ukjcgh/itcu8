@@ -35,7 +35,7 @@ function templateXSL($xslFile, $xmlElem = null) {
 }
 
 function aceAutoload($className){
-	include ACE_DIR.'ide/'.str_replace('_', '/', $className . '.php');
+	include ACE_DIR.'ide'.DS.str_replace('\\', DS, $className . '.php');
 }
 
 spl_autoload_register('aceAutoload');
