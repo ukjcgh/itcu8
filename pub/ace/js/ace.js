@@ -1,35 +1,45 @@
 ace = {
 	'request' : function(action, data) {
 
-		var reqData = {};
+		this.actionIsLoaded = function(action) {
+			ace.actions = (ace.actions == null) ? {} : ace.actions;
+			return ace.actions[action] == null;
+		};
 
-		// check for action on client
-		if (window[action] == null) {
-			reqData.actionIsNotLoaded = 1;
-		} else {
-			if (typeof (window[action]) != 'function') {
-				console.error('No place to load action, window.' + action
-						+ ' must be null. Use other name for this action');
-				return;
+		this.done = function(resp) {
+			if (resp == null) {
+				console.error('Error during ace.request(). Empty response.');
 			}
-		}
-
-		reqData.data = data;
-
-		$.ajax({
-			type : "POST",
-			url : '/ace/?action=' + encodeURIComponent(action),
-			'data' : reqData
-		}).done(function(resp) {
-			//TODO: eval attached action, run
 			console.log(resp);
-		}).fail(
-				function(xhr, jError, jsError) {
-					msg = "Error during request";
-					msg += '\n      Status: ' + xhr.status + ' '
-							+ xhr.statusText + '\n      jQuery: ' + jError
-							+ '\n      JS: ' + jsError;
-					console.error(msg);
-				});
+		};
+
+		this.fail = function(xhr, jError, jsError) {
+			msg = "Error during ace.request().";
+			if (jError == 'parsererror') {
+				msg += ' The server has sent invalid JSON. See response below:\n'
+						+ xhr.responseText;
+				console.error(msg);
+			} else {
+				msg += '\n      HTTP: ' + xhr.status + ' ' + xhr.statusText
+						+ '\n      jQuery: ' + jError + '\n      JS: '
+						+ jsError;
+				console.error(msg);
+			}
+		};
+
+		var params = {
+			'type' : "POST",
+			'dataType' : 'json', ????// force json
+			'url' : '/ace/?action=' + encodeURIComponent(action),
+			'data' : {
+				'actionIsLoaded' : this.actionIsLoaded(action),
+				'data' : data
+			}
+		};
+
+		// REQUEST
+
+		$.ajax(params).done(this.done).fail(this.fail);
+
 	}
 };
