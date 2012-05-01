@@ -23,8 +23,7 @@ ace.request = function(action, data) {
 			try {
 				ace.handlers[action] = eval(resp.handler);
 			} catch (e) {
-				console.error(errorMsg + 'Can\'t parse action "' + action
-						+ '":\n' + e);
+				console.error(errorMsg + 'Can\'t parse action "' + action + '":\n' + e);
 				return;
 			}
 		}
@@ -32,24 +31,20 @@ ace.request = function(action, data) {
 			try {
 				ace.handlers[action](resp.data);
 			} catch (e) {
-				console.error(errorMsg + 'Error in action "' + action + '"\n'
-						+ e);
+				console.error(errorMsg + 'Error in action "' + action + '"\n' + e);
 			}
 		} else {
-			console.error(errorMsg + 'Function ace.handlers["' + action
-					+ '"] not found.');
+			console.error(errorMsg + 'Function ace.handlers["' + action + '"] not found.');
 		}
 	};
 
 	this.fail = function(xhr, jError, jsError) {
 		msg = errorMsg;
 		if (jError == 'parsererror') {
-			msg += 'The server has sent invalid JSON. See response below:\n'
-					+ xhr.responseText;
+			msg += 'The server has sent invalid JSON. See response below:\n' + xhr.responseText;
 			console.error(msg);
 		} else {
-			msg += '\n      HTTP: ' + xhr.status + ' ' + xhr.statusText
-					+ '\n      jQuery: ' + jError + '\n      JS: ' + jsError;
+			msg += '\n      HTTP: ' + xhr.status + ' ' + xhr.statusText + '\n      jQuery: ' + jError + '\n      JS: ' + jsError;
 			console.error(msg);
 		}
 	};
@@ -57,7 +52,7 @@ ace.request = function(action, data) {
 	var params = {
 		'type' : "POST",
 		'dataType' : 'json', // force json, write separate request function
-								// to change this option
+		// to change this option
 		'url' : '/ace/?action=' + encodeURIComponent(action),
 		'data' : {
 			'actionIsLoaded' : this.actionIsLoaded(action),
