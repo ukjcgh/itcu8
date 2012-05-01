@@ -1,4 +1,5 @@
 ace = {};
+
 ace.request = function(action, data) {
 
 	var errorMsg = 'Error during ace.request(). ';
@@ -55,7 +56,8 @@ ace.request = function(action, data) {
 
 	var params = {
 		'type' : "POST",
-		'dataType' : 'json', // force json
+		'dataType' : 'json', // force json, write separate request function
+								// to change this option
 		'url' : '/ace/?action=' + encodeURIComponent(action),
 		'data' : {
 			'actionIsLoaded' : this.actionIsLoaded(action),
