@@ -6,8 +6,7 @@ ace.request = function(action, data) {
 
 	this.actionIsLoaded = function(action) {
 		ace.handlers = (ace.handlers == null) ? {} : ace.handlers;
-		// 0, 1 to keep bool sense even if string
-		return ace.handlers[action] == null ? 0 : 1;
+		return ace.handlers[action] != null;
 	};
 
 	this.done = function(resp) {
@@ -29,9 +28,15 @@ ace.request = function(action, data) {
 		}
 		if (typeof ace.handlers[action] == 'function') {
 			try {
+				// TODO: eval so that lineNumber is defined in exception
 				ace.handlers[action](resp.data);
 			} catch (e) {
-				console.error(errorMsg + 'Error in action "' + action + '"\n' + e);
+				var msg = errorMsg + 'Error in action "' + action + '.js".';
+				if (e.lineNumber) {
+					msg += ' Line: ' + e.lineNumber;
+				}
+				msg += '\n' + e;
+				console.error(msg);
 			}
 		} else {
 			console.error(errorMsg + 'Function ace.handlers["' + action + '"] not found.');
@@ -39,7 +44,7 @@ ace.request = function(action, data) {
 	};
 
 	this.fail = function(xhr, jError, jsError) {
-		msg = errorMsg;
+		var msg = errorMsg;
 		if (jError == 'parsererror') {
 			msg += 'The server has sent invalid JSON. See response below:\n' + xhr.responseText;
 			console.error(msg);
@@ -54,8 +59,11 @@ ace.request = function(action, data) {
 		'dataType' : 'json', // force json, write separate request function to change this option
 		'url' : '/ace/?action=' + encodeURIComponent(action),
 		'data' : {
-			'actionIsLoaded' : this.actionIsLoaded(action),
-			'data' : data
+			// send json as string to keep types so you will have bool instead of string 'false'
+			'requestData' : JSON.stringify({
+				'actionIsLoaded' : this.actionIsLoaded(action),
+				'data' : data
+			})
 		}
 	};
 
