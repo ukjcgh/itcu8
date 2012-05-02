@@ -1,3 +1,3 @@
-(function (data){
+(function(data) {
 	alert(data);
 });

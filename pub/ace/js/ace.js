@@ -2,7 +2,7 @@ ace = {};
 
 ace.request = function(action, data) {
 
-	var errorMsg = 'Error during ace.request(). ';
+	var errorMsg = 'Error during ace.request().';
 
 	this.actionIsLoaded = function(action) {
 		ace.handlers = (ace.handlers == null) ? {} : ace.handlers;
@@ -11,42 +11,37 @@ ace.request = function(action, data) {
 
 	this.done = function(resp) {
 		if (resp == null) {
-			console.error(errorMsg + 'Empty response.');
+			console.error(errorMsg + ' Empty response.');
 			return;
 		}
 		if (resp.data == null) {
-			console.error(errorMsg + 'Server returned no data.');
+			console.error(errorMsg + ' Server returned no data.');
 			return;
 		}
 		if (resp.handler) {
 			try {
 				ace.handlers[action] = eval(resp.handler);
 			} catch (e) {
-				console.error(errorMsg + 'Can\'t parse action "' + action + '":\n' + e);
+				console.error(errorMsg + ' Can\'t parse action "' + action + '":\n' + e);
 				return;
 			}
 		}
 		if (typeof ace.handlers[action] == 'function') {
 			try {
-				// TODO: eval so that lineNumber is defined in exception
+				// TODO: eval so that lineNumber is defined in exception if error
 				ace.handlers[action](resp.data);
 			} catch (e) {
-				var msg = errorMsg + 'Error in action "' + action + '.js".';
-				if (e.lineNumber) {
-					msg += ' Line: ' + e.lineNumber;
-				}
-				msg += '\n' + e;
-				console.error(msg);
+				console.error(errorMsg + ' Error in action "' + action + '.js":' + '\n' + e);
 			}
 		} else {
-			console.error(errorMsg + 'Function ace.handlers["' + action + '"] not found.');
+			console.error(errorMsg + ' Function ace.handlers["' + action + '"] not found.');
 		}
 	};
 
 	this.fail = function(xhr, jError, jsError) {
 		var msg = errorMsg;
 		if (jError == 'parsererror') {
-			msg += 'The server has sent invalid JSON. See response below:\n' + xhr.responseText;
+			msg += ' The server has sent invalid JSON. See response below:\n' + xhr.responseText;
 			console.error(msg);
 		} else {
 			msg += '\n      HTTP: ' + xhr.status + ' ' + xhr.statusText + '\n      jQuery: ' + jError + '\n      JS: ' + jsError;
