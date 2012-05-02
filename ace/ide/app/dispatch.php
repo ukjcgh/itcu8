@@ -1,12 +1,8 @@
 <?php
 
-$action = isset($_GET['action']) ? $_GET['action'] : 'default';
+$request = new Request;
 
-if(preg_match('~[^a-z]~', $action)){
-	trigger_error('Invalid action name', E_USER_ERROR);
-}
-
-$action_filename = IDE_DIR . 'app' . DS . 'actions' . DS . $action . '.php';
+$action_filename = IDE_DIR . 'app' . DS . 'actions' . DS . $request->action . '.php';
 
 if(is_readable($action_filename)) {
 	include $action_filename;
