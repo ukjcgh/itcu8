@@ -1,0 +1,47 @@
+aceMain = {};
+
+aceMain.request = {
+
+	'run' : function(action, data) {
+		var self = aceMain.request;
+		var helper = aceHelper.request;
+
+		$.ajax(self.getParams(action, data)).done(self.done(action)).fail(helper.fail);
+
+	},
+
+	'done' : function(action) {
+		return function(response) {
+			var helper = aceHelper.request;
+
+			if (helper.runupResponse(response, action)) {
+				if (response.handler) {
+					helper.handlers[action] = eval(response.handler);
+				}
+				try {
+					// TODO: eval function so that lineNumber is defined in exception if error
+					helper.handlers[action](response.data);
+				} catch (e) {
+					console.error(helper.errorMsg + ' Error in action "' + action + '.js":' + '\n' + e);
+				}
+			}
+		};
+	},
+
+	'getParams' : function(action, data) {
+		var helper = aceHelper.request;
+
+		return {
+			'type' : "POST",
+			'dataType' : 'json', // force json, write separate request function to change this option
+			'url' : '/ace/?action=' + encodeURIComponent(action),
+			'data' : {
+				// send json as string to keep types so you will have bool instead of string 'false'
+				'requestData' : JSON.stringify({
+					'actionIsLoaded' : helper.actionIsLoaded(action),
+					'data' : data
+				})
+			}
+		};
+	}
+};
