@@ -1,8 +1,8 @@
 
-add.php: $response->data = (string)$form; - how to get rid of (string)?
-__isset() __unset() for _pub
-if here sense to allow the same action for ajax and non-ajax requests? is any problems with it?
+$data = $request->data->data; in addsave.php
+data.requestData.data in aceMain.js
 continue with grid.js, only "add" is rebuilded
+move validations from dispatch to runup
 autoload
 может в блоках массив data просто заменить на AceXmlElement?
 Response refact, data and handler is checked separately, all public props should be sended

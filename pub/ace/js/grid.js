@@ -83,20 +83,7 @@ function grid_add_action() {
 }
 
 function grid_addsave_action(data) {
-	$.ajax({
-		type : "POST",
-		url : '/ace/?action=addsave',
-		'data' : data
-	}).done(function(msg) {
-
-		//document.location.reload();
-
-	}).fail(function(e) {
-		msg = "Error during request";
-		if (e.status)
-			msg += ': ' + e.status + ' ' + e.statusText;
-		alert(msg);
-	});
+	ace.request('addsave', data);
 }
 
 $(document).ready(function() {
