@@ -19,7 +19,7 @@ aceMain.request = {
 					helper.handlers[action] = eval(response.handler);
 				} else {
 					if (helper.handlers[action] == null) {
-						console.error(helper.errorMsg + ' Action "' + action + '.js" not found.');
+						console.error(helper.errorMsg + ' Handler for action "' + action + '" is not defined.');
 						return;
 					}
 				}

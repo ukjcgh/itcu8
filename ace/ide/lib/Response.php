@@ -3,6 +3,19 @@
 class Response {
 
 	public function __toString(){
+		global $request;
+
+		if($request->isAjax()){
+			$responseData = array('data'=>$this->data);
+			if(isset($this->handler)) $responseData['handler'] = $this->handler;
+			if(isset($this->error)) $responseData['error'] = $this->error;
+			return json_encode($responseData);
+		} else {
+			return (string)$this->data;
+		}
+	}
+
+	public function send($exit = true){
 		//TODO: log and clean output from ob
 		global $request;
 
@@ -11,25 +24,10 @@ class Response {
 		}
 
 		if($request->isAjax()){
-			$responseData = array('data'=>$this->data);
-			if(isset($this->handler)) $responseData['handler'] = $this->handler;
-			return json_encode($responseData);
-		} else {
-			return (string)$this->data;
-		}
-	}
-
-	public function send($exit = true){
-		global $request;
-
-		if($request->isAjax()){
 			header('Content-type: text/json');
-			$responseData = array('data'=>$this->data);
-			if(isset($this->handler)) $responseData['handler'] = $this->handler;
-			echo json_encode($responseData);
-		} else {
-			echo $this->data;
 		}
+
+		echo $this;
 
 		if($exit) exit;
 	}

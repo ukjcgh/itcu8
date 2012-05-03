@@ -13,7 +13,12 @@ if(is_readable($action_filename)) {
 
 if($request->isAjax()){
 	if(!$request->data->actionIsLoaded){
-		$response->handler = file_get_contents(IDE_DIR . 'app' . DS . 'actions' . DS . $request->action . '.js');
+		$handler_filename = IDE_DIR . 'app' . DS . 'actions' . DS . $request->action . '.js';
+		if(is_readable($handler_filename)){
+			$response->handler = file_get_contents($handler_filename);
+		} else {
+			$response->error = 'Handler "' . $handler_filename . '" is not readable.';
+		}
 	}
 }
 

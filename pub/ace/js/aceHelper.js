@@ -30,6 +30,10 @@ aceHelper.request = {
 				return;
 			}
 		}
+		if (response.error) {
+			console.error(helper.errorMsg + ' ' + response.error);
+			return;
+		}
 
 		return true;
 	},
