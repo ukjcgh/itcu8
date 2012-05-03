@@ -1,7 +1,7 @@
 
-response: $request->data->actionIsLoaded - what if data is not defined yet?
-if here sense to allow the same action for ajax and non-ajax requests? is any problems with it?
 add.php: $response->data = (string)$form; - how to get rid of (string)?
+__isset() __unset() for _pub
+if here sense to allow the same action for ajax and non-ajax requests? is any problems with it?
 continue with grid.js, only "add" is rebuilded
 autoload
 может в блоках массив data просто заменить на AceXmlElement?

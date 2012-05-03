@@ -10,10 +10,10 @@ define('IDE_DIR', ACE_DIR . 'ide' . DS);
 define('TPL_DIR', IDE_DIR . 'templates' . DS);
 define('LIB_DIR', IDE_DIR . 'lib' . DS);
 
+require_once LIB_DIR . 'traits/pubCollector.php';
 require_once LIB_DIR . 'functions.php';
 require_once LIB_DIR . 'AceXMLElement.php';
 require_once LIB_DIR . 'Request.php';
 require_once LIB_DIR . 'Response.php';
-require_once LIB_DIR . 'traits/pubCollector.php';
 
 require_once IDE_DIR . 'app' . DS . 'dispatch.php';

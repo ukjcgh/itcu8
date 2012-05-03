@@ -2,16 +2,15 @@
 
 class Response {
 
+	use pubCollector;
+
 	public function __toString(){
 		global $request;
 
 		if($request->isAjax()){
-			$responseData = array('data'=>$this->data);
-			if(isset($this->handler)) $responseData['handler'] = $this->handler;
-			if(isset($this->error)) $responseData['error'] = $this->error;
-			return json_encode($responseData);
+			return ace_json($this->_pub);
 		} else {
-			return (string)$this->data;
+			return (string)$this->_pub['data'];
 		}
 	}
 

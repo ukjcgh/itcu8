@@ -38,5 +38,21 @@ function aceAutoload($className){
 	include ACE_DIR.'ide'.DS.str_replace('\\', DS, $className . '.php');
 }
 
+function ace_json($data, $options = null){
+	//convert objects to string
+	if($data instanceof \blocks\master){
+		$data4json = (string)$data;
+	} elseif(is_array($data)) {
+		$data4json = array();
+		foreach ($data as $k => $v){
+			if($v instanceof \blocks\master) $v = (string)$v;
+			$data4json[$k] = $v;
+		}
+	} else {
+		return json_encode($data, $options);
+	}
+	return json_encode($data4json, $options);
+}
+
 spl_autoload_register('aceAutoload');
 
