@@ -5,7 +5,7 @@ namespace blocks;
 class page extends \blocks\master {
 
 	public function __construct() {
-		$this->data = array(
+		$this->_pub = array(
 				'doctype' => 'html',
 		);
 	}

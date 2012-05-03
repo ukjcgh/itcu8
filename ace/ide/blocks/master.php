@@ -19,7 +19,7 @@ abstract class master {
 
 	public function getXslData(){
 		$data = new \AceXMLElement('<data/>');
-		foreach ($this->data as $key => $value) {
+		foreach ($this->_pub as $key => $value) {
 			if($value instanceof \ArrayObject || gettype($value) == 'array') {
 				$data->insertArray($key, $value);
 			} elseif($value instanceof \SimpleXMLElement) {

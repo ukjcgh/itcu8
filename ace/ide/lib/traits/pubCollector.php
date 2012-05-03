@@ -2,14 +2,14 @@
 
 trait pubCollector {
 
-	protected $data = array();
+	protected $_pub = array();
 
 	public function __set($name, $value) {
-		$this->data[$name] = $value;
+		$this->_pub[$name] = $value;
 	}
 
 	public function __get($name) {
-		return @$this->data[$name];
+		return @$this->_pub[$name];
 	}
 
 }

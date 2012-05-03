@@ -4,6 +4,7 @@ if here sense to allow the same action for ajax and non-ajax requests? is any pr
 add.php: $response->data = (string)$form; - how to get rid of (string)?
 continue with grid.js, only "add" is rebuilded
 autoload
+может в блоках массив data просто заменить на AceXmlElement?
 Response refact, data and handler is checked separately, all public props should be sended
 _data for protected properties e.g. request::ajax?
 in response also work with public method through __get/__set? traits?
