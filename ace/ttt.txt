@@ -1,4 +1,5 @@
 
+action.js not found, - stupid ,message, check this on server and write in console.error
 response: $request->data->actionIsLoaded - what if data is not defined yet?
 if here sense to allow the same action for ajax and non-ajax requests? is any problems with it?
 add.php: $response->data = (string)$form; - how to get rid of (string)?
