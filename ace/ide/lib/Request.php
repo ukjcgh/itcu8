@@ -2,9 +2,12 @@
 
 class Request {
 
+	protected $isAjax = false;
+
 	public function __construct(){
 
 		if(isset($_SERVER['HTTP_X_REQUESTED_WITH'])){
+			$this->isAjax = true;
 			$requestData = isset($_POST['requestData']) ? $_POST['requestData'] : null;
 			$this->data = json_decode($requestData);
 		} else {
@@ -16,6 +19,10 @@ class Request {
 			trigger_error('Invalid action name', E_USER_ERROR);
 		}
 
+	}
+
+	public function isAjax(){
+		return $this->isAjax;
 	}
 
 }

@@ -17,4 +17,4 @@ $page->head->scripts[] = 'ace.js';
 $page->head->scripts[] = 'popup.js';
 $page->head->scripts[] = 'grid.js';
 
-echo $page;
+$response->data = $page;

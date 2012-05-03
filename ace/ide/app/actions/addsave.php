@@ -9,3 +9,5 @@ foreach($modelConfig->forms->add->fields->children() as $field=>$stuff) {
 }
 
 file_put_contents(ACE_DIR."app/websites.xml", $modelData->asNiceXml());
+
+$response->data = 'ok';

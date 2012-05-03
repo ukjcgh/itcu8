@@ -17,6 +17,11 @@ aceMain.request = {
 			if (helper.runupResponse(response, action)) {
 				if (response.handler) {
 					helper.handlers[action] = eval(response.handler);
+				} else {
+					if (helper.handlers[action] == null) {
+						console.error(helper.errorMsg + ' Action "' + action + '.js" not found.');
+						return;
+					}
 				}
 				try {
 					// TODO: eval function so that lineNumber is defined in exception if error
