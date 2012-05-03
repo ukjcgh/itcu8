@@ -14,5 +14,6 @@ require_once LIB_DIR . 'functions.php';
 require_once LIB_DIR . 'AceXMLElement.php';
 require_once LIB_DIR . 'Request.php';
 require_once LIB_DIR . 'Response.php';
+require_once LIB_DIR . 'traits/pubCollector.php';
 
 require_once IDE_DIR . 'app' . DS . 'dispatch.php';

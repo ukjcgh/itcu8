@@ -5,7 +5,7 @@ namespace blocks;
 class page extends \blocks\master {
 
 	public function __construct() {
-		$this->_xslData = array(
+		$this->data = array(
 				'doctype' => 'html',
 		);
 	}

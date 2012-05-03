@@ -4,6 +4,8 @@ namespace blocks;
 
 abstract class master {
 
+	use \pubCollector;
+
 	public function __toString() {
 		return templateXSL($this->getTemplateFileName(), $this->getXslData());
 	}
@@ -15,20 +17,9 @@ abstract class master {
 		return $blockPath . '.xsl';
 	}
 
-
-	protected $_xslData = array();
-
-	public function __set($name, $value) {
-		$this->_xslData[$name] = $value;
-	}
-
-	public function __get($name) {
-		return @$this->_xslData[$name];
-	}
-
 	public function getXslData(){
 		$data = new \AceXMLElement('<data/>');
-		foreach ($this->_xslData as $key => $value) {
+		foreach ($this->data as $key => $value) {
 			if($value instanceof \ArrayObject || gettype($value) == 'array') {
 				$data->insertArray($key, $value);
 			} elseif($value instanceof \SimpleXMLElement) {
