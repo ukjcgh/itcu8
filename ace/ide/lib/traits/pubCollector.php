@@ -21,7 +21,7 @@ trait pubCollector {
 	}
 
 	public function import($data){
-		if(is_scalar($data)){
+		if(is_scalar($data) || is_resource($data)){
 			$this->data = $data;
 		} else {
 			foreach($data as $k=>$v){
