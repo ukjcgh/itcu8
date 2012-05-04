@@ -2,6 +2,7 @@
 $data = $request->data->data; in addsave.php
 data.requestData.data in aceMain.js
 continue with grid.js, only "add" is rebuilded
+server.get('websites/grid/form', function(data){}) - так не лучше?
 move validations from dispatch to runup
 autoload
 может в блоках массив data просто заменить на AceXmlElement?
