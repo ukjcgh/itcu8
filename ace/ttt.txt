@@ -1,4 +1,5 @@
 
+$request->data->code - why here data?.... ace.request('edit', code); instead of {'code': code} - is it cool?
 $data = $request->data->data; in addsave.php
 ace.request.runup have eval, if there just page reload then you will never see error in console 
 $request->data->code why not $request->data['code'] - it is more usual 
