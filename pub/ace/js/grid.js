@@ -58,24 +58,11 @@ function grid_save_action(data) {
 }
 
 function grid_delete_action(code) {
-	if (!confirm('Are you sure you want to delete "' + code + '" website?'))
-		return;
-	$.ajax({
-		type : "POST",
-		url : '/ace/?action=delete',
-		'data' : {
+	if (confirm('Are you sure you want to delete "' + code + '" website?')) {
+		ace.request('delete', {
 			'code' : code
-		}
-	}).done(function(msg) {
-
-		document.location.reload();
-
-	}).fail(function(e) {
-		msg = "Error during request";
-		if (e.status)
-			msg += ': ' + e.status + ' ' + e.statusText;
-		alert(msg);
-	});
+		});
+	}
 }
 
 function grid_add_action() {

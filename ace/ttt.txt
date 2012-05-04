@@ -1,8 +1,11 @@
 
 $data = $request->data->data; in addsave.php
+ace.request.runup have eval, if there just page reload then you will never see error in console 
+$request->data->code why not $request->data['code'] - it is more usual 
 data.requestData.data in aceMain.js
 continue with grid.js, only "add" is rebuilded
 server.get('websites/grid/form', function(data){}) - так не лучше?
+async ajax? like form = server.get('websites/edit_form/[website_code]'); pupup.show(form);
 move validations from dispatch to runup
 autoload
 может в блоках массив data просто заменить на AceXmlElement?
@@ -19,6 +22,7 @@ Response: log and clean output from ob
 жс от хтмл
 формы строить скриптом? тупо ж сложные элементы на сервере строить
 website auth should be required for BO
+show for visitor alert "error hapens"? it is stange if error only in console
 
 код из индекса в блок (подготовка данных)
 структуру папок/файлов сделать удобнее и понятнее
@@ -33,6 +37,7 @@ trim from xml when edit?
 handle php errors during ajax request
 DNA!
 расширяемость самой ide
+разделяемость валидации (runup) и исполнения, что бы можно было отключить валидации и тем самым ускорить перформенс
 
 ################ questions
 может все-таки в базе хранить данные, и хмл юзать только для деплойментов?

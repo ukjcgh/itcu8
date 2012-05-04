@@ -18,10 +18,6 @@ class Response {
 		//TODO: log and clean output from ob
 		global $request;
 
-		if(!isset($this->data)){
-			trigger_error('Nothing to send in response.', E_USER_ERROR);
-		}
-
 		if($request->isAjax()){
 			header('Content-type: text/json');
 		}

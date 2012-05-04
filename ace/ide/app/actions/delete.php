@@ -1,7 +1,8 @@
 <?php
 
+$itemCode = $request->data->code;
+
 $modelData = new AceXMLElement(file_get_contents(ACE_DIR."app/websites.xml"));
-$itemCode = $_POST['code'];
 
 //find position
 $pos = 0;

@@ -9,7 +9,7 @@ trait pubCollector {
 	}
 
 	public function __get($name) {
-		return @$this->_pub[$name];
+		return isset($this->_pub[$name]) ? $this->_pub[$name] : null;
 	}
 
 	public function __isset($name) {
@@ -18,6 +18,16 @@ trait pubCollector {
 
 	public function __unset($name) {
 		unset($this->_pub[$name]);
+	}
+
+	public function import($data){
+		if(is_scalar($data)){
+			$this->data = $data;
+		} else {
+			foreach($data as $k=>$v){
+				$this->{$k} = $v;
+			}
+		}
 	}
 
 }

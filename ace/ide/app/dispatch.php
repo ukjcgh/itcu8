@@ -3,7 +3,7 @@
 $request = new Request;
 $response = new Response;
 
-$action_filename = IDE_DIR . 'app' . DS . 'actions' . DS . $request->action . '.php';
+$action_filename = IDE_DIR . 'app' . DS . 'actions' . DS . $request->getAction() . '.php';
 
 if(is_readable($action_filename)) {
 	include $action_filename;
@@ -12,8 +12,8 @@ if(is_readable($action_filename)) {
 }
 
 if($request->isAjax()){
-	if($request->data && !$request->data->actionIsLoaded){
-		$handler_filename = IDE_DIR . 'app' . DS . 'actions' . DS . $request->action . '.js';
+	if(!$request->actionIsLoaded){
+		$handler_filename = IDE_DIR . 'app' . DS . 'actions' . DS . $request->getAction() . '.js';
 		if(is_readable($handler_filename)){
 			$response->handler = file_get_contents($handler_filename);
 		} else {

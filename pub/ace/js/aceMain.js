@@ -42,7 +42,7 @@ aceMain.request = {
 			'url' : '/ace/?action=' + encodeURIComponent(action),
 			'data' : {
 				// send json as string to keep types so you will have bool instead of string 'false'
-				'requestData' : JSON.stringify({
+				'request' : JSON.stringify({
 					'actionIsLoaded' : helper.actionIsLoaded(action),
 					'data' : data
 				})

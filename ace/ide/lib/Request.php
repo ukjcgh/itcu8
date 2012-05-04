@@ -2,16 +2,20 @@
 
 class Request {
 
+	use pubCollector;
+
 	protected $isAjax = false;
+	protected $action;
 
 	public function __construct(){
 
 		if(isset($_SERVER['HTTP_X_REQUESTED_WITH'])){
 			$this->isAjax = true;
-			$requestData = isset($_POST['requestData']) ? $_POST['requestData'] : null;
-			$this->data = json_decode($requestData);
+			$requestJson = isset($_POST['request']) ? $_POST['request'] : null;
+			$request = json_decode($requestJson);
+			$this->import($request);
 		} else {
-			$this->data = $_POST;
+			$this->import($_POST);
 		}
 
 		$this->action = isset($_GET['action']) ? $_GET['action'] : 'default';
@@ -23,6 +27,10 @@ class Request {
 
 	public function isAjax(){
 		return $this->isAjax;
+	}
+
+	public function getAction(){
+		return $this->action;
 	}
 
 }

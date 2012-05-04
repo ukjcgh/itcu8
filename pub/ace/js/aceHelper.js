@@ -15,10 +15,6 @@ aceHelper.request = {
 			console.error(helper.errorMsg + ' Empty response.');
 			return;
 		}
-		if (response.data == null) {
-			console.error(helper.errorMsg + ' Response["data"] is null. Response should be an object with "data" element.');
-			return;
-		}
 		if (response.handler) {
 			try {
 				if (typeof eval(response.handler) != 'function') {
