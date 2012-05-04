@@ -3,20 +3,7 @@ function grid_edit_action(code) {
 }
 
 function grid_save_action(data) {
-	$.ajax({
-		type : "POST",
-		url : '/ace/?action=save',
-		'data' : data
-	}).done(function(msg) {
-
-		document.location.reload();
-
-	}).fail(function(e) {
-		msg = "Error during request";
-		if (e.status)
-			msg += ': ' + e.status + ' ' + e.statusText;
-		alert(msg);
-	});
+	ace.request('save', data);
 }
 
 function grid_delete_action(code) {
