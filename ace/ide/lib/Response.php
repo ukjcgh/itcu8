@@ -2,7 +2,7 @@
 
 class Response {
 
-	use pubCollector;
+	use propCollector;
 
 	public function __toString(){
 		global $request;

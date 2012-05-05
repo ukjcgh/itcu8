@@ -15,4 +15,14 @@
 		<domain>222</domain>
 		<path/>
 	</item>
+	<item>
+		<code>1</code>
+		<domain>22</domain>
+		<path/>
+	</item>
+	<item>
+		<code>ww</code>
+		<domain/>
+		<path/>
+	</item>
 </items>

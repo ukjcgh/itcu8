@@ -2,7 +2,7 @@
 
 class Request {
 
-	use pubCollector;
+	use propCollector;
 
 	protected $isAjax = false;
 	protected $action;

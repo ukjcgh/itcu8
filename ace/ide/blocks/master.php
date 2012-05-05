@@ -4,7 +4,7 @@ namespace blocks;
 
 abstract class master {
 
-	use \pubCollector;
+	use \propCollector;
 
 	public function __toString() {
 		return templateXSL($this->getTemplateFileName(), $this->getXslData());
