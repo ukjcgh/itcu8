@@ -1,4 +1,5 @@
 
+propSCollector
 sync ajax
 rename actionisloaded to isActionLoaded
 jquery.ajax.data = post (rename)

@@ -5,7 +5,7 @@ trait propCollector {
 	protected $props = array();
 
 	public function __set($name, $value) {
-		if(strpos($name, '_') === 0){
+		if($name{0} == '_'){
 			print_r(debug_backtrace(false));
 			trigger_error('Can\'t set protected property "' . $name . '"', E_USER_ERROR);
 		}
@@ -22,7 +22,7 @@ trait propCollector {
 	}
 
 	public function __unset($name) {
-		if(strpos($name, '_') === 0){
+		if($name{0} == '_'){
 			trigger_error('Can\'t unset protected property "' . $name . '"', E_USER_ERROR);
 		}
 		unset($this->props[$name]);
@@ -45,7 +45,7 @@ trait propCollector {
 			case 'prot':
 				$props = array();
 				foreach($this->props as $k=>$v){
-					if(strpos($k, '_') === 0){
+					if($name{0} == '_'){
 						$props[$k] = $v;
 					}
 				}
@@ -54,7 +54,7 @@ trait propCollector {
 			case 'pub':
 				$props = array();
 				foreach($this->props as $k=>$v){
-					if(strpos($k, '_') !== 0){
+					if($name{0} == '_'){
 						$props[$k] = $v;
 					}
 				}
