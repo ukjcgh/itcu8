@@ -6,6 +6,7 @@ trait propCollector {
 
 	public function __set($name, $value) {
 		if(strpos($name, '_') === 0){
+			print_r(debug_backtrace(false));
 			trigger_error('Can\'t set protected property "' . $name . '"', E_USER_ERROR);
 		}
 		$this->props[$name] = $value;
@@ -13,7 +14,7 @@ trait propCollector {
 
 	public function __get($name) {
 		// allow to read protected properties
-		return isset($this->_pub[$name]) ? $this->props[$name] : null;
+		return isset($this->props[$name]) ? $this->props[$name] : null;
 	}
 
 	public function __isset($name) {
@@ -44,7 +45,7 @@ trait propCollector {
 			case 'prot':
 				$props = array();
 				foreach($this->props as $k=>$v){
-					if(strpos($name, '_') === 0){
+					if(strpos($k, '_') === 0){
 						$props[$k] = $v;
 					}
 				}
@@ -53,7 +54,7 @@ trait propCollector {
 			case 'pub':
 				$props = array();
 				foreach($this->props as $k=>$v){
-					if(strpos($name, '_') !== 0){
+					if(strpos($k, '_') !== 0){
 						$props[$k] = $v;
 					}
 				}

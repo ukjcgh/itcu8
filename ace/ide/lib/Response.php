@@ -8,9 +8,9 @@ class Response {
 		global $request;
 
 		if($request->isAjax()){
-			return ace_json($this->_pub);
+			return ace_json($this->props());
 		} else {
-			return (string)$this->_pub['data'];
+			return (string)$this->data;
 		}
 	}
 
