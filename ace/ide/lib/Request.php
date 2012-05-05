@@ -2,7 +2,7 @@
 
 class Request {
 
-	use propCollector;
+	use propsCollector;
 
 	protected $isAjax = false;
 	protected $action;

@@ -1,12 +1,11 @@
 <?php
 
-trait propCollector {
+trait propsCollector {
 
 	protected $props = array();
 
 	public function __set($name, $value) {
 		if($name{0} == '_'){
-			print_r(debug_backtrace(false));
 			trigger_error('Can\'t set protected property "' . $name . '"', E_USER_ERROR);
 		}
 		$this->props[$name] = $value;
@@ -45,7 +44,7 @@ trait propCollector {
 			case 'prot':
 				$props = array();
 				foreach($this->props as $k=>$v){
-					if($name{0} == '_'){
+					if($k{0} == '_'){
 						$props[$k] = $v;
 					}
 				}
@@ -54,7 +53,7 @@ trait propCollector {
 			case 'pub':
 				$props = array();
 				foreach($this->props as $k=>$v){
-					if($name{0} == '_'){
+					if($k{0} != '_'){
 						$props[$k] = $v;
 					}
 				}
