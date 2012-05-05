@@ -36,17 +36,19 @@ aceMain.request = {
 	'getParams' : function(action, data) {
 		var helper = aceHelper.request;
 
+		var post = {
+			// send json as string to keep types so you will have bool instead of string 'false'
+			'request' : JSON.stringify({
+				'actionIsLoaded' : helper.actionIsLoaded(action),
+				'data' : data
+			})
+		};
+
 		return {
 			'type' : "POST",
 			'dataType' : 'json', // force json, write separate request function to change this option
 			'url' : '/ace/?action=' + encodeURIComponent(action),
-			'data' : {
-				// send json as string to keep types so you will have bool instead of string 'false'
-				'request' : JSON.stringify({
-					'actionIsLoaded' : helper.actionIsLoaded(action),
-					'data' : data
-				})
-			}
+			'data' : post
 		};
 	}
 };
