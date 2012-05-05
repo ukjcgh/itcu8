@@ -11,6 +11,7 @@ trait propCollector {
 	}
 
 	public function __get($name) {
+		// allow to read protected properties
 		if($this->isProt($name)){
 			$name = substr($name, 1);
 			return isset($this->_prot[$name]) ? $this->_prot[$name] : null;
