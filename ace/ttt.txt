@@ -1,4 +1,7 @@
 
+sync ajax
+rename actionisloaded to isActionLoaded
+jquery.ajax.data = post (rename)
 $request->data->code - why here data?.... ace.request('edit', code); instead of {'code': code} - is it cool?
 trigger_error('Can\'t set protected property  - backtrace needed
 $data = $request->data->data; in addsave.php

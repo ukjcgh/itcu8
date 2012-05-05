@@ -2,49 +2,67 @@
 
 trait propCollector {
 
-	protected $_pub = array();
-	protected $_prot = array();
+	protected $props = array();
 
 	public function __set($name, $value) {
-		if($this->isProt($name)) trigger_error('Can\'t set protected property "' . $name . '"', E_USER_ERROR);
-		$this->_pub[$name] = $value;
+		if(strpos($name, '_') === 0){
+			trigger_error('Can\'t set protected property "' . $name . '"', E_USER_ERROR);
+		}
+		$this->props[$name] = $value;
 	}
 
 	public function __get($name) {
 		// allow to read protected properties
-		if($this->isProt($name)){
-			$name = substr($name, 1);
-			return isset($this->_prot[$name]) ? $this->_prot[$name] : null;
-		} else {
-			return isset($this->_pub[$name]) ? $this->_pub[$name] : null;
-		}
+		return isset($this->_pub[$name]) ? $this->props[$name] : null;
 	}
 
 	public function __isset($name) {
-		if($this->isProt($name)){
-			isset($this->_prot[$name]);
-		} else {
-			return isset($this->_pub[$name]);
-		}
+		return isset($this->props[$name]);
 	}
 
 	public function __unset($name) {
-		if($this->isProt($name)) trigger_error('Can\'t unset protected property "' . $name . '"', E_USER_ERROR);
-		unset($this->_pub[$name]);
+		if(strpos($name, '_') === 0){
+			trigger_error('Can\'t unset protected property "' . $name . '"', E_USER_ERROR);
+		}
+		unset($this->props[$name]);
 	}
 
 	public function import($data){
 		if(is_scalar($data) || is_resource($data)){
-			$this->data = $data;
-		} else {
-			foreach($data as $k=>$v){
-				$this->{$k} = $v;
-			}
+			trigger_error('Can\'t import data. Data should be type of array or object', E_USER_ERROR);
+		}
+		foreach($data as $k=>$v){
+			$this->{$k} = $v;
 		}
 	}
 
-	protected function isProt($name){
-		return strpos($name, '_') === 0;
+	public function props($filter = 'pub'){
+		switch($filter){
+			case 'all':
+				return $this->props;
+				break;
+			case 'prot':
+				$props = array();
+				foreach($this->props as $k=>$v){
+					if(strpos($name, '_') === 0){
+						$props[$k] = $v;
+					}
+				}
+				return $props;
+				break;
+			case 'pub':
+				$props = array();
+				foreach($this->props as $k=>$v){
+					if(strpos($name, '_') !== 0){
+						$props[$k] = $v;
+					}
+				}
+				return $props;
+				break;
+			default:
+				trigger_error('Invalid filter value', E_USER_ERROR);
+				break;
+		}
 	}
 
 }
