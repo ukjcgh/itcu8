@@ -3,7 +3,7 @@
 $request = new Request;
 $response = new Response;
 
-$action_filename = IDE_DIR . 'app' . DS . 'actions' . DS . $request->getAction() . '.php';
+$action_filename = IDE_DIR . 'app' . DS . 'actions' . DS . $request->_action . '.php';
 
 if(is_readable($action_filename)) {
 	include $action_filename;
@@ -11,9 +11,9 @@ if(is_readable($action_filename)) {
 	trigger_error('Action "' . $action_filename . '" Not Found', E_USER_ERROR);
 }
 
-if($request->isAjax()){
+if($request->_isAjax){
 	if(!$request->actionIsLoaded){
-		$handler_filename = IDE_DIR . 'app' . DS . 'actions' . DS . $request->getAction() . '.js';
+		$handler_filename = IDE_DIR . 'app' . DS . 'actions' . DS . $request->_action . '.js';
 		if(is_readable($handler_filename)){
 			$response->handler = file_get_contents($handler_filename);
 		} else {

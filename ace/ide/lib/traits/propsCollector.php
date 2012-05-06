@@ -5,7 +5,7 @@ trait propsCollector {
 	protected $props = array();
 
 	public function __set($name, $value) {
-		if($name{0} == '_'){
+		if(!$this->isPropAccessible($name)) {
 			trigger_error('Can\'t set protected property "' . $name . '"', E_USER_ERROR);
 		}
 		$this->props[$name] = $value;
@@ -21,7 +21,7 @@ trait propsCollector {
 	}
 
 	public function __unset($name) {
-		if($name{0} == '_'){
+		if(!$this->isPropAccessible($name)) {
 			trigger_error('Can\'t unset protected property "' . $name . '"', E_USER_ERROR);
 		}
 		unset($this->props[$name]);
@@ -29,9 +29,12 @@ trait propsCollector {
 
 	public function import($data){
 		if(is_scalar($data) || is_resource($data)){
-			trigger_error('Can\'t import data. Data should be type of array or object', E_USER_ERROR);
+			trigger_error('Can\'t import data. Data must be iterable', E_USER_ERROR);
 		}
 		foreach($data as $k=>$v){
+			if(!$this->isPropAccessible($k)) {
+				trigger_error('Can\'t import protected property "' . $k . '"', E_USER_ERROR);
+			}
 			$this->{$k} = $v;
 		}
 	}
@@ -63,6 +66,15 @@ trait propsCollector {
 				trigger_error('Invalid filter value', E_USER_ERROR);
 				break;
 		}
+	}
+
+	protected function isPropAccessible($name){
+		if($name{0} == '_') {
+			if(!is_a($this, @debug_backtrace()[2]['class'])) {
+				return false;
+			}
+		}
+		return true;
 	}
 
 }

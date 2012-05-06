@@ -4,13 +4,10 @@ class Request {
 
 	use propsCollector;
 
-	protected $isAjax = false;
-	protected $action;
-
 	public function __construct(){
 
 		if(isset($_SERVER['HTTP_X_REQUESTED_WITH'])){
-			$this->isAjax = true;
+			$this->_isAjax = true;
 			$requestJson = isset($_POST['request']) ? $_POST['request'] : null;
 			$request = json_decode($requestJson);
 			$this->import($request);
@@ -18,19 +15,11 @@ class Request {
 			$this->import($_POST);
 		}
 
-		$this->action = isset($_GET['action']) ? $_GET['action'] : 'default';
-		if(preg_match('~[^a-z]~', $this->action)){
-			trigger_error('Invalid action name', E_USER_ERROR);
+		$this->_action = isset($_GET['action']) ? $_GET['action'] : 'default';
+		if(preg_match('~[^a-z]~', $this->_action)){
+			trigger_error('Invalid action name "' . $this->_action . '"', E_USER_ERROR);
 		}
 
-	}
-
-	public function isAjax(){
-		return $this->isAjax;
-	}
-
-	public function getAction(){
-		return $this->action;
 	}
 
 }

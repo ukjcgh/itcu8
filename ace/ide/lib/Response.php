@@ -7,7 +7,7 @@ class Response {
 	public function __toString(){
 		global $request;
 
-		if($request->isAjax()){
+		if($request->_isAjax){
 			return ace_json($this->props());
 		} else {
 			return (string)$this->data;
@@ -18,7 +18,7 @@ class Response {
 		//TODO: log and clean output from ob
 		global $request;
 
-		if($request->isAjax()){
+		if($request->_isAjax){
 			header('Content-type: text/json');
 		}
 

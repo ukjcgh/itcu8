@@ -1,4 +1,5 @@
 
+var_dump(debug_backtrace()[1]['class'], __CLASS__);//what about this->import?
 set _* props within object
 make all working
 sync ajax
