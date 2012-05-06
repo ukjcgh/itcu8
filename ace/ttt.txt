@@ -1,4 +1,6 @@
 
+set _* props within object
+make all working
 sync ajax
 $request->data->code - why here data?.... ace.request('edit', code); instead of {'code': code} - is it cool?
 trigger_error('Can\'t set protected property  - backtrace needed

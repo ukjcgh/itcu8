@@ -11,18 +11,8 @@
 		<path/>
 	</item>
 	<item>
-		<code>111</code>
-		<domain>222</domain>
-		<path/>
-	</item>
-	<item>
-		<code>1</code>
+		<code>333</code>
 		<domain>22</domain>
-		<path/>
-	</item>
-	<item>
-		<code>ww</code>
-		<domain/>
-		<path/>
+		<path>&lt;b&gt;asdf&lt;/b&gt;</path>
 	</item>
 </items>
