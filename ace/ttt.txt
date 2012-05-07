@@ -1,5 +1,7 @@
 
-var_dump(debug_backtrace()[1]['class'], __CLASS__);//what about this->import?
+
+allow import access to prot props if called from itseft
+check backtrace speed
 set _* props within object
 make all working
 sync ajax

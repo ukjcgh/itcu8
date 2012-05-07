@@ -10,9 +10,4 @@
 		<domain>ace.com</domain>
 		<path/>
 	</item>
-	<item>
-		<code>333</code>
-		<domain>22</domain>
-		<path>&lt;b&gt;asdf&lt;/b&gt;</path>
-	</item>
 </items>

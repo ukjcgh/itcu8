@@ -29,13 +29,13 @@ trait propsCollector {
 
 	public function import($data){
 		if(is_scalar($data) || is_resource($data)){
-			trigger_error('Can\'t import data. Data must be iterable', E_USER_ERROR);
+			trigger_error('Can\'t import data. $data must be iterable', E_USER_ERROR);
 		}
 		foreach($data as $k=>$v){
-			if(!$this->isPropAccessible($k)) {
-				trigger_error('Can\'t import protected property "' . $k . '"', E_USER_ERROR);
+			if($k{0} == '_') {
+				trigger_error('Can\'t import protected property "' . $k . '". Only public properties can be imported', E_USER_ERROR);
 			}
-			$this->{$k} = $v;
+			$this->props[$k] = $v;
 		}
 	}
 
