@@ -1,6 +1,7 @@
 
 
-allow import access to prot props if called from itseft
+propsCollector conflicts 
+allow import access to prot props if called from itseft?
 check backtrace speed
 set _* props within object
 make all working
