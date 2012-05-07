@@ -1,25 +1,39 @@
 <?php
 
-class Request {
+class Request extends DataInstance {
+	
+	protected $action;
+	protected $isAjax;
 
-	use propsCollector;
+	public function __construct($dataObj){
 
-	public function __construct(){
+		parent::__construct($dataObj);
 
 		if(isset($_SERVER['HTTP_X_REQUESTED_WITH'])){
-			$this->_isAjax = true;
+			$this->isAjax = true;
 			$requestJson = isset($_POST['request']) ? $_POST['request'] : null;
 			$request = json_decode($requestJson);
 			$this->import($request);
 		} else {
-			$this->import($_POST);
+			$this->extract($_POST);
 		}
 
-		$this->_action = isset($_GET['action']) ? $_GET['action'] : 'default';
-		if(preg_match('~[^a-z]~', $this->_action)){
-			trigger_error('Invalid action name "' . $this->_action . '"', E_USER_ERROR);
+		$this->action = isset($_GET['action']) ? $_GET['action'] : 'default';
+		if(preg_match('~[^a-z]~', $this->action)){
+			trigger_error('Invalid action name "' . $this->action . '"', E_USER_ERROR);
 		}
 
+	}
+	
+	public function getAction(){
+		return $this->action;
+	}
+	
+	public function isAjax(){
+		return $this->isAjax;
+	}
+
+	public function extract($post){
 	}
 
 }

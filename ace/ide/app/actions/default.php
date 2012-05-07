@@ -1,9 +1,9 @@
 <?php
 
 //struct
-$page = new \blocks\page;
-$page->head = new \blocks\page\head;
-$page->body = new \blocks\grid;
+$page = new DataObject('\blocks\page');
+$page->head = new DataObject('\blocks\page\head');
+$page->body = new DataObject('\blocks\grid');
 
 //filling
 $page->doctype = 'html';

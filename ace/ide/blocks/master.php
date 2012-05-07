@@ -2,10 +2,12 @@
 
 namespace blocks;
 
-abstract class master {
-
-	use \propsCollector;
-
+class master extends \DataInstance {
+	
+	public function __construct($dataObj){
+		parent::__construct($dataObj);
+	}
+	
 	public function __toString() {
 		return templateXSL($this->getTemplateFileName(), $this->getXslData());
 	}
@@ -19,7 +21,7 @@ abstract class master {
 
 	public function getXslData(){
 		$data = new \AceXMLElement('<data/>');
-		foreach ($this->props() as $key => $value) {
+		foreach ($this->data as $key => $value) {
 			if($value instanceof \ArrayObject || gettype($value) == 'array') {
 				$data->insertArray($key, $value);
 			} elseif($value instanceof \SimpleXMLElement) {

@@ -2,12 +2,10 @@
 
 class Response {
 
-	use propsCollector;
-
 	public function __toString(){
 		global $request;
 
-		if($request->_isAjax){
+		if($request->isAjax()){
 			return ace_json($this->props());
 		} else {
 			return (string)$this->data;
@@ -18,7 +16,7 @@ class Response {
 		//TODO: log and clean output from ob
 		global $request;
 
-		if($request->_isAjax){
+		if($request->isAjax()){
 			header('Content-type: text/json');
 		}
 

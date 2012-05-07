@@ -1,9 +1,9 @@
 <?php
 
-$request = new Request;
+$request = new DataObject('Request');
 $response = new Response;
 
-$action_filename = IDE_DIR . 'app' . DS . 'actions' . DS . $request->_action . '.php';
+$action_filename = IDE_DIR . 'app' . DS . 'actions' . DS . $request->getAction(). '.php';
 
 if(is_readable($action_filename)) {
 	include $action_filename;
@@ -11,7 +11,7 @@ if(is_readable($action_filename)) {
 	trigger_error('Action "' . $action_filename . '" Not Found', E_USER_ERROR);
 }
 
-if($request->_isAjax){
+if($request->isAjax()){
 	if(!$request->actionIsLoaded){
 		$handler_filename = IDE_DIR . 'app' . DS . 'actions' . DS . $request->_action . '.js';
 		if(is_readable($handler_filename)){
