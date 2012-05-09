@@ -1,10 +1,4 @@
 
-setA('dff')->setB()->setC()
-ace/app = ace/project
-propsCollector conflicts 
-allow import access to prot props if called from itseft?
-check backtrace speed
-set _* props within object
 make all working
 sync ajax
 $request->data->code - why here data?.... ace.request('edit', code); instead of {'code': code} - is it cool?
