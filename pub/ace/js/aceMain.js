@@ -6,6 +6,13 @@ aceMain.request = {
 		var self = aceMain.request;
 		var helper = aceHelper.request;
 
+		// wrap data
+		if (typeof data != 'object') {
+			data = {
+				'data' : data
+			}
+		}
+
 		$.ajax(self.getParams(action, data)).done(self.done(action)).fail(helper.fail);
 
 	},

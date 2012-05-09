@@ -36,28 +36,29 @@ function aceAutoload($className){
 	include ACE_DIR.'ide'.DS.str_replace('\\', DS, $className . '.php');
 }
 
-function ace_json($data, $options = null){
-	//convert objects to string
-	ace_json_prepare_data($data);
+// $stringify_exceptions: add get_class($this) in __toString to avoid recursion, like in Response class
+function ace_json($data, $stringify_exceptions = null, $options = null){
+	$stringify_exceptions = (array)$stringify_exceptions;
+	stringify_objects($data, $stringify_exceptions);
 	return json_encode($data, $options);
 }
 
-function ace_json_prepare_data(&$data){
+//convert objects to string
+function stringify_objects(&$data, $exceptions){
 	if(is_iterable($data)){
-		if(is_block($data)){
+		if(is_callable(array($data, '__toString')) && !stringify_exception($data, $exceptions)){
 			$data = (string)$data;
 		} else {
 			foreach ($data as $k=>&$v){
-				ace_json_prepare_data($v);
+				stringify_objects($v, $exceptions);
 			}
 		}
-	} else {
-		$data = (string)$data;
 	}
 }
 
-function is_block($obj){
-	return ($obj instanceof \data\box && $obj->hand() instanceof \blocks\master);
+function stringify_exception($object, $exceptions){
+	if($object instanceof \data\box) $object = $object->hand();
+	return in_array(get_class($object), $exceptions);
 }
 
 function is_iterable($var){

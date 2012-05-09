@@ -3,7 +3,7 @@
 class Response extends \data\hand {
 
 	protected $meta;
-	
+
 	public function __construct(){
 		parent::__construct();
 		$this->meta = new stdClass;
@@ -15,7 +15,7 @@ class Response extends \data\hand {
 		if($request->isAjax()){
 			$post = $this->meta;
 			$post->box = $this->box;
-			return ace_json($post);
+			return ace_json($post, get_class($this));
 		} else {
 			return (string)$this->box->html;
 		}
