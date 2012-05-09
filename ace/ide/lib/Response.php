@@ -6,9 +6,9 @@ class Response {
 		global $request;
 
 		if($request->isAjax()){
-			return ace_json($this->props());
+			return ace_json($this->box);
 		} else {
-			return (string)$this->data;
+			return (string)$this->html;
 		}
 	}
 

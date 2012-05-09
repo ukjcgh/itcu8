@@ -13,7 +13,7 @@ if(is_readable($action_filename)) {
 
 if($request->isAjax()){
 	if(!$request->actionIsLoaded){
-		$handler_filename = IDE_DIR . 'router' . DS . 'actions' . DS . $request->_action . '.js';
+		$handler_filename = IDE_DIR . 'router' . DS . 'actions' . DS . $request->getAction() . '.js';
 		if(is_readable($handler_filename)){
 			$response->handler = file_get_contents($handler_filename);
 		} else {

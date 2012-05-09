@@ -17,6 +17,7 @@ aceHelper.request = {
 		}
 		if (response.handler) {
 			try {
+				//TODO: what if location.reload inside handker? you can't see error in this case.
 				if (typeof eval(response.handler) != 'function') {
 					console.error(helper.errorMsg + ' Function not found in ' + action + '.js');
 					return;
