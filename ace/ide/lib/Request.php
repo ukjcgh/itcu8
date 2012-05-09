@@ -1,13 +1,12 @@
 <?php
 
-class Request extends DataInstance {
+class Request extends \data\hand {
 	
 	protected $action;
 	protected $isAjax;
 
-	public function __construct($dataObj){
-
-		parent::__construct($dataObj);
+	public function __construct(){
+		parent::__construct();
 
 		if(isset($_SERVER['HTTP_X_REQUESTED_WITH'])){
 			$this->isAjax = true;

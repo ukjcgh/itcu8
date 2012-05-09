@@ -56,3 +56,11 @@ function ace_json($data, $options = null){
 
 spl_autoload_register('aceAutoload');
 
+function newDataHand($hand, $returnBox = true){
+	$hand = new $hand();
+	return $returnBox ? $hand->box() : $hand;
+}
+
+function newBlock($hand){
+	return newDataHand($hand);
+}

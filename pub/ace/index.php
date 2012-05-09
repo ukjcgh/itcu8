@@ -12,8 +12,8 @@ define('LIB_DIR', IDE_DIR . 'lib' . DS);
 
 //require_once LIB_DIR . 'traits/propsCollector.php';
 require_once LIB_DIR . 'functions.php';
-require_once LIB_DIR . 'DataObject.php';
-require_once LIB_DIR . 'DataInstance.php';
+require_once LIB_DIR . 'data/box.php';
+require_once LIB_DIR . 'data/hand.php';
 require_once LIB_DIR . 'AceXMLElement.php';
 require_once LIB_DIR . 'Request.php';
 require_once LIB_DIR . 'Response.php';

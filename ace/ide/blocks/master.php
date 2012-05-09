@@ -2,11 +2,7 @@
 
 namespace blocks;
 
-class master extends \DataInstance {
-	
-	public function __construct($dataObj){
-		parent::__construct($dataObj);
-	}
+class master extends \data\hand {
 	
 	public function __toString() {
 		return templateXSL($this->getTemplateFileName(), $this->getXslData());
@@ -21,7 +17,7 @@ class master extends \DataInstance {
 
 	public function getXslData(){
 		$data = new \AceXMLElement('<data/>');
-		foreach ($this->data as $key => $value) {
+		foreach ($this->box as $key => $value) {
 			if($value instanceof \ArrayObject || gettype($value) == 'array') {
 				$data->insertArray($key, $value);
 			} elseif($value instanceof \SimpleXMLElement) {

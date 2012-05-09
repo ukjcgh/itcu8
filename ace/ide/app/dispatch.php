@@ -1,6 +1,6 @@
 <?php
 
-$request = new DataObject('Request');
+$request = newDataHand('Request');
 $response = new Response;
 
 $action_filename = IDE_DIR . 'app' . DS . 'actions' . DS . $request->getAction(). '.php';
