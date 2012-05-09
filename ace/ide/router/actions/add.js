@@ -1,6 +1,6 @@
-(function(formHtml) {
+(function(box) {
 
-	popup.show(formHtml);
+	popup.show(box.html);
 
 	$('.popup *[name]:first').focus();
 

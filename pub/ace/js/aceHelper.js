@@ -4,7 +4,7 @@ aceHelper.request = {
 	'errorMsg' : 'Error during ace.request().',
 	'handlers' : {},
 
-	'actionIsLoaded' : function(action) {
+	'isActionLoaded' : function(action) {
 		return aceHelper.request.handlers[action] != null;
 	},
 

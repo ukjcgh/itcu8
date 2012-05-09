@@ -10,7 +10,6 @@ define('IDE_DIR', ACE_DIR . 'ide' . DS);
 define('TPL_DIR', IDE_DIR . 'templates' . DS);
 define('LIB_DIR', IDE_DIR . 'lib' . DS);
 
-//require_once LIB_DIR . 'traits/propsCollector.php';
 require_once LIB_DIR . 'functions.php';
 require_once LIB_DIR . 'data/box.php';
 require_once LIB_DIR . 'data/hand.php';

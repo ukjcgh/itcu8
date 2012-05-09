@@ -25,8 +25,6 @@ function templateXSL($xslFile, $xmlElem = null) {
 
 	$outputNode = $xsltElem->addChild('output');
 	$outputNode->addAttribute('method', 'html');
-	// 	$outputNode->addAttribute('omit-xml-declaration', 'yes');
-	// 	$outputNode->addAttribute('indent', 'no');
 
 	$xslProc->importStylesheet($xsltElem);
 
@@ -40,27 +38,38 @@ function aceAutoload($className){
 
 function ace_json($data, $options = null){
 	//convert objects to string
-	if($data instanceof \blocks\master){
-		$data4json = (string)$data;
-	} elseif(is_array($data)) {
-		$data4json = array();
-		foreach ($data as $k => $v){
-			if($v instanceof \blocks\master) $v = (string)$v;
-			$data4json[$k] = $v;
+	ace_json_prepare_data($data);
+	return json_encode($data, $options);
+}
+
+function ace_json_prepare_data(&$data){
+	if(is_iterable($data)){
+		if(is_block($data)){
+			$data = (string)$data;
+		} else {
+			foreach ($data as $k=>&$v){
+				ace_json_prepare_data($v);
+			}
 		}
 	} else {
-		return json_encode($data, $options);
+		$data = (string)$data;
 	}
-	return json_encode($data4json, $options);
+}
+
+function is_block($obj){
+	return ($obj instanceof \data\box && $obj->hand() instanceof \blocks\master);
+}
+
+function is_iterable($var){
+	return is_array($var) || is_object($var);
 }
 
 spl_autoload_register('aceAutoload');
 
-function newDataHand($hand, $returnBox = true){
-	$hand = new $hand();
-	return $returnBox ? $hand->box() : $hand;
-}
-
-function newBlock($hand){
-	return newDataHand($hand);
+function box($handClass, $returnHand = false){
+	$hand = new $handClass();
+	if(!is_a($hand, 'data\hand')){
+		trigger_error('Can\'t create box, "'.$handClass.'" should be an instance of \data\hand', E_USER_ERROR);
+	}
+	return $returnHand ? $hand : $hand->box();
 }

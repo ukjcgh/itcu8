@@ -1,7 +1,7 @@
 <?php
 
-$request = newDataHand('Request');
-$response = new Response;
+$request = box('Request');
+$response = box('Response');
 
 $action_filename = IDE_DIR . 'router' . DS . 'actions' . DS . $request->getAction(). '.php';
 
@@ -12,12 +12,12 @@ if(is_readable($action_filename)) {
 }
 
 if($request->isAjax()){
-	if(!$request->actionIsLoaded){
+	if(!$request->meta('isActionLoaded')){
 		$handler_filename = IDE_DIR . 'router' . DS . 'actions' . DS . $request->getAction() . '.js';
 		if(is_readable($handler_filename)){
-			$response->handler = file_get_contents($handler_filename);
+			$response->meta('handler', file_get_contents($handler_filename));
 		} else {
-			$response->error = 'Handler "' . $handler_filename . '" is not readable.';
+			$response->meta('error', 'Handler "' . $handler_filename . '" is not readable.');
 		}
 	}
 }

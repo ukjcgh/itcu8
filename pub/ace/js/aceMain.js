@@ -25,7 +25,7 @@ aceMain.request = {
 				}
 				try {
 					// TODO: eval function so that lineNumber is defined in exception if error
-					helper.handlers[action](response.data);
+					helper.handlers[action](response.box);
 				} catch (e) {
 					console.error(helper.errorMsg + ' Error in action "' + action + '.js":' + '\n' + e);
 				}
@@ -39,8 +39,8 @@ aceMain.request = {
 		var post = {
 			// send json as string to keep types so you will have bool instead of string 'false'
 			'request' : JSON.stringify({
-				'actionIsLoaded' : helper.actionIsLoaded(action),
-				'data' : data
+				'isActionLoaded' : helper.isActionLoaded(action),
+				'box' : data
 			})
 		};
 

@@ -1,4 +1,6 @@
 
+isActionLoaded always should be present
+setA('dff')->setB()->setC()
 ace/app = ace/project
 propsCollector conflicts 
 allow import access to prot props if called from itseft?
@@ -32,6 +34,7 @@ Response: log and clean output from ob
 формы строить скриптом? тупо ж сложные элементы на сервере строить
 website auth should be required for BO
 show for visitor alert "error hapens"? it is stange if error only in console
+powered by in head
 
 код из индекса в блок (подготовка данных)
 структуру папок/файлов сделать удобнее и понятнее

@@ -4,6 +4,7 @@ class Request extends \data\hand {
 	
 	protected $action;
 	protected $isAjax;
+	protected $meta;
 
 	public function __construct(){
 		parent::__construct();
@@ -12,9 +13,11 @@ class Request extends \data\hand {
 			$this->isAjax = true;
 			$requestJson = isset($_POST['request']) ? $_POST['request'] : null;
 			$request = json_decode($requestJson);
-			$this->import($request);
-		} else {
-			$this->extract($_POST);
+			if(isset($request->box)){
+				$this->import($request->box);
+				unset($request->box);
+			}
+			$this->meta = $request;
 		}
 
 		$this->action = isset($_GET['action']) ? $_GET['action'] : 'default';
@@ -31,8 +34,9 @@ class Request extends \data\hand {
 	public function isAjax(){
 		return $this->isAjax;
 	}
-
-	public function extract($post){
+	
+	public function meta($name){
+		return isset($this->meta->$name) ? $this->meta->$name : null;
 	}
 
 }
