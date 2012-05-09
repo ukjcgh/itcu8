@@ -1,5 +1,5 @@
-(function(editForm) {
-	popup.show(editForm);
+(function(box) {
+	popup.show(box.html);
 	$('.popup *[name]:first').focus();
 
 	var submit_func = function() {

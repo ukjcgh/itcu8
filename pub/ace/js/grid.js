@@ -8,9 +8,7 @@ function grid_save_action(data) {
 
 function grid_delete_action(code) {
 	if (confirm('Are you sure you need to delete "' + code + '" website?')) {
-		ace.request('delete', {
-			'code' : code
-		});
+		ace.request('delete', code);
 	}
 }
 

@@ -1,6 +1,6 @@
 <?php
 
-$itemCode = $request->data->code;
+$itemCode = $request->data;
 
 $modelData = new AceXMLElement(file_get_contents(ACE_DIR."app/websites.xml"));
 

@@ -1,3 +1,3 @@
-(function(msg) {
+(function() {
 	document.location.reload();
 })
