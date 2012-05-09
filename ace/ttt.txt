@@ -1,5 +1,4 @@
 
-isActionLoaded always should be present
 setA('dff')->setB()->setC()
 ace/app = ace/project
 propsCollector conflicts 
