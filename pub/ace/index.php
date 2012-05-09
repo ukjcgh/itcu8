@@ -18,4 +18,4 @@ require_once LIB_DIR . 'AceXMLElement.php';
 require_once LIB_DIR . 'Request.php';
 require_once LIB_DIR . 'Response.php';
 
-require_once IDE_DIR . 'app' . DS . 'dispatch.php';
+require_once IDE_DIR . 'router' . DS . 'dispatch.php';

@@ -1,8 +1,4 @@
 
-блядский эклипс со свомим энтерами
-можно ли сделать прайвет конструктор и что бы он запускался даже без вызова?
-
-DataObject, DataInstance, new DataObject('\blocks\page'); ???
 ace/app = ace/project
 propsCollector conflicts 
 allow import access to prot props if called from itseft?
