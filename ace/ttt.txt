@@ -1,6 +1,6 @@
 
 server.get
-how to allow return flat data e.g. just string
+how to allow return flat data e.g. just string: plain(true|false, $value)
 ajax loading progress
 refact
 move validations from dispatch to runup
