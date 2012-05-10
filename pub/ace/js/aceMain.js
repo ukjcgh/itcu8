@@ -53,7 +53,7 @@ aceMain.request = {
 
 		return {
 			'type' : "POST",
-			'dataType' : 'json', // force json, write separate request function to change this option
+			'dataType' : 'json', // force json, write separate function to change this option
 			'url' : '/ace/?action=' + encodeURIComponent(action),
 			'data' : post
 		};

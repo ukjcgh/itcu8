@@ -13,7 +13,9 @@ function grid_delete_action(code) {
 }
 
 function grid_add_action() {
-	ace.request('add');
+	//ace.request('add');
+	var data = server.get('add');
+	alert(data.form);
 }
 
 function grid_addsave_action(data) {
