@@ -1,6 +1,5 @@
 
-описать где-то почему box<->hand а не просто как в маженто, что бы потом не забыть, и сами названия
-причины, удобно работать с данными они сверху, нет конфликтов, не так как в маженто потому что перформенс лучше
+box, data, pool
 есть ли смысл сделать box::__tostring return $this->data, когда в коробке всего одно значение data
 make all working
 sync ajax
@@ -12,7 +11,7 @@ $request->data->code why not $request->data['code'] - it is more usual
 data.requestData.data in aceMain.js
 continue with grid.js, only "add" is rebuilded
 server.get('websites/grid/form', function(data){}) - так не лучше?
-async ajax? like form = server.get('websites/edit_form/[website_code]'); pupup.show(form);
+sync ajax? like form = server.get('websites/edit_form/[website_code]'); pupup.show(form);
 move validations from dispatch to runup
 autoload
 может в блоках массив data просто заменить на AceXmlElement?

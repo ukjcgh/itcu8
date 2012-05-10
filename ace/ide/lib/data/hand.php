@@ -7,7 +7,7 @@ class hand {
 	protected $box;
 
 	public function __construct(){
-		$this->box = new box($this);
+		$this->box = new \data\box($this);
 	}
 
 	public function box(){
@@ -21,6 +21,7 @@ class hand {
 		}
 	}
 
+	// this function should here but not in \data\box to make it not possible to read protected props of box
 	public function export(){
 		$data = new \stdClass;
 		foreach ($this->box as $k=>$v){

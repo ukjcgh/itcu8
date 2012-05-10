@@ -1,5 +1,12 @@
 <?php
 
+/*
+ * box<->hand
+ * - it is convenient to work with directly using ->, especially in case of blocks
+ * - no conflicts with internal class props
+ * - better performance than for magic methods
+ */
+
 namespace data;
 
 class box {
