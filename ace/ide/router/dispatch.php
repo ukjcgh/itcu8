@@ -1,7 +1,7 @@
 <?php
 
-$request = box('Request');
-$response = box('Response');
+$request = o('Request');
+$response = o('Response');
 
 $action_filename = IDE_DIR . 'router' . DS . 'actions' . DS . $request->getAction(). '.php';
 

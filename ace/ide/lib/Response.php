@@ -14,10 +14,10 @@ class Response extends \data\hand {
 
 		if($request->isAjax()){
 			$post = $this->meta;
-			$post->box = $this->box->export(); // export to avoid recursion (stringify of itself)
+			$post->data = $this->data->export(); // export to avoid recursion (stringify of itself)
 			return ace_json($post);
 		} else {
-			return (string)$this->box->html;
+			return (string)$this->data->html;
 		}
 	}
 

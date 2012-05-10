@@ -11,7 +11,7 @@ define('TPL_DIR', IDE_DIR . 'templates' . DS);
 define('LIB_DIR', IDE_DIR . 'lib' . DS);
 
 require_once LIB_DIR . 'functions.php';
-require_once LIB_DIR . 'data/box.php';
+require_once LIB_DIR . 'data.php';
 require_once LIB_DIR . 'data/hand.php';
 require_once LIB_DIR . 'AceXMLElement.php';
 require_once LIB_DIR . 'Request.php';

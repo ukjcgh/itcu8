@@ -4,27 +4,27 @@ namespace data;
 
 class hand {
 
-	protected $box;
+	protected $data;
 
 	public function __construct(){
-		$this->box = new \data\box($this);
+		$this->data = new \data($this);
 	}
 
-	public function box(){
-		return $this->box;
+	public function data(){
+		return $this->data;
 	}
 
-	// this function should here but not in \data\box to make it not possible to averride protected props of box
+	// this function should be here but not in \data to make it not possible to averride protected props of \data
 	public function import($data){
 		foreach ($data as $k=>$v){
-			$this->box->$k = $v;
+			$this->data->$k = $v;
 		}
 	}
 
-	// this function should here but not in \data\box to make it not possible to read protected props of box
+	// this function should be here but not in \data to make it not possible to read protected props of \data
 	public function export(){
 		$data = new \stdClass;
-		foreach ($this->box as $k=>$v){
+		foreach ($this->data as $k=>$v){
 			$data->$k = $v;
 		}
 		return $data;

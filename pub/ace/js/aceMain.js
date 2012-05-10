@@ -32,7 +32,7 @@ aceMain.request = {
 				}
 				try {
 					// TODO: eval function so that lineNumber is defined in exception if error
-					helper.handlers[action](response.box);
+					helper.handlers[action](response.data);
 				} catch (e) {
 					console.error(helper.errorMsg + ' Error in action "' + action + '.js":' + '\n' + e);
 				}
@@ -47,7 +47,7 @@ aceMain.request = {
 			// send json as string to keep types so you will have bool instead of string 'false'
 			'request' : JSON.stringify({
 				'isActionLoaded' : helper.isActionLoaded(action),
-				'box' : data
+				'data' : data
 			})
 		};
 

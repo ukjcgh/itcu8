@@ -62,10 +62,17 @@ function is_iterable($var){
 
 spl_autoload_register('aceAutoload');
 
-function box($handClass, $returnHand = false){
-	$hand = new $handClass();
-	if(!is_a($hand, 'data\hand')){
-		trigger_error('Can\'t create box, "'.$handClass.'" should be an instance of \data\hand', E_USER_ERROR);
+
+function o($class){
+	$o = new $class();
+	if(is_a($o, 'data\hand')){
+		/*
+		 * data<->hand
+		* - it is convenient to work directly with data using ->, especially in case of blocks
+		* - no conflicts with internal class props
+		* - better performance than magic methods
+		*/
+		return $o->data();
 	}
-	return $returnHand ? $hand : $hand->box();
+	return $o;
 }

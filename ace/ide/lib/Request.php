@@ -13,9 +13,9 @@ class Request extends \data\hand {
 			$this->isAjax = true;
 			$requestJson = isset($_POST['request']) ? $_POST['request'] : null;
 			$request = json_decode($requestJson);
-			if(isset($request->box)){
-				$this->import($request->box);
-				unset($request->box);
+			if(isset($request->data)){
+				$this->import($request->data);
+				unset($request->data);
 			}
 			$this->meta = $request;
 		}

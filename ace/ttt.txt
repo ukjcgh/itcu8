@@ -1,5 +1,7 @@
 
-box, data, pool
+make data private?
+return (string)$this->data->data;
+
 есть ли смысл сделать box::__tostring return $this->data, когда в коробке всего одно значение data
 make all working
 sync ajax
