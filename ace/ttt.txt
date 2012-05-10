@@ -1,4 +1,5 @@
 
+stop recursion: use hashes for exceptions, auto add exception for himself
 make all working
 sync ajax
 $request->data->code - why here data?.... ace.request('edit', code); instead of {'code': code} - is it cool?
