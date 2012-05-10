@@ -33,34 +33,27 @@ function templateXSL($xslFile, $xmlElem = null) {
 }
 
 function aceAutoload($className){
+	if(!is_readable(ACE_DIR.'ide'.DS.str_replace('\\', DS, $className . '.php'))){
+		var_dump(debug_backtrace(false)); exit;
+	}
 	include ACE_DIR.'ide'.DS.str_replace('\\', DS, $className . '.php');
 }
 
-// $stringify_exceptions: add get_class($this) in __toString to avoid recursion, like in Response class
-function ace_json($data, $stringify_exceptions = null, $options = null){
-	// use stop_recursion coz php falls without error
-	stop_recursion(__FUNCTION__, 6, 'Try to add exception by second parameter.');
-	$stringify_exceptions = (array)$stringify_exceptions;
-	stringify_objects($data, $stringify_exceptions);
+function ace_json($data, $options = null){
+	stringify_objects($data);
 	return json_encode($data, $options);
 }
 
-//convert objects to string
-function stringify_objects(&$data, $exceptions){
+function stringify_objects(&$data){
 	if(is_iterable($data)){
-		if(is_callable(array($data, '__toString')) && !stringify_exception($data, $exceptions)){
+		if(is_callable(array($data, '__toString'))){
 			$data = (string)$data;
 		} else {
 			foreach ($data as $k=>&$v){
-				stringify_objects($v, $exceptions);
+				stringify_objects($v);
 			}
 		}
 	}
-}
-
-function stringify_exception($object, $exceptions){
-	if($object instanceof \data\box) $object = $object->hand();
-	return in_array(get_class($object), $exceptions);
 }
 
 function is_iterable($var){
@@ -75,18 +68,4 @@ function box($handClass, $returnHand = false){
 		trigger_error('Can\'t create box, "'.$handClass.'" should be an instance of \data\hand', E_USER_ERROR);
 	}
 	return $returnHand ? $hand : $hand->box();
-}
-
-//TODO: improve to work with class method
-function stop_recursion($funcname, $limit, $msg = ''){
-	$backtrace = debug_backtrace(false);
-	$calls = 0;
-	foreach ($backtrace as $point){
-		if($point['function'] == $funcname){
-			$calls++;
-			if($calls > $limit){
-				trigger_error('Recursion for "'.$funcname.'" detected (limit of '.$limit.' times is exceeded). '.$msg." File {$point['file']}, line {$point['line']}\n", E_USER_ERROR);
-			}
-		}
-	}
 }

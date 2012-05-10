@@ -14,8 +14,8 @@ class Response extends \data\hand {
 
 		if($request->isAjax()){
 			$post = $this->meta;
-			$post->box = $this->box;
-			return ace_json($post, get_class($this));
+			$post->box = $this->box->export(); // export to avoid recursion (stringify of itself)
+			return ace_json($post);
 		} else {
 			return (string)$this->box->html;
 		}

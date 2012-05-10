@@ -10,6 +10,10 @@ class hand {
 		$this->box = new box($this);
 	}
 
+	public function box(){
+		return $this->box;
+	}
+
 	// this function should here but not in \data\box to make it not possible to averride protected props of box
 	public function import($data){
 		foreach ($data as $k=>$v){
@@ -17,8 +21,11 @@ class hand {
 		}
 	}
 
-	public function box(){
-		return $this->box;
+	public function export(){
+		$data = new \stdClass;
+		foreach ($this->box as $k=>$v){
+			$data->$k = $v;
+		}
+		return $data;
 	}
-
 }

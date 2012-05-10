@@ -1,5 +1,7 @@
 
-stop recursion: use hashes for exceptions, auto add exception for himself
+описать где-то почему box<->hand а не просто как в маженто, что бы потом не забыть, и сами названия
+причины, удобно работать с данными они сверху, нет конфликтов, не так как в маженто потому что перформенс лучше
+есть ли смысл сделать box::__tostring return $this->data, когда в коробке всего одно значение data
 make all working
 sync ajax
 $request->data->code - why here data?.... ace.request('edit', code); instead of {'code': code} - is it cool?
@@ -52,6 +54,7 @@ debug: tree_var_dump();
 where to place ace avents management
 если в админке можно менеджить список отображаемых полей в табличке, то как с ide это сделать менеджебл?
 cache in local storage?
+билдер экстеншенов для ide - это уже что будет билдер билдера.. может это не так и мутно
 
 
 ################ in future
