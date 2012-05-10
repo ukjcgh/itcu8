@@ -38,6 +38,8 @@ function aceAutoload($className){
 
 // $stringify_exceptions: add get_class($this) in __toString to avoid recursion, like in Response class
 function ace_json($data, $stringify_exceptions = null, $options = null){
+	// use stop_recursion coz php falls without error
+	stop_recursion(__FUNCTION__, 'Try to add exception by second parameter.');
 	$stringify_exceptions = (array)$stringify_exceptions;
 	stringify_objects($data, $stringify_exceptions);
 	return json_encode($data, $options);
@@ -73,4 +75,17 @@ function box($handClass, $returnHand = false){
 		trigger_error('Can\'t create box, "'.$handClass.'" should be an instance of \data\hand', E_USER_ERROR);
 	}
 	return $returnHand ? $hand : $hand->box();
+}
+
+function stop_recursion($funcname, $msg = ''){
+	$backtrace = debug_backtrace(false);
+	$calls = 0;
+	foreach ($backtrace as $point){
+		if($point['function'] == $funcname){
+			$calls++;
+			if($calls > 1){
+				trigger_error('Recursion detected for "'.$funcname.'". '.$msg, E_USER_ERROR);
+			}
+		}
+	}
 }

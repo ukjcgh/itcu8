@@ -1,5 +1,4 @@
 
-type of static class - is it object, what if spl_object_hash
 make all working
 sync ajax
 $request->data->code - why here data?.... ace.request('edit', code); instead of {'code': code} - is it cool?
