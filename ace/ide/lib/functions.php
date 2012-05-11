@@ -39,11 +39,6 @@ function aceAutoload($className){
 	include ACE_DIR.'ide'.DS.str_replace('\\', DS, $className . '.php');
 }
 
-function ace_json($data, $options = null){
-	stringify_objects($data);
-	return json_encode($data, $options);
-}
-
 function stringify_objects(&$data){
 	if(is_iterable($data)){
 		if(is_callable(array($data, '__toString'))){

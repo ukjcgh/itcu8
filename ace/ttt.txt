@@ -1,4 +1,5 @@
 
+data->plain() or response->plain
 server.get
 how to allow return flat data e.g. just string: plain(true|false, $value)
 ajax loading progress
