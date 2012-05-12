@@ -1,6 +1,9 @@
 
-data->plain() or response->plain
-server.get
+loading indicator at sync ajax
+server.get, rm add.js
+waiting for a response from the server
+plain data
+action -> methods?
 how to allow return flat data e.g. just string: plain(true|false, $value)
 ajax loading progress
 refact
