@@ -1,4 +1,5 @@
 
+responseXML - оно парсит? как котключить?
 почему бы не избавится от jquery?
 server.get, rm actions/add.js
 waiting for a response from the server

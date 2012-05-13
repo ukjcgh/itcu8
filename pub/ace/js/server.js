@@ -14,6 +14,26 @@ server.get = function(action, params) {
 	return response.data;
 }
 
+server.request = function(action, data) {
+	var xhr = new XMLHttpRequest();
+	xhr.open("POST", '/ace/?action=' + encodeURIComponent(action), true);
+	xhr.setRequestHeader('XMLHttpRequest', 'async');
+	xhr.onreadystatechange = function() {
+		if (xhr.readyState == 4) {
+			if (xhr.status == 200) {
+				// self.done(action)(xhr);
+			} else {
+				console.error('xhr fail');
+			}
+		}
+	}
+	var request = {
+		'isActionLoaded' : helper.isActionLoaded(action),
+		'data' : data
+	};
+	xhr.send('request=' + encodeURIComponent(JSON.stringify(request)));
+}
+
 server.validateResponse = function(request, action) {
 	var msg = 'Error: server.get("' + action + '") failed. ';
 	if (request.status != 200) {
