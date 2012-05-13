@@ -26,6 +26,7 @@ DNA!
 debug: tree_var_dump();
 powered by in head
 AUTO CACHE so getter should not be called every time
+access to logs in production mode, group the same errors, use sqlite 
 
 ################ questions
 может все-таки в базе хранить данные, и хмл юзать только для деплойментов?
