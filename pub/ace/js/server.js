@@ -15,7 +15,7 @@ server.get = function(action, params) {
 }
 
 server.validateResponse = function(request, action) {
-	var msg = 'Error: server.get("' + action + '") failded. ';
+	var msg = 'Error: server.get("' + action + '") failed. ';
 	if (request.status != 200) {
 		throw msg + '\n      HTTP: ' + request.status + ' ' + request.statusText;
 	}
