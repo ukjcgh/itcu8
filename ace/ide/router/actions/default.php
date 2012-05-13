@@ -10,6 +10,7 @@ $page->doctype = 'html';
 $page->head->title = "TTITLEE";
 $page->head->styles[] = 'styles.css';
 $page->head->styles[] = 'popup.css';
+$page->head->scripts[] = 'checkua.js';
 $page->head->scripts[] = 'jquery-1.7.2.min.js';
 $page->head->scripts[] = 'aceHelper.js';
 $page->head->scripts[] = 'aceMain.js';
