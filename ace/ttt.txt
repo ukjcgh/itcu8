@@ -1,8 +1,6 @@
 
-restrict browser
 почему бы не избавится от jquery?
-loading indicator at sync ajax
-server.get, rm add.js
+server.get, rm actions/add.js
 waiting for a response from the server
 plain data
 action -> methods?

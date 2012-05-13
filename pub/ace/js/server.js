@@ -33,7 +33,7 @@ server.validateResponse = function(request, action) {
 server.indicator = {
 	'show' : function() {
 		if (!$('.server-indicator').length) {
-			$('body').append('<div class="server-indicator">waiting for a response from the server</div>');
+			$('body').append('<div class="server-indicator">Loading..</div>');
 		}
 		$('.server-indicator').show();
 	},

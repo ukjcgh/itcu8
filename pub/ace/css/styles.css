@@ -2,15 +2,26 @@ table {
 	background-color: #ccc;
 	border-spacing: 1px;
 }
-table td, table th {
+
+table td,table th {
 	background-color: #fff;
 	padding: 0 7px 0 7px;
 }
+
 a {
-	color: rgb(40,40,198);
+	color: rgb(40, 40, 198);
 	text-decoration: none;
 }
 
 table.form {
 	background-color: #fff;
+}
+
+.server-indicator {
+	position: fixed;
+	top: 0;
+	right: 0;
+	padding-right: 15px;
+	background-color: #fff;
+	color: #333;
 }
