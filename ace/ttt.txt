@@ -1,4 +1,6 @@
 
+как в бекофисе и на фронте
+Ajax-type
 responseXML - оно парсит? как котключить?
 почему бы не избавится от jquery?
 server.get, rm actions/add.js
@@ -27,7 +29,11 @@ DNA!
 debug: tree_var_dump();
 powered by in head
 AUTO CACHE so getter should not be called every time
-access to logs in production mode, group the same errors, use sqlite 
+access to logs in production mode, group the same errors, use sqlite
+format html output checkbox
+если в системе что-то лишнее, например акселератор, то писать об этом
+проверка кук и джаваскрипта
+проверка броузера при отключенном жс
 
 ################ questions
 может все-таки в базе хранить данные, и хмл юзать только для деплойментов?
@@ -37,6 +43,7 @@ where to place ace avents management
 cache in local storage?
 билдер экстеншенов для ide - это уже что будет билдер билдера.. может это не так и мутно
 версия проекта, версия интерпретатора, версия ide, + поддержка многих проектов в одной ide.. версии надо чекать как-то
+how to simplify request so if logged in user click button and on server just runs quesry "delete from asdf where id=1234" without extra checks
 
 
 ################ in future
