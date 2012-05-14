@@ -10,6 +10,7 @@ $page->doctype = 'html';
 $page->head->title = "TTITLEE";
 $page->head->styles[] = 'styles.css';
 $page->head->styles[] = 'popup.css';
+$page->head->scripts[] = 'base.js';
 $page->head->scripts[] = 'checkua.js';
 $page->head->scripts[] = 'server.js';
 $page->head->scripts[] = 'popup.js';

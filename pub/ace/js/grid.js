@@ -1,5 +1,6 @@
 function grid_edit_action(code) {
-	ace.request('edit', code);
+	alert(code);
+	// ace.request('edit', code);
 }
 
 function grid_save_action(data) {
@@ -8,65 +9,64 @@ function grid_save_action(data) {
 
 function grid_delete_action(code) {
 	if (confirm('Are you sure you need to delete "' + code + '" website?')) {
-		ace.request('delete', code);
+		server.request('delete', code);
 	}
 }
 
 function grid_add_action() {
-	var data = server.get('add');
-	
+	var data = server.request('add');
+
 	popup.show(data.form);
 
-	$('.popup *[name]:first').focus();
+	if (first = el('.popup *[name]')) {
+		first.focus();
+	}
 
-	var submit_func = function() {
+	var submit = function() {
 		var data = {};
-		$('.form *[name]').each(function(i, el) {
-			data[el.name] = el.value;
-		});
-
-		$('.form-save-button').html('saving..');
-
+		var fields = els('.form *[name]');
+		for ( var i in fields) {
+			data[fields[i].name] = fields[i].value;
+		}
 		grid_addsave_action(data);
 	};
 
-	$('.popup input[type="text"]').each(function(i, el) {
-		$(el).bind('keypress', function(e) {
+	var textFields = els('.popup input[type="text"]');
+	for ( var i in textFields) {
+		textFields[i].onkeypress = function(e) {
 			if (e.keyCode == 13) {
-				submit_func();
+				submit();
 			}
-		});
-	});
+		}
+	}
 
-	$('.form-save-button').bind('click', function() {
-		submit_func();
-	});
+	el('.form-save-button').onclick = function() {
+		submit();
+	};
 }
 
 function grid_addsave_action(data) {
-	ace.request('addsave', data);
+	server.request('addsave', data);
+	document.location.reload();
 }
 
-$(document).ready(function() {
-	$('.edit-link').each(function(i, el) {
-		$(el).bind('click', function() {
-			grid_edit_action($(el).attr('code'));
-			return false;
-		});
-		$(el).attr('href', '#');
-	});
-	$('.delete-link').each(function(i, el) {
-		$(el).bind('click', function() {
-			grid_delete_action($(el).attr('code'));
-			return false;
-		});
-		$(el).attr('href', '#');
-	});
-	$('.add-link').each(function(i, el) {
-		$(el).bind('click', function() {
-			grid_add_action($(el).attr('code'));
-			return false;
-		});
-		$(el).attr('href', '#');
-	});
+initFuncs.push(function() {
+
+	var initLinks = function(selector, func) {
+		var links = els(selector);
+		for ( var i in links) {
+			links[i].onclick = (function(links, i) {
+				return function() {
+					func(links[i].getAttribute('code'));
+					return false;
+				}
+			})(links, i);
+			links[i].href = '#';
+		}
+	}
+
+	initLinks('.edit-link', grid_edit_action);
+	initLinks('.delete-link', grid_delete_action);
+	initLinks('.add-link', grid_add_action);
+
 });

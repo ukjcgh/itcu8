@@ -1,31 +1,39 @@
 popup = {
 
 	show : function(html) {
-		if (!$('.popup-back').length) {
-			$('body').append('<div class="popup-back"></div>');
-			$('body').append('<div class="popup"></div>');
-			$('.popup').append('<div class="head"><a href="#">close</a></div>');
-			$('.popup .head a').click(function(e) {
+		if (!el('.popup-back')) {
+			var body = el('body');
+
+			var popupBackDiv = newel('div');
+			popupBackDiv.className = 'popup-back';
+			body.appendChild(popupBackDiv);
+
+			var popupDiv = newel('div');
+			popupDiv.className = 'popup';
+			body.appendChild(popupDiv);
+
+			popupDiv.innerHTML = '<div class="head"><a href="#">close</a></div>';
+			popupDiv.innerHTML += '<div class="content"></div>';
+
+			el('.popup .head a').onclick = function() {
 				popup.hide();
 				return false;
-			});
-			$('.popup').append('<div class="content"></div>');
+			};
 		}
-		// $('.popup').append();
-		$('.popup .content').html(html);
-		$('.popup-back').show();
-		$('.popup').show();
+		el('.popup .content').innerHTML = html;
+		el('.popup-back').style.display = 'block';
+		el('.popup').style.display = 'block';
 	},
 
 	hide : function() {
-		if ($('.popup-back').length) {
-			$('.popup').hide();
-			$('.popup-back').hide();
+		if (el('.popup-back')) {
+			el('.popup').style.display = 'none';
+			el('.popup-back').style.display = 'none';
 		}
 	}
 }
 
-$(document).bind('keyup', function(e) {
+document.addEventListener('keyup', function(e) {
 	if (e.keyCode == 27) {
 		popup.hide();
 	}

@@ -1,9 +1,4 @@
 
-get info
-generate some html
-push data
-request for action
-
 почему бы не избавится от jquery?
 server.get, rm actions/add.js
 waiting for a response from the server

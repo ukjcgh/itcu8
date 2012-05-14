@@ -9,14 +9,13 @@ server.request = function(action, data) {
 	var request = {};
 	request.data = data;
 	xhr.send('request=' + encodeURIComponent(JSON.stringify(request)));
-	var response = JSON.parse(xhr.responseText);
-	response = server.validateResponse(response, action);
+	var response = server.validateResponse(xhr, action);
 	server.indicator.hide();
 	return response.data;
 }
 
 server.validateResponse = function(request, action) {
-	var msg = 'Error: server.get("' + action + '") failed. ';
+	var msg = 'Error: server.request("' + action + '") failed. ';
 	if (request.status != 200) {
 		throw msg + '\n      HTTP: ' + request.status + ' ' + request.statusText;
 	}
@@ -33,12 +32,15 @@ server.validateResponse = function(request, action) {
 
 server.indicator = {
 	'show' : function() {
-		if (!$('.server-indicator').length) {
-			$('body').append('<div class="server-indicator">Loading..</div>');
+		if (!el('.server-indicator')) {
+			var indicatorDiv = newel('div');
+			indicatorDiv.className = 'server-indicator';
+			indicatorDiv.innerHTML = 'Processing..';
+			el('body').appendChild(indicatorDiv);
 		}
-		$('.server-indicator').show();
+		el('.server-indicator').style.display = 'block';
 	},
 	'hide' : function() {
-		$('.server-indicator').hide();
+		el('.server-indicator').style.display = 'none';
 	}
 }
