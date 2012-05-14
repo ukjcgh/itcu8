@@ -1,37 +1,18 @@
 server = {};
 
-server.get = function(action, params) {
-	server.indicator.show();
-	var request = $.ajax({
-		'async' : false,
-		'type' : "POST",
-		'dataType' : 'json', // force json, write separate function to change this option
-		'url' : '/ace/?action=' + encodeURIComponent(action),
-		'data' : params
-	});
-	server.indicator.hide();
-	response = server.validateResponse(request, action);
-	return response.data;
-}
-
 server.request = function(action, data) {
+	server.indicator.show();
 	var xhr = new XMLHttpRequest();
-	xhr.open("POST", '/ace/?action=' + encodeURIComponent(action), true);
-	xhr.setRequestHeader('XMLHttpRequest', 'async');
-	xhr.onreadystatechange = function() {
-		if (xhr.readyState == 4) {
-			if (xhr.status == 200) {
-				// self.done(action)(xhr);
-			} else {
-				console.error('xhr fail');
-			}
-		}
-	}
-	var request = {
-		'isActionLoaded' : helper.isActionLoaded(action),
-		'data' : data
-	};
+	xhr.open('POST', '/ace/?action=' + encodeURIComponent(action), false);
+	xhr.setRequestHeader('Ajax-type', 'sync');
+	xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+	var request = {};
+	request.data = data;
 	xhr.send('request=' + encodeURIComponent(JSON.stringify(request)));
+	var response = JSON.parse(xhr.responseText);
+	response = server.validateResponse(response, action);
+	server.indicator.hide();
+	return response.data;
 }
 
 server.validateResponse = function(request, action) {

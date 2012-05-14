@@ -9,7 +9,7 @@ class Request extends \data\hand {
 	public function __construct(){
 		parent::__construct();
 
-		if(isset($_SERVER['HTTP_X_REQUESTED_WITH'])){
+		if(isset($_SERVER['HTTP_AJAX_TYPE'])){
 			$this->isAjax = true;
 			$requestJson = isset($_POST['request']) ? $_POST['request'] : null;
 			$request = json_decode($requestJson);

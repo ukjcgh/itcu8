@@ -1,7 +1,9 @@
 
-как в бекофисе и на фронте
-Ajax-type
-responseXML - оно парсит? как котключить?
+get info
+generate some html
+push data
+request for action
+
 почему бы не избавится от jquery?
 server.get, rm actions/add.js
 waiting for a response from the server
@@ -34,6 +36,7 @@ format html output checkbox
 если в системе что-то лишнее, например акселератор, то писать об этом
 проверка кук и джаваскрипта
 проверка броузера при отключенном жс
+проверка браузера в бэкофисе
 
 ################ questions
 может все-таки в базе хранить данные, и хмл юзать только для деплойментов?
