@@ -3,21 +3,18 @@ server = {};
 server.request = function(action, data) {
 	server.indicator.show();
 
-	// send request
+	// init request
 	var xhr = new XMLHttpRequest();
 	xhr.open('POST', '/ace/?action=' + encodeURIComponent(action), false);
 	xhr.setRequestHeader('Ajax-type', 'sync');
 	xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+
+	// send request
 	var request = {};
-	if (typeof data != 'object') {
-		data = {
-			'data' : data
-		}
-	}
 	request.data = data;
 	xhr.send('request=' + encodeURIComponent(JSON.stringify(request)));
 
-	// fetch data from response
+	// fetch response
 	var response = server.validateResponse(xhr, action);
 
 	server.indicator.hide();

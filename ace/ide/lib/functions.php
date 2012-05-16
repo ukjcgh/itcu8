@@ -33,9 +33,6 @@ function templateXSL($xslFile, $xmlElem = null) {
 }
 
 function aceAutoload($className){
-	if(!is_readable(ACE_DIR.'ide'.DS.str_replace('\\', DS, $className . '.php'))){
-		var_dump(debug_backtrace(false)); exit;
-	}
 	include ACE_DIR.'ide'.DS.str_replace('\\', DS, $className . '.php');
 }
 
@@ -70,4 +67,8 @@ function o($class){
 		return $o->data();
 	}
 	return $o;
+}
+
+function ohash($obj){
+	return spl_object_hash($obj);
 }

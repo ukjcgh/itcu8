@@ -7,7 +7,7 @@ class page extends \blocks\master {
 	public function __construct() {
 		parent::__construct();
 		
-		$this->import(array(
+		$this->data()->import(array(
 				'doctype' => 'html',
 		));
 	}

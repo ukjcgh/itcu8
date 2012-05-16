@@ -18,7 +18,7 @@ class Response extends \data\hand {
 			stringify_objects($post);
 			return json_encode($post);
 		} else {
-			return (string)$this->data->html;
+			return (string)$this->data()->html;
 		}
 	}
 

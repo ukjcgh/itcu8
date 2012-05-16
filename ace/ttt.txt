@@ -1,7 +1,4 @@
 
-почему бы не избавится от jquery?
-server.get, rm actions/add.js
-добавить все-таки __get(){return null}
 plain data
 action -> methods?
 how to allow return flat data e.g. just string: plain(true|false, $value)

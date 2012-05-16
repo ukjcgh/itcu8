@@ -13,6 +13,7 @@ define('LIB_DIR', IDE_DIR . 'lib' . DS);
 require_once LIB_DIR . 'functions.php';
 require_once LIB_DIR . 'data.php';
 require_once LIB_DIR . 'data/hand.php';
+require_once LIB_DIR . 'object/property.php';
 require_once LIB_DIR . 'AceXMLElement.php';
 require_once LIB_DIR . 'Request.php';
 require_once LIB_DIR . 'Response.php';
