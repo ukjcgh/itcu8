@@ -16,36 +16,6 @@
 		<path>!!</path>
 	</item>
 	<item>
-		<code/>
-		<domain/>
-		<path/>
-	</item>
-	<item>
-		<code/>
-		<domain/>
-		<path/>
-	</item>
-	<item>
-		<code/>
-		<domain/>
-		<path/>
-	</item>
-	<item>
-		<code/>
-		<domain/>
-		<path/>
-	</item>
-	<item>
-		<code/>
-		<domain/>
-		<path/>
-	</item>
-	<item>
-		<code/>
-		<domain/>
-		<path/>
-	</item>
-	<item>
 		<code>222</code>
 		<domain/>
 		<path/>
@@ -59,10 +29,5 @@
 		<code>2</code>
 		<domain>3</domain>
 		<path>4</path>
-	</item>
-	<item>
-		<code/>
-		<domain/>
-		<path/>
 	</item>
 </items>

@@ -1,22 +1,33 @@
 function grid_edit_action(code) {
-	alert(code);
-	// ace.request('edit', code);
+	var form = server.request('edit', code).form;
+	popup.show(form);
+	grid_init_form(grid_save_action);
 }
 
 function grid_save_action(data) {
-	ace.request('save', data);
+	server.request('save', data);
+	document.location.reload();
 }
 
 function grid_delete_action(code) {
 	if (confirm('Are you sure you need to delete "' + code + '" website?')) {
 		server.request('delete', code);
+		document.location.reload();
 	}
 }
 
 function grid_add_action() {
-	var data = server.request('add');
+	var form = server.request('add').form;
+	popup.show(form);
+	grid_init_form(grid_addsave_action);
+}
 
-	popup.show(data.form);
+function grid_addsave_action(data) {
+	server.request('addsave', data);
+	document.location.reload();
+}
+
+function grid_init_form(submitFunc) {
 
 	if (first = el('.popup *[name]')) {
 		first.focus();
@@ -28,7 +39,7 @@ function grid_add_action() {
 		for ( var i in fields) {
 			data[fields[i].name] = fields[i].value;
 		}
-		grid_addsave_action(data);
+		submitFunc(data);
 	};
 
 	var textFields = els('.popup input[type="text"]');
@@ -43,11 +54,6 @@ function grid_add_action() {
 	el('.form-save-button').onclick = function() {
 		submit();
 	};
-}
-
-function grid_addsave_action(data) {
-	server.request('addsave', data);
-	document.location.reload();
 }
 
 initFuncs.push(function() {

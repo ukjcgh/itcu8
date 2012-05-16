@@ -1,3 +1,0 @@
-(function(data) {
-	alert(data);
-});
