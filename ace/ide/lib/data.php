@@ -17,6 +17,7 @@ class data {
 	public function import($data){
 		foreach ($data as $k=>$v) $this->$k = $v;
 	}
+	
 
 	public function export(){
 		$data = new \stdClass;
