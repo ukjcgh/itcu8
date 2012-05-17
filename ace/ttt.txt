@@ -1,6 +1,4 @@
 
-plain data
-action -> methods?
 how to allow return flat data e.g. just string: plain(true|false, $value)
 ajax loading progress
 refact
@@ -74,6 +72,8 @@ not modified headers, caches
 auto updates
 API
 дебагер и профайлинг нормальный кода и запросов к бд.. профайлер встроенный или екстеншеном?
+export any table to sql,xml,csv,xls
+xhprof - профайл глянуть и убрать недостатки по перформенсу
 
 
 

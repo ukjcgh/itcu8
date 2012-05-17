@@ -2,26 +2,26 @@
 
 class data {
 
+	public function __construct($hand){
+		/**
+		 * hide hand into global storage to clean object from own props to avoid conflicts
+		 * also it is convenient for var_dump
+		 */
+		\object\property::set($this, 'hand', $hand);
+	}
+
 	public function hand(){
 		return \object\property::get($this, 'hand');
 	}
 
 	public function import($data){
-		if(!is_iterable($data)){
-			$this->data = $data;
-		} else {
-			foreach ($data as $k=>$v) $this->$k = $v;
-		}
+		foreach ($data as $k=>$v) $this->$k = $v;
 	}
 
 	public function export(){
 		$data = new \stdClass;
 		foreach ($this as $k=>$v) $data->$k = $v;
 		return $data;
-	}
-
-	public function __construct($hand){
-		\object\property::set($this, 'hand', $hand);
 	}
 
 	public function __destruct(){
