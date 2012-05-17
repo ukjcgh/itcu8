@@ -1,5 +1,5 @@
 function grid_edit_action(code) {
-	var form = server.request('edit', code).form;
+	var form = server.request('edit', [ code ]).form;
 	popup.show(form);
 	grid_init_form(grid_save_action);
 }
@@ -11,7 +11,7 @@ function grid_save_action(data) {
 
 function grid_delete_action(code) {
 	if (confirm('Are you sure you need to delete "' + code + '" website?')) {
-		server.request('delete', code);
+		server.request('delete', [ code ]);
 		document.location.reload();
 	}
 }

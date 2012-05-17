@@ -1,7 +1,7 @@
 <?php
 
 class Request extends \data\hand {
-	
+
 	protected $action;
 	protected $isAjax;
 	protected $meta;
@@ -14,7 +14,7 @@ class Request extends \data\hand {
 			$requestJson = isset($_POST['request']) ? $_POST['request'] : null;
 			$request = json_decode($requestJson);
 			if(isset($request->data)){
-				$this->import($request->data);
+				$this->data()->import($request->data);
 				unset($request->data);
 			}
 			$this->meta = $request;
@@ -26,15 +26,15 @@ class Request extends \data\hand {
 		}
 
 	}
-	
+
 	public function getAction(){
 		return $this->action;
 	}
-	
+
 	public function isAjax(){
 		return $this->isAjax;
 	}
-	
+
 	public function meta($name){
 		return isset($this->meta->$name) ? $this->meta->$name : null;
 	}

@@ -1,6 +1,6 @@
 <?php
 
-$itemCode = $request->data;
+$itemCode = $request->{0};
 
 $form = o('blocks\grid\form');
 $modelData = new AceXMLElement('<data/>');

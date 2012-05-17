@@ -1,6 +1,15 @@
 server = {};
 
 server.request = function(action, data) {
+
+	if (typeof data == 'undefined') {
+		data = {};
+	} else {
+		if (typeof data != 'object') {
+			throw 'Can\'t send scalar value as data';
+		}
+	}
+
 	server.indicator.show();
 
 	// init request
