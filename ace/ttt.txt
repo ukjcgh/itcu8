@@ -1,8 +1,7 @@
 
+refact, clean code
 форма редактирования на клиенте а сервер просто как api? как достигнуть
 add error at edit/delete "no item found with passed code", ошибки уже не в консоль выводить
-ajax loading progress
-refact
 move validations from dispatch to runup
 autoload
 цсс по блокам, css namespaces

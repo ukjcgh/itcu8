@@ -3,7 +3,7 @@
 $request = o('Request');
 $response = o('Response');
 
-$action_filename = IDE_DIR . 'router' . DS . 'actions' . DS . $request->getAction(). '.php';
+$action_filename = ACE_IDE_DIR . 'router' . DS . 'actions' . DS . $request->getAction(). '.php';
 
 if(is_readable($action_filename)) {
 	include $action_filename;
