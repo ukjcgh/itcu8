@@ -11,7 +11,7 @@ class master extends \data\hand {
 	public function getTemplateFileName(){
 		$className = get_class($this);
 		$blockName = substr($className, strpos($className, '\\') + 1);
-		$blockPath = str_replace('\\', DS, $blockName);
+		$blockPath = str_replace('\\', '/', $blockName);
 		return $blockPath . '.xsl';
 	}
 

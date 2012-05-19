@@ -1,7 +1,7 @@
 <?php
 
-define('ACE_TPL_DIR', ACE_IDE_DIR . 'templates' . DS);
-define('ACE_LIB_DIR', ACE_IDE_DIR . 'lib' . DS);
+define('ACE_TPL_DIR', ACE_IDE_DIR . 'templates/');
+define('ACE_LIB_DIR', ACE_IDE_DIR . 'lib/');
 
 require_once ACE_LIB_DIR . 'functions.php';
 require_once ACE_LIB_DIR . 'data.php';
