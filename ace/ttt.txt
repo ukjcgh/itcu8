@@ -1,4 +1,6 @@
+DNA and Config.. 
 should $request be accesible globally?
+gsetRequest(){return $this} - problem coz hand returned instead of data
 o() - add possibility create singleton.. ot just use static classes
 стоит ли отделять префиксом классы в либе и не в либе? вдруг надо проекстендить
 перечитать все здесь, а то потом забуду о чем писал
