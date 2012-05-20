@@ -2,7 +2,7 @@
 
 $itemCode = $request->{0};
 
-$modelData = new AceXMLElement(file_get_contents(ACE_DIR."app/websites.xml"));
+$modelData = new AceXMLElement(file_get_contents(APP_DIR."websites.xml"));
 
 //find position
 $pos = 0;
@@ -17,7 +17,7 @@ foreach ($modelData->item as $item){
 
 if($itemPosition !== null){
 	unset($modelData->item[$itemPosition]);
-	file_put_contents(ACE_DIR."app/websites.xml", $modelData->asNiceXml());
+	file_put_contents(APP_DIR."websites.xml", $modelData->asNiceXml());
 } else {
 	$response->meta('error', 'Item not found');
 }

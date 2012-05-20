@@ -1,3 +1,4 @@
+simplexmlelement __set вместо insert?
 move templateXSL to blocks/master?
 refact, clean code
 форма редактирования на клиенте а сервер просто как api? как достигнуть

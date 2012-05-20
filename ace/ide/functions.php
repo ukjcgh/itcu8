@@ -35,7 +35,7 @@ function ohash($obj){
 }
 
 function aceAutoload($className){
-	include ACE_DIR.'ide/'.str_replace('\\', '/', $className . '.php');
+	include IDE_DIR.str_replace('\\', '/', $className . '.php');
 }
 
 function o($class){
@@ -59,7 +59,7 @@ function templateXSL($xslFile, $xmlElem = null) {
 	$xslProc = new XSLTProcessor();
 
 	// use simplexml_load_string coz faster
-	$xsltElem = simplexml_load_string(file_get_contents(ACE_TPL_DIR . $xslFile), 'AceXMLElement');
+	$xsltElem = simplexml_load_string(file_get_contents(IDE_TPL_DIR . $xslFile), 'AceXMLElement');
 
 	$outputNode = $xsltElem->addChild('output');
 	$outputNode->addAttribute('method', 'html');
