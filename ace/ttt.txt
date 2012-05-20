@@ -60,7 +60,7 @@ ace mudule and ide extensions, extensions server, any installation can be the se
 хранить код файлов в оперативке? если ли смысл? винт будет меньше дергатся
 not modified headers, caches
 logs: все логи в sqlite и другую инфу, которая спамит базу; access only to logs if production mode, group the same errors
-ide action logs
+ide action logs, все эти логи коммитить что бы можно было посмотреть например кто добавил такой-то вебсайт или изменил какую-то настройку
 крон сетапить атоматически
 при компиляции вставлять каменты что нефиг редактировать эти файлы
 auto updates
