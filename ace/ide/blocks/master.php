@@ -3,9 +3,11 @@
 namespace blocks;
 
 class master extends \data\hand {
-	
+
+	public static $TPL_DIR;
+
 	public function __toString() {
-		return templateXSL($this->getTemplateFileName(), $this->getXslData());
+		return $this->transform($this->getTemplateFileName(), $this->getXslData());
 	}
 
 	public function getTemplateFileName(){
@@ -27,6 +29,24 @@ class master extends \data\hand {
 			}
 		}
 		return $data;
+	}
+
+	public function transform($xslFile, $xmlElem = null) {
+
+		if(is_null($xmlElem)) $xmlElem = new AceXMLElement('<data/>');
+
+		$xslProc = new \XSLTProcessor();
+
+		// use simplexml_load_string coz faster
+		$xsltElem = simplexml_load_string(file_get_contents($this::$TPL_DIR . $xslFile), 'AceXMLElement');
+
+		$outputNode = $xsltElem->addChild('output');
+		$outputNode->addAttribute('method', 'html');
+
+		$xslProc->importStylesheet($xsltElem);
+
+		return $xslProc->transformToXml($xmlElem);
+
 	}
 
 }

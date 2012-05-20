@@ -51,21 +51,3 @@ function o($class){
 	}
 	return $o;
 }
-
-function templateXSL($xslFile, $xmlElem = null) {
-
-	if(is_null($xmlElem)) $xmlElem = new AceXMLElement('<data/>');
-
-	$xslProc = new XSLTProcessor();
-
-	// use simplexml_load_string coz faster
-	$xsltElem = simplexml_load_string(file_get_contents(IDE_TPL_DIR . $xslFile), 'AceXMLElement');
-
-	$outputNode = $xsltElem->addChild('output');
-	$outputNode->addAttribute('method', 'html');
-
-	$xslProc->importStylesheet($xsltElem);
-
-	return $xslProc->transformToXml($xmlElem);
-
-}
