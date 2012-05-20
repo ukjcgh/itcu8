@@ -37,13 +37,15 @@ function ohash($obj){
 function o($class){
 	$o = new $class;
 	if(is_a($o, 'data\hand')){
-		/*
-		 * data<->hand
-		* - it is convenient to work directly with data using ->, especially in case of blocks
-		* - no conflicts with internal class props
-		* - better performance than magic methods
-		*/
 		return $o->data();
 	}
 	return $o;
+}
+
+function sole($class){
+	static $objects = array();
+	if(!isset($objects[$class])){
+		$objects[$class] = o($class);
+	}
+	return $objects[$class];
 }

@@ -1,11 +1,14 @@
-DNA and Config.. 
+
+AceXMLElement.php -> XMLElement.php
+больше независимости кода, много завязок, я редактирую во многих местах при рефакторинге
+DNA and Config.. config for manager? config for website developer, config for ide dev. 
 should $request be accesible globally?
-gsetRequest(){return $this} - problem coz hand returned instead of data
+setRequest(){return $this} - problem coz hand returned instead of data
 o() - add possibility create singleton.. ot just use static classes
 стоит ли отделять префиксом классы в либе и не в либе? вдруг надо проекстендить
 перечитать все здесь, а то потом забуду о чем писал
 simplexmlelement __set вместо insert?
-refact, clean code
+refact, clean code, folder structure
 форма редактирования на клиенте а сервер просто как api? как достигнуть
 add error at edit/delete "no item found with passed code", ошибки уже не в консоль выводить
 move validations from dispatch to runup

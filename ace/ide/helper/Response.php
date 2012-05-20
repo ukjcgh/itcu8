@@ -3,7 +3,7 @@
 class Response extends \data\hand {
 
 	protected $meta;
-	protected $request;
+	protected $isAjax;
 
 	public function __construct(){
 		parent::__construct();
@@ -11,7 +11,7 @@ class Response extends \data\hand {
 	}
 
 	public function __toString(){
-		if($this->request->isAjax()){
+		if($this->isAjax){
 			$post = $this->meta;
 			$post->data = $this->data()->export(); // export to avoid recursion (stringify of itself)
 			stringify_objects($post->data);
@@ -23,7 +23,7 @@ class Response extends \data\hand {
 
 	public function send($exit = true){
 		//TODO: log and clean output from ob
-		if($this->request->isAjax()){
+		if($this->isAjax){
 			header('Content-type: text/json');
 		}
 		echo $this;
@@ -39,8 +39,8 @@ class Response extends \data\hand {
 		}
 	}
 
-	public function setRequest($request){
-		$this->request = $request;
+	public function isAjax($value){
+		$this->isAjax = $value;
 	}
 
 }
