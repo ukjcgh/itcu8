@@ -1,5 +1,8 @@
+should $request be accesible globally?
+o() - add possibility create singleton.. ot just use static classes
+стоит ли отделять префиксом классы в либе и не в либе? вдруг надо проекстендить
+перечитать все здесь, а то потом забуду о чем писал
 simplexmlelement __set вместо insert?
-move templateXSL to blocks/master?
 refact, clean code
 форма редактирования на клиенте а сервер просто как api? как достигнуть
 add error at edit/delete "no item found with passed code", ошибки уже не в консоль выводить

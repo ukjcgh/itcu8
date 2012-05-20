@@ -6,4 +6,4 @@ error_reporting(E_ALL);
 
 require_once '../../ace/ide/init.php';
 
-require_once IDE_DIR . 'router/dispatch.php';
+router::dispatch();

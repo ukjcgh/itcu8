@@ -34,12 +34,8 @@ function ohash($obj){
 	return spl_object_hash($obj);
 }
 
-function aceAutoload($className){
-	include IDE_DIR.str_replace('\\', '/', $className . '.php');
-}
-
 function o($class){
-	$o = new $class();
+	$o = new $class;
 	if(is_a($o, 'data\hand')){
 		/*
 		 * data<->hand

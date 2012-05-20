@@ -3,6 +3,7 @@
 class Response extends \data\hand {
 
 	protected $meta;
+	protected $request;
 
 	public function __construct(){
 		parent::__construct();
@@ -10,12 +11,10 @@ class Response extends \data\hand {
 	}
 
 	public function __toString(){
-		global $request;
-
-		if($request->isAjax()){
+		if($this->request->isAjax()){
 			$post = $this->meta;
 			$post->data = $this->data()->export(); // export to avoid recursion (stringify of itself)
-			stringify_objects($post);
+			stringify_objects($post->data);
 			return json_encode($post);
 		} else {
 			return (string)$this->data()->html;
@@ -24,14 +23,10 @@ class Response extends \data\hand {
 
 	public function send($exit = true){
 		//TODO: log and clean output from ob
-		global $request;
-
-		if($request->isAjax()){
+		if($this->request->isAjax()){
 			header('Content-type: text/json');
 		}
-
 		echo $this;
-
 		if($exit) exit;
 	}
 
@@ -42,6 +37,10 @@ class Response extends \data\hand {
 		} else {
 			return isset($this->meta->$name) ? $this->meta->$name : null;
 		}
+	}
+
+	public function setRequest($request){
+		$this->request = $request;
 	}
 
 }
