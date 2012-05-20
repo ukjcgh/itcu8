@@ -14,6 +14,4 @@ spl_autoload_register(function($className){
 	include str_replace('\\', '/', $className . '.php');
 });
 
-\blocks\master::$TPL_DIR = IDE_DIR . 'config/templates/';
-
 define('APP_DIR', realpath(IDE_DIR . '../app').'/');

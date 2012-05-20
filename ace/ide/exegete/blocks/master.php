@@ -4,8 +4,6 @@ namespace blocks;
 
 class master extends \data\hand {
 
-	public static $TPL_DIR;
-
 	public function __toString() {
 		return $this->transform($this->getTemplateFileName(), $this->getXslData());
 	}
@@ -38,7 +36,7 @@ class master extends \data\hand {
 		$xslProc = new \XSLTProcessor();
 
 		// use simplexml_load_string coz faster
-		$xsltElem = simplexml_load_string(file_get_contents($this::$TPL_DIR . $xslFile), 'XmlElement');
+		$xsltElem = simplexml_load_string(file_get_contents(IDE_DIR.'config/templates/'.$xslFile), 'XmlElement');
 
 		$outputNode = $xsltElem->addChild('output');
 		$outputNode->addAttribute('method', 'html');

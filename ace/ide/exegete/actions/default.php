@@ -1,19 +1,24 @@
 <?php
 
-//struct
+// structure
 $page = o('blocks\page');
 $page->head = o('blocks\page\head');
 $page->body = o('blocks\grid');
 
-//filling
+// content
 $page->doctype = 'html';
 $page->head->title = "TTITLEE";
-$page->head->styles[] = 'styles.css';
-$page->head->styles[] = 'popup.css';
-$page->head->scripts[] = 'base.js';
-$page->head->scripts[] = 'checkua.js';
-$page->head->scripts[] = 'server.js';
-$page->head->scripts[] = 'popup.js';
-$page->head->scripts[] = 'grid.js';
+
+$page->head->styles = array(
+		'styles.css',
+		'popup.css',
+);
+$page->head->scripts = array(
+		'base.js',
+		'checkua.js',
+		'server.js',
+		'popup.js',
+		'grid.js',
+);
 
 $response->html = $page;
