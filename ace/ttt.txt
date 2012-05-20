@@ -1,5 +1,7 @@
 
+grin block->getXslData
 simplexmlelement __set вместо insert?
+ref: check actions (separate files for each?), blocks, js, templates, css
 refact, clean code, folder structure
 форма редактирования на клиенте а сервер просто как api? как достигнуть (строить форму через жс, но конфигурится он ж на сервере)
 add error at edit/delete "no item found with passed code", ошибки уже не в консоль выводить
