@@ -14,28 +14,6 @@ function xpath_escape_var($var){
 	return $escaped;
 }
 
-function templateXSL($xslFile, $xmlElem = null) {
-
-	if(is_null($xmlElem)) $xmlElem = new AceXMLElement('<data/>');
-
-	$xslProc = new XSLTProcessor();
-
-	// use simplexml_load_string coz faster
-	$xsltElem = simplexml_load_string(file_get_contents(ACE_TPL_DIR . $xslFile), 'AceXMLElement');
-
-	$outputNode = $xsltElem->addChild('output');
-	$outputNode->addAttribute('method', 'html');
-
-	$xslProc->importStylesheet($xsltElem);
-
-	return $xslProc->transformToXml($xmlElem);
-
-}
-
-function aceAutoload($className){
-	include ACE_DIR.'ide/'.str_replace('\\', '/', $className . '.php');
-}
-
 function stringify_objects(&$data){
 	if(is_iterable($data)){
 		if(is_callable(array($data, '__toString'))){
@@ -52,8 +30,13 @@ function is_iterable($var){
 	return is_array($var) || is_object($var);
 }
 
-spl_autoload_register('aceAutoload');
+function ohash($obj){
+	return spl_object_hash($obj);
+}
 
+function aceAutoload($className){
+	include ACE_DIR.'ide/'.str_replace('\\', '/', $className . '.php');
+}
 
 function o($class){
 	$o = new $class();
@@ -69,6 +52,20 @@ function o($class){
 	return $o;
 }
 
-function ohash($obj){
-	return spl_object_hash($obj);
+function templateXSL($xslFile, $xmlElem = null) {
+
+	if(is_null($xmlElem)) $xmlElem = new AceXMLElement('<data/>');
+
+	$xslProc = new XSLTProcessor();
+
+	// use simplexml_load_string coz faster
+	$xsltElem = simplexml_load_string(file_get_contents(ACE_TPL_DIR . $xslFile), 'AceXMLElement');
+
+	$outputNode = $xsltElem->addChild('output');
+	$outputNode->addAttribute('method', 'html');
+
+	$xslProc->importStylesheet($xsltElem);
+
+	return $xslProc->transformToXml($xmlElem);
+
 }

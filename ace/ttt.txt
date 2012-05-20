@@ -1,4 +1,4 @@
-
+move templateXSL to blocks/master?
 refact, clean code
 форма редактирования на клиенте а сервер просто как api? как достигнуть
 add error at edit/delete "no item found with passed code", ошибки уже не в консоль выводить
@@ -103,3 +103,11 @@ wikipedia
 sites with frameworks overview
 
 модерация экстеншенов, сильно матерится на левые.. а я буду брать деньги за то что их проверяю и утверждаю
+
+name:
+wand, sole, pure, pp-47
+just was no worthy platform: jww
+worthy platform simply not existed: wpsne
+достойной платформы просто не существовало - DosPlatProNeSusche dpns
+tired of primitive php frameworks: toppf
+tired of unworthy platforms: touw
