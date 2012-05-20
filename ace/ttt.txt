@@ -1,68 +1,48 @@
 
-больше независимости кода, много завязок, я редактирую во многих местах при рефакторинге
-DNA and Config.. config for manager? config for website developer, config for ide dev. 
-should $request be accesible globally?
-setRequest(){return $this} - problem coz hand returned instead of data
-o() - add possibility create singleton.. ot just use static classes
-стоит ли отделять префиксом классы в либе и не в либе? вдруг надо проекстендить
 перечитать все здесь, а то потом забуду о чем писал
 simplexmlelement __set вместо insert?
 refact, clean code, folder structure
-форма редактирования на клиенте а сервер просто как api? как достигнуть
+форма редактирования на клиенте а сервер просто как api? как достигнуть (строить форму через жс, но конфигурится он ж на сервере)
 add error at edit/delete "no item found with passed code", ошибки уже не в консоль выводить
 move validations from dispatch to runup
-autoload
 цсс по блокам, css namespaces
 валидация данных формы, обработка ошибок при аяксе
 жс от хтмл
 формы строить скриптом? тупо ж сложные элементы на сервере строить
 website auth should be required for BO
-структура папок/файлов
 походу конструктов в блоках надо заменить на xml и указывать там тип и дефолное значение
 styles & script as individual blocks?
 block_abstract::getXslData - move to acexmlelement::insert (with type check)
-trim from xml when edit?
+trim xml values when edit?
 алиасы для сайтов, с алиасов не редиректить
 DNA!
 расширяемость самой ide
 разделяемость валидации (runup) и исполнения, что бы можно было отключить валидации и тем самым ускорить перформенс
-debug: tree_var_dump();
 powered by in head
-AUTO CACHE so getter should not be called every time
-access to logs in production mode, group the same errors, use sqlite
 format html output checkbox
 если в системе что-то лишнее, например акселератор, то писать об этом
 проверка кук и джаваскрипта
 проверка броузера при отключенном жс
 проверка браузера в бэкофисе
-сделать оверлоад для data через overloadProperties(array());
+сделать оверлоад для data через overloadProperties(array()); AUTO CACHE so getter should not be called every time??
+merging css and js
 
 ################ questions
-может все-таки в базе хранить данные, и хмл юзать только для деплойментов?
-а почему бы клиентский теплейт формы не сделать обычным, а внего данные просто сетить скриптом, в поле.value = value
 where to place ace avents management
 если в админке можно менеджить список отображаемых полей в табличке, то как с ide это сделать менеджебл?
-cache in local storage?
-билдер экстеншенов для ide - это уже что будет билдер билдера.. может это не так и мутно
 версия проекта, версия интерпретатора, версия ide, + поддержка многих проектов в одной ide.. версии надо чекать как-то
 how to simplify request so if logged in user click button and on server just runs quesry "delete from asdf where id=1234" without extra checks
 ошибки на сервере показывать через браузер в консоль - это нормально?
-куча ошибок есть, простых типа: не сконфигурирован доступ к базе, при этом мажента выдает неадекватную ошибку где-то в коре.. как найти все такие места и выдавать понятные ошибки что бы дев не тратил много времени на ее устранение?
 показывать основные элементы системы в виде схемки с кнопочками конфигурации?
-магический методы дают оверлоад, как это сделать при работе со свойствами?
-
 
 ################ in future
+extensions ide for ide
+cache in browser local storage?
+при работе в ide можно индексить данные в sqlite а при сохранении обратно в хмл, если будет проблема с перформенсом
 куча ошибок есть, простых типа: не сконфигурирован доступ к базе, при этом мажента выдает неадекватную ошибку где-то в коре.. как найти все такие места и выдавать понятные ошибки что бы дев не тратил много времени на ее устранение?
-показывать основные элементы системы в виде схемки с кнопочками конфигурации?
-переименовать папку /ace там где ide и профиксить все
 атоматизация разворачивания, аплоад базы, медиа, конфигурация, может и других данных?
-при инсталяции показвать недостающие экстеншены и модуля апача
+при инсталяции показвать недостающие экстеншены php и модуля апача
 компиляция, так что данные из хмл прямо в коде и не надо тягать все
-лог действий а ide.. что бы они тоже коммитились?
-профайлер
-дебаг
-импорт експорт
 loadlimiter
 grab design - simplify, automate
 unittesting
@@ -70,39 +50,28 @@ unittesting
 шедулер
 protection from CSR (cross site request) by referrer check
 fastCgi
-реклама в бо и админке и опционально на фронте?
-sanity check + add check for obsolete indexes by time of table modification
-merging css and js
 configure error alert, maybe nagios
-debug: profiler + track to exit;
+debug: profiler, sql profiler, track to script die, tree_var_dump(), niceHtml, errors to the console;
+профайлер встроенный или екстеншеном?
 ace mudule and ide extensions, extensions server, any installation can be the server, автоматическая проверка на говнокод, например "->" в темплейтах
 компиляция с темплейтами и данными в файле!!!
 хранить сессии в оперативке
-возможность форматирования хтмл на выходе, для дебага
-allow chrome only for ide
+хранить код файлов в оперативке? если ли смысл? винт будет меньше дергатся
 not modified headers, caches
-все логи в sqlite и другую инфу, которая спамит базу
+logs: все логи в sqlite и другую инфу, которая спамит базу; access only to logs if production mode, group the same errors
+ide action logs
 крон сетапить атоматически
-при компиляции вставлять каменты что нефиг редактировать
+при компиляции вставлять каменты что нефиг редактировать эти файлы
 auto updates
 API
-дебагер и профайлинг нормальный кода и запросов к бд.. профайлер встроенный или екстеншеном?
 export any table to sql,xml,csv,xls
 xhprof - профайл глянуть и убрать недостатки по перформенсу
 вынести мониторинг отдельно, если например что-то не кэшируется при включенных кэшах то говорить об этом.. аналайзей который предлагает оптимизировать что-то - отдельно.
 собирать статистику и предлагать решения по оптимизации, например статическое кеширование темплейта который используется много раз при одном запросе
+варнинги что например на продакшене стоит niceHtml которые ухудшает перформенс, эта настройка в компоненте XSL Transformer
 
-
-
-XSL: safe (auto escaping, valid html), supported by browser and server, possible output raw xml, FED on FE can see whole input (xml) and template, good FED and DEV separation, force to pass convenient data to the template
- 	but: slower, not convenient (problems with highlight, verbose), new language to learn
 
  	
-я хочу быть автором, будет сайт посвященный этому фрему и я должен быть там автором
-я хочу иметь право использовать его в своих целях, в том состоянии когда я еще брал участие в его разработке
-я не хочу что бы кто-то мне диктовал что и как делать, я сам знаю что делать и как, остальное просто советы и пожелания
-я не хочу что бы без меня там кто-то что-то делал, без меня официальная версия не должна выпускаться
-
 РАСКРУТКА:
 php.net
 w3schools.com
@@ -110,9 +79,11 @@ habrahabr
 wikipedia
 sites with frameworks overview
 
+Может и подзаработать?
 модерация экстеншенов, сильно матерится на левые.. а я буду брать деньги за то что их проверяю и утверждаю
+реклама в бо и ide?
 
-name:
+New name:
 wand, sole, pure, pp-47
 just was no worthy platform: jww
 worthy platform simply not existed: wpsne
