@@ -6,8 +6,8 @@ class grid extends \blocks\master {
 
 	public function getXslData(){
 		$model = 'websites.xml';
-		$data = new \AceXMLElement('<data/>');
-		$modelConfig = new \AceXMLElement(IDE_DIR.'config/models/'.$model, 0, true);
+		$data = new \XmlElement('<data/>');
+		$modelConfig = new \XmlElement(IDE_DIR.'config/models/'.$model, 0, true);
 		$data->insertXmlElement($modelConfig->grid);
 		$data->insertXmlFile(APP_DIR.$model, 'items');
 		return $data;

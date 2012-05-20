@@ -1,5 +1,4 @@
 
-AceXMLElement.php -> XMLElement.php
 больше независимости кода, много завязок, я редактирую во многих местах при рефакторинге
 DNA and Config.. config for manager? config for website developer, config for ide dev. 
 should $request be accesible globally?

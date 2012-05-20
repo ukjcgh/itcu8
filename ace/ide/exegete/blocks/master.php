@@ -18,7 +18,7 @@ class master extends \data\hand {
 	}
 
 	public function getXslData(){
-		$data = new \AceXMLElement('<data/>');
+		$data = new \XmlElement('<data/>');
 		foreach ($this->data() as $key => $value) {
 			if($value instanceof \ArrayObject || gettype($value) == 'array') {
 				$data->insertArray($key, $value);
@@ -33,12 +33,12 @@ class master extends \data\hand {
 
 	public function transform($xslFile, $xmlElem = null) {
 
-		if(is_null($xmlElem)) $xmlElem = new AceXMLElement('<data/>');
+		if(is_null($xmlElem)) $xmlElem = new \XmlElement('<data/>');
 
 		$xslProc = new \XSLTProcessor();
 
 		// use simplexml_load_string coz faster
-		$xsltElem = simplexml_load_string(file_get_contents($this::$TPL_DIR . $xslFile), 'AceXMLElement');
+		$xsltElem = simplexml_load_string(file_get_contents($this::$TPL_DIR . $xslFile), 'XmlElement');
 
 		$outputNode = $xsltElem->addChild('output');
 		$outputNode->addAttribute('method', 'html');

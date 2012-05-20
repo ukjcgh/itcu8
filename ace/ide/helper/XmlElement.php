@@ -1,6 +1,6 @@
 <?php
 
-class AceXMLElement extends SimpleXMLElement {
+class XmlElement extends SimpleXMLElement {
 
 	public function addChild($name, $value = null, $namespace = null) {
 		return parent::addChild($name, html($value), $namespace);

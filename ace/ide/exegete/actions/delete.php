@@ -2,7 +2,7 @@
 
 $itemCode = $request->{0};
 
-$modelData = new AceXMLElement(file_get_contents(APP_DIR."websites.xml"));
+$modelData = new XmlElement(file_get_contents(APP_DIR."websites.xml"));
 
 //find position
 $pos = 0;
