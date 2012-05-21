@@ -4,7 +4,7 @@ namespace blocks;
 
 class grid extends \blocks\master {
 
-	public function getXslData(){
+	public function getXmlElemement(){
 		$model = 'websites.xml';
 		$data = new \XmlElement('<data/>');
 		$modelConfig = new \XmlElement(IDE_DIR.'config/models/'.$model, 0, true);

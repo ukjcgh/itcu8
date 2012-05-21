@@ -5,17 +5,17 @@ namespace blocks;
 class master extends \data\hand {
 
 	public function __toString() {
-		return $this->transform($this->getTemplateFileName(), $this->getXslData());
+		return $this->transform();
 	}
 
-	public function getTemplateFileName(){
+	public function getXslFileName(){
 		$className = get_class($this);
 		$blockName = substr($className, strpos($className, '\\') + 1);
 		$blockPath = str_replace('\\', '/', $blockName);
 		return $blockPath . '.xsl';
 	}
 
-	public function getXslData(){
+	public function getXmlElemement(){
 		$data = new \XmlElement('<data/>');
 		foreach ($this->data() as $key => $value) {
 			if($value instanceof \ArrayObject || gettype($value) == 'array') {
@@ -29,21 +29,19 @@ class master extends \data\hand {
 		return $data;
 	}
 
-	public function transform($xslFile, $xmlElem = null) {
-
-		if(is_null($xmlElem)) $xmlElem = new \XmlElement('<data/>');
+	public function transform() {
 
 		$xslProc = new \XSLTProcessor();
 
 		// use simplexml_load_string coz faster
-		$xsltElem = simplexml_load_string(file_get_contents(IDE_DIR.'config/templates/'.$xslFile), 'XmlElement');
+		$xsltElem = simplexml_load_string(file_get_contents(IDE_DIR.'config/templates/'.$this->getXslFileName()), 'XmlElement');
 
 		$outputNode = $xsltElem->addChild('output');
 		$outputNode->addAttribute('method', 'html');
 
 		$xslProc->importStylesheet($xsltElem);
 
-		return $xslProc->transformToXml($xmlElem);
+		return $xslProc->transformToXml($this->getXmlElemement());
 
 	}
 
