@@ -35,6 +35,7 @@ where to place ace avents management
 how to simplify request so if logged in user click button and on server just runs quesry "delete from asdf where id=1234" without extra checks
 ошибки на сервере показывать через браузер в консоль - это нормально?
 показывать основные элементы системы в виде схемки с кнопочками конфигурации?
+а может ide не делать встроенной а отдельно... совсем отдельное приложение, в котором можно работать с проектами через браузер
 
 ################ in future
 extensions ide for ide
@@ -70,7 +71,7 @@ xhprof - профайл глянуть и убрать недостатки по
 вынести мониторинг отдельно, если например что-то не кэшируется при включенных кэшах то говорить об этом.. аналайзей который предлагает оптимизировать что-то - отдельно.
 собирать статистику и предлагать решения по оптимизации, например статическое кеширование темплейта который используется много раз при одном запросе
 варнинги что например на продакшене стоит niceHtml которые ухудшает перформенс, эта настройка в компоненте XSL Transformer
-
+если какой-то экст спамит сообщения деву, добавлять с спам (кнопочка)
 
  	
 РАСКРУТКА:
@@ -85,10 +86,6 @@ sites with frameworks overview
 реклама в бо и ide?
 donate?
 
-New name:
-wand, sole, pure, pp-47
-just was no worthy platform: jww
-worthy platform simply not existed: wpsne
-достойной платформы просто не существовало - DosPlatProNeSusche dpns
-tired of primitive php frameworks: toppf
-tired of unworthy platforms: touw
+New name: exegete(xgt), tirof, topp, tof, topf
+web embedded development environment, online ide (emenv, wede, eide)
+
