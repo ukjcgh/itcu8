@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<block>
+	<doctype>html</doctype>
+	<head type="block">
+		<title>TTITLEE</title>
+		<styles type="array">
+			<item>styles.css</item>
+			<item>popup.css</item>
+		</styles>
+		<scripts type="array">
+			<item>base.js</item>
+			<item>checkua.js</item>
+			<item>server.js</item>
+			<item>popup.js</item>
+			<item>grid.js</item>
+		</scripts>
+	</head>
+	<body type="block" block="grid" />
+</block>

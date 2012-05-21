@@ -1,6 +1,7 @@
 
-grin block->getXslData
-simplexmlelement __set вместо insert?
+config/blocks/page.xml
+grin block->getXmlElemement - это нормально в блоке такой код?
+simplexmlelement __set вместо insert? тогда getXmlElemement успростится
 ref: check actions (separate files for each?), blocks, js, templates, css
 refact, clean code, folder structure
 форма редактирования на клиенте а сервер просто как api? как достигнуть (строить форму через жс, но конфигурится он ж на сервере)
