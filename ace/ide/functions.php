@@ -34,7 +34,7 @@ function ohash($obj){
 	return spl_object_hash($obj);
 }
 
-function o($class){
+function object($class){
 	$o = new $class;
 	if(is_a($o, 'data\hand')){
 		return $o->data();
@@ -45,7 +45,7 @@ function o($class){
 function single($class){
 	static $objects = array();
 	if(!isset($objects[$class])){
-		$objects[$class] = o($class);
+		$objects[$class] = object($class);
 	}
 	return $objects[$class];
 }
