@@ -4,8 +4,8 @@ class router {
 
 	public function dispatch(){
 
-		$request = sole('Request');
-		$response = sole('Response');
+		$request = single('Request');
+		$response = single('Response');
 
 		$action_filename = IDE_DIR . 'exegete/actions/' . $request->getAction(). '.php';
 

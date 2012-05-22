@@ -42,7 +42,7 @@ function o($class){
 	return $o;
 }
 
-function sole($class){
+function single($class){
 	static $objects = array();
 	if(!isset($objects[$class])){
 		$objects[$class] = o($class);

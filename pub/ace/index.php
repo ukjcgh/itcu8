@@ -6,4 +6,4 @@ error_reporting(E_ALL);
 
 require_once '../../ace/ide/init.php';
 
-sole('router')->dispatch();
+single('router')->dispatch();
