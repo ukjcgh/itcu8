@@ -1,6 +1,5 @@
 
-блоки и лейауты, в чем разница, как разграничить или не надо?
-config/blocks/page.xml
+\model\xml\save
 grin block->getXmlElemement - это нормально в блоке такой код?
 simplexmlelement __set вместо insert? тогда getXmlElemement успростится
 ref: check actions (separate files for each?), blocks, js, templates, css

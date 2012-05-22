@@ -4,16 +4,6 @@ function html($str){
 	return htmlspecialchars($str);
 }
 
-function xpath_escape_var($var){
-	if(strpos($var, '"') !== false) {
-		$escaped = preg_replace('~("+)~', '",\'$1\',"', $var);
-		$escaped = 'concat("' . $escaped . '")';
-	} else {
-		$escaped = "'$var'";
-	}
-	return $escaped;
-}
-
 function stringify_objects(&$data){
 	if(is_iterable($data)){
 		if(is_callable(array($data, '__toString'))){

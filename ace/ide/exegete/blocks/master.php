@@ -18,7 +18,8 @@ class master extends \data\hand {
 	public function getXmlElemement(){
 		$data = new \XmlElement('<data/>');
 		foreach ($this->data() as $key => $value) {
-			if($value instanceof \ArrayObject || gettype($value) == 'array') {
+			if($value instanceof \ArrayObject || gettype($value) == 'array'
+					|| (is_object($value) && get_class($value) == 'stdClass')) {
 				$data->insertArray($key, $value);
 			} elseif($value instanceof \SimpleXMLElement) {
 				$data->insertXmlElement($value, $key);
