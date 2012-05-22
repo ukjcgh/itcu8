@@ -1,4 +1,5 @@
 
+блоки и лейауты, в чем разница
 config/blocks/page.xml
 grin block->getXmlElemement - это нормально в блоке такой код?
 simplexmlelement __set вместо insert? тогда getXmlElemement успростится
