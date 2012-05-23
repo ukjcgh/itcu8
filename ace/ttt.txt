@@ -1,4 +1,5 @@
 
+object('xml\model', 'websites.xml') - add constructor params
 insertXmlElement -> insertElement
 saveSource - xml\model - как оптимизировать что бы перегрузка сорца не происходила когда не надо (sync, еще раз init при load или..)
 'Item with code "'.$request->code.'" already exists' - user error, not to conxole
