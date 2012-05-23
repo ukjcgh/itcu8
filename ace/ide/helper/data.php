@@ -29,7 +29,9 @@ class data {
 	}
 
 	public function __call($method, $args){
-		return call_user_func_array(array($this->hand(), $method), $args);
+		$hand = $this->hand();
+		$result = call_user_func_array(array($hand, $method), $args);
+		return $result === $hand ? $this : $result;
 	}
 
 	public function __get($name){

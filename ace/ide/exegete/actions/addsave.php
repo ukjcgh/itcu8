@@ -1,12 +1,9 @@
 <?php
 
-$modelData = new XmlElement(file_get_contents(APP_DIR."websites.xml"));
-$modelConfig = new XmlElement(IDE_DIR.'config/models/websites.xml', 0, true);
-
-$item = $modelData->addChild('item');
-
-foreach($modelConfig->forms->add->fields->children() as $field=>$stuff) {
-	$item->$field = trim($request->$field);
+$model = object('xml\model')->init('websites.xml');
+if(!$model->load($request->code)){
+	$model->import($request);
+	$model->upload();
+} else {
+	$response->meta('error', 'Can\'t add item with code "'.$request->code.'", already exists');
 }
-
-file_put_contents(APP_DIR."websites.xml", $modelData->asNiceXml());

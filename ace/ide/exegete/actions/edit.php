@@ -1,14 +1,10 @@
 <?php
 
-$code = $request->{0};
-
-$item = object('model\xml');
-$item->setSource(APP_DIR."websites.xml");
-if($item->load($code)){
+$model = object('xml\model')->init('websites.xml');
+if($model->load($request->{0})){
 	$form = object('blocks\grid\form');
-	$form->item = $item->export();
-	$config = new XmlElement(IDE_DIR.'config/models/websites.xml', 0, true);
-	$form->config = $config->forms->edit;
+	$form->item = $model->export();
+	$form->config = $model->getConfig()->forms->edit;
 	$response->form = $form;
 } else {
 	$response->meta('error', 'Item with code="'.$request->{0}.'" not found.');

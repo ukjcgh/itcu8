@@ -16,7 +16,7 @@ class master extends \data\hand {
 	}
 
 	public function getXmlElemement(){
-		$data = new \XmlElement('<data/>');
+		$data = new \xml\element('<data/>');
 		foreach ($this->data() as $key => $value) {
 			if($value instanceof \ArrayObject || gettype($value) == 'array'
 					|| (is_object($value) && get_class($value) == 'stdClass')) {
@@ -35,7 +35,7 @@ class master extends \data\hand {
 		$xslProc = new \XSLTProcessor();
 
 		// use simplexml_load_string coz faster
-		$xsltElem = simplexml_load_string(file_get_contents(IDE_DIR.'config/templates/'.$this->getXslFileName()), 'XmlElement');
+		$xsltElem = simplexml_load_string(file_get_contents(IDE_DIR.'config/templates/'.$this->getXslFileName()), 'xml\element');
 
 		$outputNode = $xsltElem->addChild('output');
 		$outputNode->addAttribute('method', 'html');

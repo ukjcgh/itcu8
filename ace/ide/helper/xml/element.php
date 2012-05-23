@@ -1,6 +1,8 @@
 <?php
 
-class XmlElement extends SimpleXMLElement {
+namespace xml;
+
+class element extends \SimpleXMLElement {
 
 	public function addChild($name, $value = null, $namespace = null) {
 		return parent::addChild($name, html($value), $namespace);
@@ -73,7 +75,7 @@ class XmlElement extends SimpleXMLElement {
 		$arrayNode = $currNode->addChild($name);
 		foreach ($array as $key => $value) {
 			$arrayTag = is_numeric($key) ? "item$key" : $key;
-			if($value instanceof ArrayObject || gettype($value) == 'array') {
+			if($value instanceof \ArrayObject || gettype($value) == 'array') {
 				$currNode->insertArray($arrayTag, $value, $arrayNode);
 			} else {
 				$arrayNode->addChild($arrayTag, $value);
