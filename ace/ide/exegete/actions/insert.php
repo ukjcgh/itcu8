@@ -5,5 +5,5 @@ if(!$model->load($request->code)){
 	$model->import($request);
 	$model->upload();
 } else {
-	$response->meta('error', 'Can\'t add item with code "'.$request->code.'", already exists');
+	$response->meta('user-error', 'Item with code "'.$request->code.'" already exists, try different one');
 }

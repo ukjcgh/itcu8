@@ -1,11 +1,11 @@
 function grid_edit_action(code) {
-	var form = server.request('edit', [ code ]).form;
+	var form = server.request('updateForm', [ code ]).form;
 	popup.show(form);
 	grid_init_form(grid_save_action);
 }
 
 function grid_save_action(data) {
-	server.request('save', data);
+	server.request('update', data);
 	document.location.reload();
 }
 
@@ -17,13 +17,13 @@ function grid_delete_action(code) {
 }
 
 function grid_add_action() {
-	var form = server.request('add').form;
+	var form = server.request('insertForm').form;
 	popup.show(form);
 	grid_init_form(grid_addsave_action);
 }
 
 function grid_addsave_action(data) {
-	server.request('addsave', data);
+	server.request('insert', data);
 	document.location.reload();
 }
 

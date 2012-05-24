@@ -74,6 +74,7 @@ class element extends \SimpleXMLElement {
 		if(is_null($currNode)) $currNode = $this;
 		$arrayNode = $currNode->addChild($name);
 		foreach ($array as $key => $value) {
+			// is_numeric($key) - may be it is better to check if first symbol is digit?
 			$arrayTag = is_numeric($key) ? "item$key" : $key;
 			if($value instanceof \ArrayObject || gettype($value) == 'array') {
 				$currNode->insertArray($arrayTag, $value, $arrayNode);

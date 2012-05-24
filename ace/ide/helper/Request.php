@@ -21,7 +21,7 @@ class Request extends \data\hand {
 		}
 
 		$this->action = isset($_GET['action']) ? $_GET['action'] : 'default';
-		if(preg_match('~[^a-z]~', $this->action)){
+		if(preg_match('~[^a-zA-Z]~', $this->action)){
 			trigger_error('Invalid action name "' . $this->action . '"', E_USER_ERROR);
 		}
 

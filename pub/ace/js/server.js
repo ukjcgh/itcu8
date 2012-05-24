@@ -47,6 +47,13 @@ server.validateResponse = function(request, action) {
 		throw msg + 'Server has sent error: ' + response.error;
 	}
 
+	if (response['user-error']) {
+		alert(response['user-error']);
+		// just interrupt
+		throw msg + 'This exception thrown out only to stop further execution of the script in case of user error: '
+				+ response['user-error'];
+	}
+
 	return response;
 }
 

@@ -1,11 +1,8 @@
 
-saveSource - xml\model - как оптимизировать что бы перегрузка сорца не происходила когда не надо (sync, еще раз init при load или..)
-insertXmlElement -> insertElement
-'Item with code "'.$request->code.'" already exists' - user error, not to conxole
+'Item with code "'.$request->code.'" already exists' - user error, not to console
 привести в раб сост, наворотить, данные xml->php->json что бы все четко
-\model\xml\save
 grin block->getXmlElemement - это нормально в блоке такой код?
-simplexmlelement __set вместо insert? тогда getXmlElemement успростится
+simplexmlelement __set вместо insert? тогда getXmlElemement упростится
 ref: check actions (separate files for each?), blocks, js, templates, css
 refact, clean code, folder structure
 форма редактирования на клиенте а сервер просто как api? как достигнуть (строить форму через жс, но конфигурится он ж на сервере)
