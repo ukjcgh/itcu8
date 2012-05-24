@@ -1,9 +1,6 @@
 
-конфиг моделей - почему не в проекте? будет же возможность их создавать
-nice error text when autoload fail.. use backtrace
-object('xml\model', 'websites.xml') - add constructor params
-insertXmlElement -> insertElement
 saveSource - xml\model - как оптимизировать что бы перегрузка сорца не происходила когда не надо (sync, еще раз init при load или..)
+insertXmlElement -> insertElement
 'Item with code "'.$request->code.'" already exists' - user error, not to conxole
 привести в раб сост, наворотить, данные xml->php->json что бы все четко
 \model\xml\save
@@ -35,6 +32,7 @@ format html output checkbox
 проверка браузера в бэкофисе
 сделать оверлоад для data через overloadProperties(array()); AUTO CACHE so getter should not be called every time??
 merging css and js
+nice error text when autoload fail.. use backtrace
 
 ################ questions
 where to place ace avents management
@@ -85,6 +83,7 @@ xhprof - профайл глянуть и убрать недостатки по
 много полей при создании продуктов, надо возможность легко создавать визарды(простые формы, где можно указывать дефотные значения для требуемых полей, остальные ввводятся пользователем)
 после деплоймента, если визитор провтыкал мейнтанс, при аякс запросе нужно выдавать "вам надо перезагрузить страницу, сайт был изменен"
 мультиязычтость только префиксами /en/ так как для сео только так нормально
+автоопределение локали, если не указана, можно еще в куках запоминать на всяк случ, что бы редиректнуть
 
  	
 РАСКРУТКА:
