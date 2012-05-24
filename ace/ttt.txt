@@ -1,34 +1,24 @@
 
-привести в раб сост, наворотить, данные xml->php->json что бы все четко
-grin block->getXmlElemement - это нормально в блоке такой код?
-simplexmlelement __set вместо insert? тогда getXmlElemement упростится
-ref: check actions (separate files for each?), blocks, js, templates, css
-refact, clean code, folder structure
-форма редактирования на клиенте а сервер просто как api? как достигнуть (строить форму через жс, но конфигурится он ж на сервере)
-add error at edit/delete "no item found with passed code", ошибки уже не в консоль выводить
+перенести темплейты форм на клиент
+наворотить, данные xml->php->json что бы все четко
+валидация данных формы, обработка ошибок при аяксе
+website auth should be required for BO
+алиасы для сайтов, с алиасов не редиректить?
 move validations from dispatch to runup
 цсс по блокам, css namespaces
-валидация данных формы, обработка ошибок при аяксе
 жс от хтмл
-формы строить скриптом? тупо ж сложные элементы на сервере строить
-website auth should be required for BO
-походу конструктов в блоках надо заменить на xml и указывать там тип и дефолное значение
 styles & script as individual blocks?
-block_abstract::getXslData - move to acexmlelement::insert (with type check)
-trim xml values when edit?
-алиасы для сайтов, с алиасов не редиректить
 DNA!
-расширяемость самой ide
-разделяемость валидации (runup) и исполнения, что бы можно было отключить валидации и тем самым ускорить перформенс
 powered by in head
-format html output checkbox
-если в системе что-то лишнее, например акселератор, то писать об этом
+nice html output checkbox in the configuration, "Template Engine" component
 проверка кук и джаваскрипта
 проверка броузера при отключенном жс
 проверка браузера в бэкофисе
 сделать оверлоад для data через overloadProperties(array()); AUTO CACHE so getter should not be called every time??
 merging css and js
 nice error text when autoload fail.. use backtrace
+расширяемость самой ide
+разделяемость валидации (runup) и исполнения, что бы можно было отключить валидации и тем самым ускорить перформенс
 
 ################ questions
 where to place ace avents management
@@ -40,6 +30,7 @@ how to simplify request so if logged in user click button and on server just run
 а может ide не делать встроенной а отдельно... совсем отдельное приложение, в котором можно работать с проектами через браузер
 
 ################ in future
+если в системе что-то лишнее, например акселератор, то писать об этом
 extensions ide for ide
 cache in browser local storage?
 при работе в ide можно индексить данные в sqlite а при сохранении обратно в хмл, если будет проблема с перформенсом
