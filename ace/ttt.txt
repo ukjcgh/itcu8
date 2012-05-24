@@ -1,4 +1,5 @@
 
+конфиг моделей - почему не в проекте? будет же возможность их создавать
 nice error text when autoload fail.. use backtrace
 object('xml\model', 'websites.xml') - add constructor params
 insertXmlElement -> insertElement
