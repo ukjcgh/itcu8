@@ -1,5 +1,4 @@
 
-'Item with code "'.$request->code.'" already exists' - user error, not to console
 привести в раб сост, наворотить, данные xml->php->json что бы все четко
 grin block->getXmlElemement - это нормально в блоке такой код?
 simplexmlelement __set вместо insert? тогда getXmlElemement упростится
