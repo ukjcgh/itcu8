@@ -1,5 +1,8 @@
 
 перенести темплейты форм на клиент
+is stringify_objects enoug custom to move them to Response?
+move Response and Request to exegate folder? seems no
+[^a-zA-Z/] - регулярка на экшн и на конфиг модели.. добавить цифры и как-то вынести типа path_secure, geld 
 code="sf" в ссылках лишнее
 наворотить, данные xml->php->json что бы все четко
 валидация данных формы, обработка ошибок при аяксе
