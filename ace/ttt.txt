@@ -1,4 +1,5 @@
 
+model(config, data, templates) - multirequest? or just folder model/forms? or all data inside init grid?
 перенести темплейты форм на клиент
 is stringify_objects enoug custom to move them to Response?
 move Response and Request to exegate folder? seems no
