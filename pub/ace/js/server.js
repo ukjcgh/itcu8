@@ -23,10 +23,11 @@ server.request = function(action, data) {
 	request.data = data;
 	xhr.send('request=' + encodeURIComponent(JSON.stringify(request)));
 
+	server.indicator.hide();
+
 	// fetch response
 	var response = server.validateResponse(xhr, action);
 
-	server.indicator.hide();
 	return response.data;
 }
 

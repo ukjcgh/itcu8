@@ -6,6 +6,7 @@ function html($str){
 
 function stringify_objects(&$data){
 	if(is_iterable($data)){
+		if($data instanceof xml\element) return;
 		if(is_callable(array($data, '__toString'))){
 			$data = (string)$data;
 		} else {
