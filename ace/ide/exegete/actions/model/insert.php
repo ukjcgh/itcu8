@@ -1,6 +1,6 @@
 <?php
 
-$model = object('xml\model')->init('websites.xml');
+$model = object('xml\model')->init('websites');
 if(!$model->load($request->code)){
 	$model->import($request);
 	$model->upload();

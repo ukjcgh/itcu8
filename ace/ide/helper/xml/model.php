@@ -10,8 +10,12 @@ class model extends \data\hand {
 	protected $sourceFile;
 
 	public function init($entity){
-		$this->configFile = IDE_DIR.'config/models/'.$entity;
-		$this->sourceFile = APP_DIR.$entity;
+		if(preg_match('~[^a-zA-Z/]~', $entity)){
+			trigger_error('Invalid entity name "' . $entity . '"', E_USER_ERROR);
+		}
+		$this->configFile = IDE_DIR.'config/models/'.$entity.'.xml';
+		$this->sourceFile = APP_DIR.$entity.'.xml';
+		$this->config = $this->source = null;
 		return $this;
 	}
 

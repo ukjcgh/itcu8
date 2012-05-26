@@ -1,6 +1,6 @@
 <?php
 
-$model = object('xml\model')->init('websites.xml');
+$model = object('xml\model')->init('websites');
 if($model->load($request->{0})){
 	$form = object('blocks\grid\form');
 	$form->item = $model->export();

@@ -1,4 +1,4 @@
 <?php
 
-$model = object('xml\model')->init('websites.xml');
+$model = object('xml\model')->init('websites');
 $model->delete($request->{0});
