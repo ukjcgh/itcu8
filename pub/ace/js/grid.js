@@ -1,29 +1,29 @@
 function grid_edit_action(code) {
-	var form = server.request('updateForm', [ code ]).form;
+	var form = server.request('grid/updateForm', [ code ]).form;
 	popup.show(form);
 	grid_init_form(grid_save_action);
 }
 
 function grid_save_action(data) {
-	server.request('update', data);
+	server.request('grid/update', data);
 	document.location.reload();
 }
 
 function grid_delete_action(code) {
 	if (confirm('Are you sure you need to delete "' + code + '" website?')) {
-		server.request('delete', [ code ]);
+		server.request('grid/delete', [ code ]);
 		document.location.reload();
 	}
 }
 
 function grid_add_action() {
-	var form = server.request('insertForm').form;
+	var form = server.request('grid/insertForm').form;
 	popup.show(form);
 	grid_init_form(grid_addsave_action);
 }
 
 function grid_addsave_action(data) {
-	server.request('insert', data);
+	server.request('grid/insert', data);
 	document.location.reload();
 }
 
