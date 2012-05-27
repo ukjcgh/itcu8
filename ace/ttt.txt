@@ -1,5 +1,7 @@
 
 model(config, data, templates) - multirequest? or just folder model/forms? or all data inside init grid? or action model/info with params (data/config/templates), multiinsert?
+стоит ли insert и update объединять?
+при аджаксе $page->body = "asdf"; что бы автоматом поменяло
 перенести темплейты форм на клиент
 is stringify_objects enoug custom to move them to Response?
 move Response and Request to exegate folder? seems no
@@ -26,6 +28,7 @@ nice error text when autoload fail.. use backtrace
 разделяемость валидации (runup) и исполнения, что бы можно было отключить валидации и тем самым ускорить перформенс
 
 ################ questions
+навигация вперед-назад, ссылка на текущее состояние что бы кому-то скинуть (надо или нет?)
 where to place ace avents management
 если в админке можно менеджить список отображаемых полей в табличке, то как с ide это сделать менеджебл?
 версия проекта, версия интерпретатора, версия ide, + поддержка многих проектов в одной ide.. версии надо чекать как-то
