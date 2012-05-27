@@ -1,5 +1,5 @@
 function grid_edit_action(code) {
-	var form = server.request('model/updateForm', [ code ]).form;
+	var form = server.request('model/forms/update', [ code ]).form;
 	popup.show(form);
 	grid_init_form(grid_save_action);
 }
@@ -17,7 +17,7 @@ function grid_delete_action(code) {
 }
 
 function grid_add_action() {
-	var form = server.request('model/insertForm').form;
+	var form = server.request('model/forms/insert').form;
 	popup.show(form);
 	grid_init_form(grid_addsave_action);
 }

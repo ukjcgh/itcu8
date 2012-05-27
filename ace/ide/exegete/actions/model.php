@@ -4,4 +4,5 @@ $entity = $request->{0};
 
 $model = object('xml\model')->init($entity);
 
-$response->model = $model->getConfig();
+$response->config = $model->getConfig()->asXml();
+$response->data = $model->getSource()->asXml();
