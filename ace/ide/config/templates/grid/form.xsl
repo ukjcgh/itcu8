@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xsl:stylesheet version="1.0"
-	xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 	<xsl:template match="/data">
 		<b>
 			<xsl:value-of select="config/title" />
@@ -13,8 +12,7 @@
 						<xsl:value-of select="$fieldCode" />
 					</td>
 					<td>
-						<input type="text" value="{/data/item/*[name()=$fieldCode]}"
-							name="{$fieldCode}" />
+						<input type="text" value="{/data/item/*[name()=$fieldCode]}" name="{$fieldCode}" />
 					</td>
 				</tr>
 			</xsl:for-each>
