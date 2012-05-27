@@ -13,21 +13,20 @@ setTimeout(wait = function() {
 
 function els(selectors) {
 	var list = document.querySelectorAll(selectors);
+
+	// convert list to regular array
 	var els = [];
 	for ( var i = 0; i < list.length; i++) {
 		els.push(list.item(i));
 	}
+
 	return els;
 }
 
 function el(selector) {
-	var list = els(selector);
-	if (list.length) {
-		return list[0];
-	}
-	return null;
+	return document.querySelector(selector);
 }
 
-function newel(tag){
+function newel(tag) {
 	return document.createElement(tag);
 }

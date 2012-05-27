@@ -12,7 +12,7 @@
 		</field>
 		<field>
 			<code>path</code>
-			<unique>1 per domain</unique>
+			<unique>per domain</unique>
 		</field>
 	</structure>
 	<grid>
