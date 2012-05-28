@@ -1,5 +1,5 @@
 
-model(config, data, templates) - multirequest? or just folder model/forms? or all data inside init grid? or action model/info with params (data/config/templates), multiinsert?
+закончил на grid_add_action - надо убрать формы с экшенов, делать все на клиенте
 стоит ли insert и update объединять?
 при аджаксе $page->body = "asdf"; что бы автоматом поменяло
 перенести темплейты форм на клиент

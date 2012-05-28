@@ -79,6 +79,14 @@ class model extends \data\hand {
 		$this->source = null;
 	}
 
+	public function getConfigFile(){
+		return $this->configFile;
+	}
+
+	public function getSourceFile(){
+		return $this->sourceFile;
+	}
+
 	public function escape_xpath_var($var){
 		if(strpos($var, '"') !== false) {
 			$escaped = preg_replace('~("+)~', '",\'$1\',"', $var);

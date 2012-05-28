@@ -17,7 +17,8 @@ function grid_delete_action(code) {
 }
 
 function grid_add_action() {
-	var form = server.request('model/forms/insert').form;
+	//var form = server.request('model/forms/insert').form;
+	var form = template('grid/form');
 	popup.show(form);
 	grid_init_form(grid_addsave_action);
 }
@@ -56,8 +57,7 @@ function grid_init_form(submitFunc) {
 	};
 }
 
-initFuncs.push(function() {
-
+grid_init = function() {
 	var initLinks = function(selector, func) {
 		var links = els(selector);
 		for ( var i in links) {
@@ -74,5 +74,4 @@ initFuncs.push(function() {
 	initLinks('.edit-link', grid_edit_action);
 	initLinks('.delete-link', grid_delete_action);
 	initLinks('.add-link', grid_add_action);
-
-});
+}

@@ -33,8 +33,10 @@ popup = {
 	}
 }
 
-document.addEventListener('keyup', function(e) {
-	if (e.keyCode == 27) {
-		popup.hide();
-	}
+initFuncs.push(function() {
+	document.addEventListener('keyup', function(e) {
+		if (e.keyCode == 27) {
+			popup.hide();
+		}
+	});
 });

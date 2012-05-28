@@ -31,6 +31,17 @@ server.request = function(action, data) {
 	return response.data;
 }
 
+server.requestXml = function(action, data) {
+	var response = server.request(action, data);
+	if (response.xml) {
+		// parse using DOMParser coz error handling is better
+		var parser = new DOMParser();
+		return parser.parseFromString(response.xml, "text/xml");
+	} else {
+		throw 'Error: XML not found in response of "' + action + '"';
+	}
+}
+
 server.validateResponse = function(request, action) {
 	var msg = 'Error: server.request("' + action + '") failed. ';
 
