@@ -18,26 +18,37 @@ function grid_delete_action(code) {
 
 function grid_add_action() {
 	// var form = server.request('model/forms/insert').form;
-	//var xml = (new DOMParser()).parseFromString('<data/>', "text/xml");
+	// var xml = (new DOMParser()).parseFromString('<data/>', "text/xml");
 	var xml = createDocument('data');
 	var cfg = newel('config');
 	xml.firstChild.appendChild(xml.importNode(cfg));
-	//console.log(xml); return;
+	// console.log(xml); return;
 	var childs = configXml.querySelector('forms add').childNodes;
-	//import node?
-	for (var i=0; i<childs.length; i++){
+	// import node?
+	for ( var i = 0; i < childs.length; i++) {
 		cfg.appendChild(childs.item(i).cloneNode(true));
 	}
 	xml1 = xml;
 	console.log(xml1);
-	
+
 	var xhr = new XMLHttpRequest();
 	xhr.open('GET', '/ace/test.xml', false);
 	xhr.send();
 	xml = xhr.responseXML;
 	xml2 = xml;
 	console.log(xml2);
-	var form = template('grid/form', xml1);
+
+	xml3 = (new DOMParser()).parseFromString("<data>	<config>		<title>Add Website</title>		<fields>			<code></code>			<domain></domain>			<path></path>		</fields>	</config></data>", "text/xml");
+	console.log(xml3);
+	xml3.firstChild.appendChild(newel('asdf'));
+	
+	xml4 = createDocument('data');
+	xml4.firstChild.appendChild(xml4.createElement('config'));
+	title = xml4.createElement('title');
+	title.textContent = 'asdfasdf';
+	xml4.firstChild.firstChild.appendChild(title);
+	console.log(xml4);
+	var form = template('grid/form', xml4);
 	popup.show(form);
 	grid_init_form(grid_addsave_action);
 }
