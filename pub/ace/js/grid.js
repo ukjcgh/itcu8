@@ -17,8 +17,27 @@ function grid_delete_action(code) {
 }
 
 function grid_add_action() {
-	//var form = server.request('model/forms/insert').form;
-	var form = template('grid/form');
+	// var form = server.request('model/forms/insert').form;
+	//var xml = (new DOMParser()).parseFromString('<data/>', "text/xml");
+	var xml = createDocument('data');
+	var cfg = newel('config');
+	xml.firstChild.appendChild(xml.importNode(cfg));
+	//console.log(xml); return;
+	var childs = configXml.querySelector('forms add').childNodes;
+	//import node?
+	for (var i=0; i<childs.length; i++){
+		cfg.appendChild(childs.item(i).cloneNode(true));
+	}
+	xml1 = xml;
+	console.log(xml1);
+	
+	var xhr = new XMLHttpRequest();
+	xhr.open('GET', '/ace/test.xml', false);
+	xhr.send();
+	xml = xhr.responseXML;
+	xml2 = xml;
+	console.log(xml2);
+	var form = template('grid/form', xml1);
 	popup.show(form);
 	grid_init_form(grid_addsave_action);
 }
@@ -26,6 +45,41 @@ function grid_add_action() {
 function grid_addsave_action(data) {
 	server.request('model/insert', data);
 	document.location.reload();
+}
+
+function grid_show() {
+	configXml = server.requestXml('model/config');
+	dataXml = server.requestXml('model/data');
+
+	xml = createDocument('data');
+	with (xml.firstChild) {
+		appendChild(configXml.querySelector('grid'));
+		appendChild(dataXml.firstChild);
+	}
+
+	html = template('grid', xml);
+	document.body.innerHTML = html;
+
+	grid_init();
+}
+
+grid_init = function() {
+	var initLinks = function(selector, func) {
+		var links = els(selector);
+		for ( var i in links) {
+			links[i].onclick = (function(links, i) {
+				return function() {
+					func(links[i].getAttribute('code'));
+					return false;
+				}
+			})(links, i);
+			links[i].href = '#';
+		}
+	}
+
+	initLinks('.edit-link', grid_edit_action);
+	initLinks('.delete-link', grid_delete_action);
+	initLinks('.add-link', grid_add_action);
 }
 
 function grid_init_form(submitFunc) {
@@ -55,23 +109,4 @@ function grid_init_form(submitFunc) {
 	el('.form-save-button').onclick = function() {
 		submit();
 	};
-}
-
-grid_init = function() {
-	var initLinks = function(selector, func) {
-		var links = els(selector);
-		for ( var i in links) {
-			links[i].onclick = (function(links, i) {
-				return function() {
-					func(links[i].getAttribute('code'));
-					return false;
-				}
-			})(links, i);
-			links[i].href = '#';
-		}
-	}
-
-	initLinks('.edit-link', grid_edit_action);
-	initLinks('.delete-link', grid_delete_action);
-	initLinks('.add-link', grid_add_action);
 }

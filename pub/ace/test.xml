@@ -1,0 +1,10 @@
+<data>
+	<config>
+		<title>Add Website</title>
+		<fields>
+			<code></code>
+			<domain></domain>
+			<path></path>
+		</fields>
+	</config>
+</data>

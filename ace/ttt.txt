@@ -1,7 +1,17 @@
+xml2.readyState
+"interactive"
+xml1.readyState
+"complete"
+
 
 закончил на grid_add_action - надо убрать формы с экшенов, делать все на клиенте
 стоит ли insert и update объединять?
 при аджаксе $page->body = "asdf"; что бы автоматом поменяло
+я смешиваю 2 хмля - этого можно избежать?
+getXmlElemement
+$ - use this standard function
+ 			var serializer = new XMLSerializer();
+            var str = serializer.serializeToString( result );
 перенести темплейты форм на клиент
 is stringify_objects enoug custom to move them to Response?
 move Response and Request to exegate folder? seems no
