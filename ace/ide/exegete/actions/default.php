@@ -19,6 +19,7 @@ $page->head->scripts = array(
 		'server.js',
 		'popup.js',
 		'grid.js',
+		'xml.js',
 		'index.js',
 );
 

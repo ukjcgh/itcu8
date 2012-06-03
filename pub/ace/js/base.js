@@ -22,6 +22,10 @@ function createDocument(rootNode) {
 	return document.implementation.createDocument(null, rootNode, null);
 }
 
+function getClass(object) {
+	return object === null ? null : (new RegExp(' (.*?)\\(')).exec(object.constructor.toString())[1];
+}
+
 function template(xslFile, xml) {
 
 	var xhr = new XMLHttpRequest();
@@ -38,12 +42,14 @@ function template(xslFile, xml) {
 
 	var docFrag = proc.transformToFragment(xml, document);
 
-	// fetch html
-	var tmpdiv = newel('div');
-	tmpdiv.appendChild(docFrag);
-	var html = tmpdiv.innerHTML;
+	if (typeof docFrag != 'undefined') {
+		var tmpdiv = newel('div');
+		tmpdiv.appendChild(docFrag);
+		return tmpdiv.innerHTML;
+	} else {
+		return '';
+	}
 
-	return html;
 }
 
 initFuncs = [];
@@ -53,7 +59,7 @@ setTimeout(wait = function() {
 			return;
 		}
 		if (window.initFuncs) {
-			for ( var i in initFuncs) {
+			for ( var i = 0; i < initFuncs.length; i++) {
 				initFuncs[i]();
 			}
 		}
