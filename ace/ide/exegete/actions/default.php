@@ -15,11 +15,11 @@ $page->head->styles = array(
 );
 $page->head->scripts = array(
 		'checkua.js',
-		'base.js',
-		'server.js',
+		'lib/base.js',
+		'lib/server.js',
+		'lib/xml.js',
 		'popup.js',
 		'grid.js',
-		'xml.js',
 		'index.js',
 );
 
