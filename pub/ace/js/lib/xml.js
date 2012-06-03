@@ -42,10 +42,16 @@ Object.prototype.toXmlString = function(rootTag, level) {
 	// initialization
 	var xmlString = '';
 	level = typeof level == 'undefined' ? 1 : level;
+	var object = this;
 	if (typeof rootTag == 'undefined') {
-		throw 'rootTag is required paramater';
+		if (getClass(object) != 'Document') {
+			throw 'rootTag is required paramater';
+		} else {
+			rootTag = object.firstChild.nodeName;
+			object = object.firstChild;
+		}
 	}
-	var object = this.toObject();
+	object = object.toObject();
 	if (level == 1 && object instanceof Array) {
 		throw 'Array can\'t be a root element, Object expected';
 	}
@@ -96,8 +102,11 @@ Object.prototype.toObject = function() {
 		var object = this;
 		break;
 
-	case 'Element':
 	case 'Document':
+		return this.firstChild.toObject();
+		break;
+
+	case 'Element':
 		var object = {};
 		var nodes = this.childNodes;
 		if (nodes.length == 1 && nodes[0].nodeName == '#text') {

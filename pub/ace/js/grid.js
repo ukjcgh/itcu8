@@ -1,8 +1,8 @@
 function grid_edit_action(code) {
 	var item = false;
-	for ( var i = 0; i < data.items.item.length; i++) {
-		if (data.items.item[i]['code'] == code) {
-			item = data.items.item[i];
+	for ( var i = 0; i < data.item.length; i++) {
+		if (data.item[i]['code'] == code) {
+			item = data.item[i];
 		}
 	}
 	var xml = ({
@@ -42,7 +42,7 @@ function grid_addsave_action(data) {
 
 function grid_show() {
 	configXml = server.requestXml('model/config');
-	config = configXml.toObject().config;
+	config = configXml.toObject();
 	dataXml = server.requestXml('model/data');
 	data = dataXml.toObject();
 

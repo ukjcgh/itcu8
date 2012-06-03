@@ -23,7 +23,26 @@ function createDocument(rootNode) {
 }
 
 function getClass(object) {
-	return object === null ? null : (new RegExp(' (.*?)\\(')).exec(object.constructor.toString())[1];
+
+	if (object === null) {
+		return null;
+	}
+
+	var info = object.constructor.toString();
+	var rx = new RegExp(' (.*?)\\(');
+	var ms = rx.exec(info);
+	if (ms !== null) {
+		return ms[1];
+	}
+
+	// firefox bugs
+	switch (info) {
+	case '[object XMLDocument]':
+		return 'Document';
+	case '[object Element]':
+		return 'Element';
+	}
+
 }
 
 function template(xslFile, xml) {
