@@ -57,40 +57,84 @@ Object.prototype.toXmlString = function(rootTag, level) {
 	}
 
 	// conversion
-	for ( var key in object) {
-		if (object.hasOwnProperty(key) && typeof object[key] !== 'function') {
-			switch (typeof object[key]) {
-			case 'string':
-			case 'number':
-				if (object instanceof Array) {
-					xmlString += '\n' + xml.indent(level - 1) + xml.open(rootTag) + xml.escape(object[key]) + xml.close(rootTag);
-				} else {
-					xmlString += '\n' + xml.indent(level) + xml.open(key) + xml.escape(object[key]) + xml.close(key);
-				}
+	switch (getClass(object)) {
+
+	case 'Array':
+
+		for ( var key = 0; key < object.length; key++) {
+
+			switch (getClass(object[key])) {
+
+			case 'NULL':
+			case 'Function':
 				break;
-			case 'object':
-				if (object instanceof Array) {
-					if (object[key] instanceof Array) {
-						throw 'Array inside Array can\'t be converted to XML, wrap child Array into Object';
-					}
-					xmlString += object[key].toXmlString(rootTag, level);
-				} else {
-					xmlString += object[key].toXmlString(key, level + 1);
-				}
+
+			case 'String':
+			case 'Number':
+				xmlString += '\n' + xml.indent(level - 1) + xml.open(rootTag) + xml.escape(object[key]) + xml.close(rootTag);
 				break;
+
+			case 'Object':
+				xmlString += object[key].toXmlString(rootTag, level);
+				break;
+
+			case 'Array':
+				throw 'Array inside Array can\'t be converted to XML, wrap child Array into Object';
+				break;
+
+			default:
+				throw 'Unexpected value type in Array, can\'t convert it to XML';
+				break;
+
 			}
 		}
-	}
 
-	// wrap in rootTag
-	if (!(object instanceof Array)) {
+		break;
+
+	case 'Object':
+
+		for ( var key in object) {
+			if (object.hasOwnProperty(key)) {
+
+				switch (getClass(object[key])) {
+
+				case 'NULL':
+				case 'Function':
+					break;
+
+				case 'String':
+				case 'Number':
+					xmlString += '\n' + xml.indent(level) + xml.open(key) + xml.escape(object[key]) + xml.close(key);
+					break;
+
+				case 'Object':
+				case 'Array':
+					xmlString += object[key].toXmlString(key, level + 1);
+					break;
+
+				default:
+					throw 'Unexpected value type in Object, can\'t convert it to XML';
+					break;
+
+				}
+			}
+		}
+
 		xmlString = xml.indent(level - 1) + xml.open(rootTag) + xmlString + '\n' + xml.indent(level - 1) + xml.close(rootTag);
 		if (level > 1) {
 			xmlString = '\n' + xmlString;
 		}
+
+		break;
+
+	default:
+		throw 'Unexpected object type';
+		break;
+
 	}
 
 	return xmlString;
+
 };
 
 Object.prototype.toObject = function() {
