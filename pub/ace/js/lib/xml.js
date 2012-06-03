@@ -1,3 +1,7 @@
+/*
+ * Intended for data XML only (no attributes and namespaces)
+ */
+
 XmlHelper = {
 
 	'open' : function(tag) {
