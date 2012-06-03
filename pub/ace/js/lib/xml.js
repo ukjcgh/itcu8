@@ -39,30 +39,31 @@ Object.prototype.toXmlString = function(rootTag, level) {
 	// helper
 	var xml = XmlHelper;
 
-	// initialization
-	var xmlString = '';
-	level = typeof level == 'undefined' ? 1 : level;
+	// initialize and validate variables
 	var object = this;
 	if (typeof rootTag == 'undefined') {
-		if (getClass(object) != 'Document') {
-			throw 'rootTag is required paramater';
-		} else {
+		if (getClass(object) == 'Document') {
 			rootTag = object.firstChild.nodeName;
 			object = object.firstChild;
+		} else {
+			throw 'rootTag is required paramater';
 		}
 	}
-	object = object.toObject();
+	level = typeof level == 'undefined' ? 1 : level;
 	if (level == 1 && object instanceof Array) {
 		throw 'Array can\'t be a root element, Object expected';
 	}
+	var xmlString = '';
 
-	// conversion
+	// convert any other object to standard Object so that it is iterable in standard way
+	object = object.toObject();
+
+	// CONVERSION
 	switch (getClass(object)) {
 
 	case 'Array':
 
 		for ( var key = 0; key < object.length; key++) {
-
 			switch (getClass(object[key])) {
 
 			case 'NULL':
@@ -95,7 +96,6 @@ Object.prototype.toXmlString = function(rootTag, level) {
 
 		for ( var key in object) {
 			if (object.hasOwnProperty(key)) {
-
 				switch (getClass(object[key])) {
 
 				case 'NULL':
@@ -153,15 +153,18 @@ Object.prototype.toObject = function() {
 	case 'Element':
 		var object = {};
 		var nodes = this.childNodes;
+
 		if (nodes.length == 1 && nodes[0].nodeName == '#text') {
 			throw 'Node Element:#text can\'t be converted to Object';
 		} else {
 			for ( var i = 0; i < nodes.length; i++) {
 
+				// skip text between nodes
 				if (nodes[i].nodeName == '#text') {
 					continue;
 				}
 
+				// get key and value
 				var key = nodes[i].nodeName;
 				if (nodes[i].childNodes.length == 1 && nodes[i].childNodes[0].nodeName == '#text') {
 					var value = nodes[i].childNodes[0].nodeValue;
@@ -172,7 +175,9 @@ Object.prototype.toObject = function() {
 						var value = nodes[i].toObject();
 					}
 				}
-				if (object.hasOwnProperty(key)) {
+
+				// fill-in object
+				if (object.hasOwnProperty(key)) {// if already isset, convert to Array
 					if (getClass(object[key]) !== 'Array') {
 						object[key] = [ object[key] ];
 					}
@@ -180,6 +185,7 @@ Object.prototype.toObject = function() {
 				} else {
 					object[key] = value;
 				}
+
 			}
 		}
 		break;
