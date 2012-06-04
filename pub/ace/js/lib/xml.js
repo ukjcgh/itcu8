@@ -4,7 +4,7 @@
  * 
  * adds 3 function to any Object:
  * 1. toXmlString(rootTag) - rootTag is required // generate raw XML from Object
- * 2. toObject() // convert Element to standard Object
+ * 2. toObject() // convert object to standard Object recursively
  * 3. toXmlDocument() // create XML Document from Object to use it for XSLTProcessor
  * 
  * Use this if you need edit XML before pass it to XSLTProcessor... toObject() -> edit -> toXmlDocument()
@@ -35,6 +35,7 @@ Object.prototype.toXmlString = function(rootTag) {
 
 	// stringify
 	var xml = helper.stringify(rootTag, object);
+
 	// remove "\n" at the beginning
 	xml = xml.substring(1);
 
@@ -51,7 +52,9 @@ Object.prototype.toObject = function() {
 };
 
 Object.prototype.toXmlDocument = function(rootTag) {
+
 	return (new DOMParser()).parseFromString(this.toXmlString(rootTag), "text/xml");
+
 };
 
 /*
@@ -161,6 +164,10 @@ XmlHelper = {
 
 	'objectify' : function(value) {
 
+		if (typeof (value) != 'object') {
+			return value;
+		}
+
 		var helper = XmlHelper;
 
 		var func = 'objectify' + getClass(value);
@@ -178,15 +185,23 @@ XmlHelper = {
 	},
 
 	'objectifyObject' : function(object) {
+		for ( var key in object) {
+			if (object.hasOwnProperty(key)) {
+				object[key] = XmlHelper.objectify(object[key]);
+			}
+		}
 		return object;
 	},
 
 	'objectifyArray' : function(array) {
+		for ( var key = 0; key < array.length; key++) {
+			array[key] = XmlHelper.objectify(array[key]);
+		}
 		return array;
 	},
 
 	'objectifyDocument' : function(object) {
-		return object.firstChild.toObject();
+		return XmlHelper.objectify(object.firstChild);
 	},
 
 	'objectifyElement' : {

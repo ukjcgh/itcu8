@@ -1,6 +1,4 @@
 
-recursive toObject?
-
 	if (typeof docFrag != 'undefined') {
 	//!! use serializer?
 		var tmpdiv = newel('div');
