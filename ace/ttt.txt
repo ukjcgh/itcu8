@@ -1,4 +1,6 @@
 
+$ - use this standard function
+
 server.getXml, какой объект удобнее возвращать? надо ли контроливать на сервере респонс?
 	
 использовать код сайта сразу как имя тега
@@ -11,19 +13,13 @@ isAjax in response - may be router should check isAjax and send response?
 
 стоит ли insert и update объединять?
 allow edit item code?
-при аджаксе $page->body = "asdf"; что бы автоматом поменяло
+при аджаксе $page->body = "asdf"; что бы автоматом поменяло на клиете
 я смешиваю 2 хмля - этого можно избежать?
-getXmlElemement
-$ - use this standard function
- 			var serializer = new XMLSerializer();
-            var str = serializer.serializeToString( result );
-перенести темплейты форм на клиент
 is stringify_objects enoug custom to move them to Response?
-move Response and Request to exegate folder? seems no
 [^a-zA-Z/] - регулярка на экшн и на конфиг модели.. добавить цифры и как-то вынести типа path_secure, geld 
 code="sf" в ссылках лишнее
 наворотить, данные xml->php->json что бы все четко
-валидация данных формы, обработка ошибок при аяксе
+валидация данных формы, выдача ошибок при аяксе
 website auth should be required for BO
 алиасы для сайтов, с алиасов не редиректить?
 move validations from dispatch to runup

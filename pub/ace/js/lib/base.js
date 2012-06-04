@@ -14,8 +14,8 @@ function el(selector) {
 	return document.querySelector(selector);
 }
 
-function newel(tag) {
-	return document.createElement(tag);
+function newElement(name) {
+	return document.createElement(name);
 }
 
 // always return string
@@ -65,7 +65,7 @@ function template(xslFile, xml) {
 
 	if (typeof docFrag != 'undefined') {
 		// use div.innerHTML to avoid xmlns attributes in firefox
-		var div = newel('div');
+		var div = newElement('div');
 		div.appendChild(docFrag);
 		return div.innerHTML;
 	} else {

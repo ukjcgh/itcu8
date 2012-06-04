@@ -43,27 +43,27 @@ server.requestXml = function(action, data) {
 }
 
 server.validateResponse = function(request, action) {
-	var msg = 'Error: server.request("' + action + '") failed. ';
+	var msg = 'server.request("' + action + '") failed. ';
 
 	if (request.status != 200) {
-		throw msg + '\n      HTTP: ' + request.status + ' ' + request.statusText;
+		throwError(msg + '\n      HTTP: ' + request.status + ' ' + request.statusText);
 	}
 
 	try {
 		response = JSON.parse(request.responseText);
 	} catch (e) {
-		throw msg + 'The server has sent invalid JSON. See response below:\n' + request.responseText;
+		throwError(msg + 'The server has sent invalid JSON. See response below:\n' + request.responseText);
 	}
 
 	if (response.error) {
-		throw msg + 'Server has sent error: ' + response.error;
+		throwError(msg + 'Server has sent error: ' + response.error);
 	}
 
 	if (response['user-error']) {
 		alert(response['user-error']);
 		// just interrupt
-		throw msg + 'This exception thrown out only to stop further execution of the script in case of user error: '
-				+ response['user-error'];
+		throwError(msg + 'This exception thrown out only to stop further execution of the script in case of user error: '
+				+ response['user-error']);
 	}
 
 	return response;
@@ -73,7 +73,7 @@ server.indicator = {
 
 	'show' : function() {
 		if (!el('.server-indicator')) {
-			var indicatorDiv = newel('div');
+			var indicatorDiv = newElement('div');
 			indicatorDiv.className = 'server-indicator';
 			indicatorDiv.innerHTML = 'Processing..';
 			el('body').appendChild(indicatorDiv);
