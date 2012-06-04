@@ -12,6 +12,8 @@
 
 Object.prototype.toXmlString = function(rootTag) {
 
+	var helper = XmlHelper;
+
 	var object = this;
 
 	if (typeof rootTag == 'undefined') {
@@ -30,11 +32,13 @@ Object.prototype.toXmlString = function(rootTag) {
 	// convert any other object to standard Object so that it is iterable in standard way
 	object = object.toObject();
 
-	return XmlHelper.stringifyObject(object, rootTag);
+	return helper.stringifyObject(object, rootTag);
 
 };
 
 Object.prototype.toObject = function() {
+
+	var helper = XmlHelper;
 
 	switch (getClass(this)) {
 
@@ -48,7 +52,7 @@ Object.prototype.toObject = function() {
 		break;
 
 	case 'Element':
-		var object = XmlHelper.elementToObject.proceed(this);
+		var object = helper.elementToObject.proceed(this);
 		break;
 
 	default:
@@ -95,15 +99,18 @@ XmlHelper = {
 		}
 	},
 
+	'objectValue' : function(value) {
+		return getClass(value) == 'Object' && value.isEmpty() ? '' : value;
+	},
+
 	'stringifyArray' : function(array, itemTag) {
 
-		var xml = XmlHelper;
+		var helper = XmlHelper;
 		var xmlString = '';
 
 		for ( var key = 0; key < array.length; key++) {
 
-			var value = array[key];
-			value = getClass(value) == 'Object' && value.isEmpty() ? '' : value;
+			var value = helper.objectValue(array[key]);
 
 			switch (getClass(value)) {
 
@@ -113,11 +120,11 @@ XmlHelper = {
 
 			case 'String':
 			case 'Number':
-				xmlString += '\n' + xml.open(itemTag) + xml.escape(value) + xml.close(itemTag);
+				xmlString += '\n' + helper.open(itemTag) + helper.escape(value) + helper.close(itemTag);
 				break;
 
 			case 'Object':
-				xmlString += '\n' + xml.stringifyObject(value, itemTag);
+				xmlString += '\n' + helper.stringifyObject(value, itemTag);
 				break;
 
 			case 'Array':
@@ -137,7 +144,7 @@ XmlHelper = {
 
 	'stringifyObject' : function(object, objectTag) {
 
-		var xml = XmlHelper;
+		var helper = XmlHelper;
 		var xmlString = '';
 
 		for ( var key in object) {
@@ -154,14 +161,14 @@ XmlHelper = {
 
 				case 'String':
 				case 'Number':
-					xmlString += '\n' + xml.open(key) + xml.escape(value) + xml.close(key);
+					xmlString += '\n' + helper.open(key) + helper.escape(value) + helper.close(key);
 					break;
 
 				case 'Object':
-					xmlString += '\n' + xml.stringifyObject(value, key);
+					xmlString += '\n' + helper.stringifyObject(value, key);
 					break;
 				case 'Array':
-					xmlString += xml.stringifyArray(value, key);
+					xmlString += helper.stringifyArray(value, key);
 					break;
 
 				default:
@@ -174,7 +181,7 @@ XmlHelper = {
 		}
 
 		// wrap in rootTag
-		xmlString = xml.open(objectTag) + xmlString.replace(/\n/g, '\n\t') + '\n' + xml.close(objectTag);
+		xmlString = helper.open(objectTag) + xmlString.replace(/\n/g, '\n\t') + '\n' + helper.close(objectTag);
 
 		return xmlString;
 
@@ -218,16 +225,21 @@ XmlHelper = {
 		},
 
 		'nodeValue' : function(node) {
+
+			var helper = XmlHelper;
+
 			if (node.childNodes.length == 1 && node.childNodes[0].nodeName == '#text') {
 				var value = node.childNodes[0].nodeValue;
 			} else {
 				if (node.childNodes.length == 0) {
 					var value = '';
 				} else {
-					var value = XmlHelper.elementToObject.proceed(node);
+					var value = helper.elementToObject.proceed(node);
 				}
 			}
+
 			return value;
+
 		},
 
 		'addToObject' : function(object, key, value) {

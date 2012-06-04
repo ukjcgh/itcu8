@@ -1,4 +1,3 @@
-
 	if (typeof docFrag != 'undefined') {
 	//!! use serializer?
 		var tmpdiv = newel('div');
@@ -20,6 +19,7 @@ refact grid_show (use new xml functions) и т д
 javascript callstack
 
 стоит ли insert и update объединять?
+allow edit item code?
 при аджаксе $page->body = "asdf"; что бы автоматом поменяло
 я смешиваю 2 хмля - этого можно избежать?
 getXmlElemement
