@@ -39,7 +39,7 @@ function getClass(object) {
 		return ms[1];
 	}
 
-	// firefox bugs
+	// firefox
 	switch (info) {
 	case '[object XMLDocument]':
 		return 'Document';

@@ -41,28 +41,17 @@ Object.prototype.toObject = function() {
 
 	var helper = XmlHelper;
 
-	switch (getClass(this)) {
+	var func = getClass(this).toLowerCase() + 'ToObject';
 
-	case 'Object':
-	case 'Array':
-		var object = this;
-		break;
-
-	case 'Document':
-		var object = this.firstChild.toObject();
-		break;
-
-	case 'Element':
-		var object = helper.elementToObject.proceed(this);
-		break;
-
-	default:
-		throw getClass(this) + ' can\'t be converted to Object (not supported)';
-		break;
-
+	if (typeof (helper[func]) == 'function') {
+		return helper[func](this);
+	} else {
+		if (typeof (helper[func]) == 'object' && typeof (helper[func].proceed) == 'function') {
+			return helper[func].proceed(this);
+		} else {
+			throw 'Error: function "' + func + '" not found, can\'t convert ' + getClass(this) + ' to Object';
+		}
 	}
-
-	return object;
 
 };
 
@@ -71,7 +60,9 @@ Object.prototype.toXmlDocument = function(rootTag) {
 };
 
 /*
- * helper functions
+ * 
+ * Helper functions
+ * 
  */
 
 XmlHelper = {
@@ -121,8 +112,6 @@ XmlHelper = {
 					throw 'Array inside Array can\'t be converted to XML, wrap child Array into Object';
 				}
 
-				xmlString += valueClass == 'Object' ? '\n' : '';
-
 				switch (valueClass) {
 				case 'null':
 				case 'Function':
@@ -132,8 +121,10 @@ XmlHelper = {
 					xmlString += '\n' + helper.open(valueTag) + helper.escape(value) + helper.close(valueTag);
 					break;
 				case 'Array':
-				case 'Object':
 					xmlString += helper.stringifyObject(value, valueTag);
+					break;
+				case 'Object':
+					xmlString += '\n' + helper.stringifyObject(value, valueTag);
 					break;
 				default:
 					var fallBack = 'stringify' + valueClass;
@@ -155,6 +146,18 @@ XmlHelper = {
 
 		return xmlString;
 
+	},
+
+	'objectToObject' : function(object) {
+		return object;
+	},
+
+	'arrayToObject' : function(object) {
+		return object;
+	},
+
+	'documentToObject' : function(object) {
+		return object.firstChild.toObject();
 	},
 
 	'elementToObject' : {
@@ -224,6 +227,6 @@ XmlHelper = {
 			}
 		}
 
-	}
+	},
 
 };
