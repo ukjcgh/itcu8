@@ -103,84 +103,49 @@ XmlHelper = {
 		return getClass(value) == 'Object' && value.isEmpty() ? '' : value;
 	},
 
-	'stringifyArray' : function(array, itemTag) {
-
-		var helper = XmlHelper;
-		var xmlString = '';
-
-		for ( var key = 0; key < array.length; key++) {
-
-			var value = helper.objectValue(array[key]);
-
-			switch (getClass(value)) {
-
-			case 'NULL':
-			case 'Function':
-				break;
-
-			case 'String':
-			case 'Number':
-				xmlString += '\n' + helper.open(itemTag) + helper.escape(value) + helper.close(itemTag);
-				break;
-
-			case 'Object':
-				xmlString += '\n' + helper.stringifyObject(value, itemTag);
-				break;
-
-			case 'Array':
-				throw 'Array inside Array can\'t be converted to XML, wrap child Array into Object';
-				break;
-
-			default:
-				throw 'Unexpected value type in Array, can\'t convert it to XML';
-				break;
-
-			}
-		}
-
-		return xmlString;
-
-	},
-
 	'stringifyObject' : function(object, objectTag) {
 
 		var helper = XmlHelper;
+		var objectClass = getClass(object);
 		var xmlString = '';
 
 		for ( var key in object) {
 			if (object.hasOwnProperty(key)) {
 
 				var value = helper.objectValue(object[key]);
+				var valueClass = getClass(value);
+				var valueTag = objectClass == 'Array' ? objectTag : key;
 
-				switch (getClass(value)) {
+				if (objectClass == 'Array' && valueClass == 'Array') {
+					throw 'Array inside Array can\'t be converted to XML, wrap child Array into Object';
+				}
 
-				case 'NULL':
+				xmlString += valueClass == 'Object' ? '\n' : '';
+
+				switch (valueClass) {
+				case false:
 				case 'Function':
 					break;
-
 				case 'String':
 				case 'Number':
-					xmlString += '\n' + helper.open(key) + helper.escape(value) + helper.close(key);
-					break;
-
-				case 'Object':
-					xmlString += '\n' + helper.stringifyObject(value, key);
+					xmlString += '\n' + helper.open(valueTag) + helper.escape(value) + helper.close(valueTag);
 					break;
 				case 'Array':
-					xmlString += helper.stringifyArray(value, key);
+				case 'Object':
+					xmlString += helper.stringifyObject(value, valueTag);
 					break;
-
 				default:
 					throw 'Unexpected value type in Object, can\'t convert it to XML';
 					break;
-
 				}
 
 			}
 		}
 
-		// wrap in rootTag
-		xmlString = helper.open(objectTag) + xmlString.replace(/\n/g, '\n\t') + '\n' + helper.close(objectTag);
+		// wrap in rootTag if not Array
+		if (objectClass != 'Array') {
+			xmlString = helper.open(objectTag) + xmlString.replace(/\n/g, '\n\t') + '\n' + helper.close(objectTag);
+		}
 
 		return xmlString;
 
