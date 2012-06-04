@@ -6,7 +6,7 @@ server.request = function(action, data) {
 		data = {};
 	} else {
 		if (typeof data != 'object') {
-			throw 'Error: Can\'t send scalar value as data';
+			throwError('Can\'t send scalar value as data');
 		}
 	}
 
@@ -38,7 +38,7 @@ server.requestXml = function(action, data) {
 		var parser = new DOMParser();
 		return parser.parseFromString(response.xml, "text/xml");
 	} else {
-		throw 'Error: XML not found in response of "' + action + '"';
+		throwError('XML not found in response of "' + action + '"');
 	}
 }
 

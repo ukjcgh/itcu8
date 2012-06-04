@@ -73,7 +73,7 @@ function template(xslFile, xml) {
 		div.appendChild(docFrag);
 		return div.innerHTML;
 	} else {
-		throw 'Error: transformToFragment failed, check your template "' + xslFile + '" and passed XML';
+		throwError('transformToFragment failed, check your template "' + xslFile + '" and passed XML');
 	}
 
 }
@@ -85,6 +85,12 @@ Object.prototype.isEmpty = function() {
 	}
 	return true;
 };
+
+function throwError(message) {
+	// console.error adds trace in Chrome
+	console.error('Error: ' + message);
+	throw 'script terminated';
+}
 
 initFuncs = [];
 setTimeout(wait = function() {

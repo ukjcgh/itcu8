@@ -22,12 +22,12 @@ Object.prototype.toXmlString = function(rootTag) {
 			rootTag = object.firstChild.nodeName;
 			object = object.firstChild;
 		} else {
-			throw 'Error: rootTag is required paramater';
+			throwError('rootTag is required paramater');
 		}
 	}
 
 	if (getClass(object) == 'Array') {
-		throw 'Error: Array can\'t be a root element, Object expected';
+		throwError('Array can\'t be a root element, Object expected');
 	}
 
 	// convert any other object to standard Object so that it is iterable in standard way
@@ -82,10 +82,10 @@ XmlHelper = {
 	'checkTag' : function(tag) {
 		tag = tag + '';
 		if ((new RegExp('[^0-9A-z_]', 'g')).test(tag)) {
-			throw 'Error: Invalid symbol in tagName "' + tag + '"';
+			throwError('Invalid symbol in tagName "' + tag + '"');
 		}
 		if (!isNaN(tag.charAt(0))) {
-			throw 'Error: First symbol in tagName "' + tag + '" can\'t be a digit';
+			throwError('First symbol in tagName "' + tag + '" can\'t be a digit');
 		}
 	},
 
@@ -101,7 +101,7 @@ XmlHelper = {
 		if (typeof (helper[func]) == 'function') {
 			return xml = helper[func](key, value);
 		} else {
-			throw 'Error: function "' + func + '" not found within helper, can\'t stringify value';
+			throwError('function "' + func + '" not found within helper, can\'t stringify value');
 		}
 
 	},
@@ -134,7 +134,7 @@ XmlHelper = {
 			var value = array[key];
 
 			if (getClass(value) == 'Array') {
-				throw 'Error: Array inside Array can\'t be converted to XML, wrap child Array into Object';
+				throwError('Array inside Array can\'t be converted to XML, wrap child Array into Object');
 			}
 
 			xml += helper.stringify(itemTag, value);
@@ -178,8 +178,8 @@ XmlHelper = {
 			if (typeof (helper[func]) == 'object' && typeof (helper[func].proceed) == 'function') {
 				return helper[func].proceed(value);
 			} else {
-				throw 'Error: function "' + func + '" not found within helper, can\'t convert ' + getClass(value)
-						+ ' to Object';
+				throwError('function "' + func + '" not found within helper, can\'t convert ' + getClass(value)
+						+ ' to Object');
 			}
 		}
 	},
@@ -215,7 +215,7 @@ XmlHelper = {
 			var nodes = element.childNodes;
 
 			if (nodes.length == 1 && nodes[0].nodeName == '#text') {
-				throw 'Error: Node Element:#text can\'t be converted to Object';
+				throwError('Node Element:#text can\'t be converted to Object');
 			} else {
 				for ( var i = 0; i < nodes.length; i++) {
 
