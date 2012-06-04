@@ -1,6 +1,7 @@
 
-stringify fallback
-toObject fallback
+
+toObject fallback should it be inside ElementToObject?
+
 	if (typeof docFrag != 'undefined') {
 	//!! use serializer?
 		var tmpdiv = newel('div');
@@ -11,10 +12,9 @@ toObject fallback
 		return '';
 	}
 	
-может все-таки разбить функцию toXmlString для массива и объекта отдельно?
-
 использовать код сайта сразу как имя тега
 - ограничивает сиволы в коде потому что тег - это все недостатки?
+- что если просто список хранить, не надо придумывать коды, а с кодами как это делать? как удаление будет работать?
 
 refact grid_show (use new xml functions) и т д
 удалить base.js:createDocument 

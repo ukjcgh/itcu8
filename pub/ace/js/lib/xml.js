@@ -33,7 +33,12 @@ Object.prototype.toXmlString = function(rootTag) {
 	// convert any other object to standard Object so that it is iterable in standard way
 	object = object.toObject();
 
-	return helper.stringifyObject(object, rootTag);
+	// stringify
+	var xml = helper.stringify(rootTag, object);
+	// remove "\n" at the beginning
+	xml = xml.substring(1);
+
+	return xml;
 
 };
 
@@ -41,17 +46,7 @@ Object.prototype.toObject = function() {
 
 	var helper = XmlHelper;
 
-	var func = getClass(this).toLowerCase() + 'ToObject';
-
-	if (typeof (helper[func]) == 'function') {
-		return helper[func](this);
-	} else {
-		if (typeof (helper[func]) == 'object' && typeof (helper[func].proceed) == 'function') {
-			return helper[func].proceed(this);
-		} else {
-			throw 'Error: function "' + func + '" not found, can\'t convert ' + getClass(this) + ' to Object';
-		}
-	}
+	return helper.objectify(this);
 
 };
 
@@ -91,80 +86,114 @@ XmlHelper = {
 		}
 	},
 
-	'objectValue' : function(value) {
-		return getClass(value) == 'Object' && value.isEmpty() ? '' : value;
-	},
-
-	'stringifyObject' : function(object, objectTag) {
+	'stringify' : function(key, value) {
 
 		var helper = XmlHelper;
-		var objectClass = getClass(object);
-		var xmlString = '';
+		var valueClass = getClass(value);
+
+		value = valueClass == 'Object' && value.isEmpty() ? '' : value;
+
+		var func = 'stringify' + getClass(value);
+
+		if (typeof (helper[func]) == 'function') {
+			return xml = helper[func](key, value);
+		} else {
+			throw 'Error: function "' + func + '" not found within helper, can\'t stringify value';
+		}
+
+	},
+
+	'stringifyObject' : function(objectTag, object) {
+
+		var helper = XmlHelper;
+		var xml = '';
 
 		for ( var key in object) {
 			if (object.hasOwnProperty(key)) {
-
-				var value = helper.objectValue(object[key]);
-				var valueClass = getClass(value);
-				var valueTag = objectClass == 'Array' ? objectTag : key;
-
-				if (objectClass == 'Array' && valueClass == 'Array') {
-					throw 'Array inside Array can\'t be converted to XML, wrap child Array into Object';
-				}
-
-				xmlString += valueClass == 'Object' ? '\n' : '';
-
-				switch (valueClass) {
-				case 'null':
-				case 'Function':
-					break;
-				case 'String':
-				case 'Number':
-					xmlString += '\n' + helper.open(valueTag) + helper.escape(value) + helper.close(valueTag);
-					break;
-				case 'Array':
-				case 'Object':
-					xmlString += helper.stringifyObject(value, valueTag);
-					break;
-				default:
-					var fallback = 'stringify' + valueClass;
-					if (typeof (helper[fallback])) {
-						xmlString += helper[fallback](object, key);
-					} else {
-						throw 'Unexpected value type in Object, can\'t convert it to XML string';
-					}
-					break;
-				}
-
+				var value = object[key];
+				xml += helper.stringify(key, value);
 			}
 		}
 
-		// wrap in rootTag if not Array
-		if (objectClass != 'Array') {
-			xmlString = helper.open(objectTag) + xmlString.replace(/\n/g, '\n\t') + '\n' + helper.close(objectTag);
+		xml = '\n' + helper.open(objectTag) + xml.replace(/\n/g, '\n\t') + '\n' + helper.close(objectTag);
+
+		return xml;
+
+	},
+
+	'stringifyArray' : function(itemTag, array) {
+
+		var helper = XmlHelper;
+		var xml = '';
+
+		for ( var key = 0; key < array.length; key++) {
+
+			var value = array[key];
+
+			if (getClass(value) == 'Array') {
+				throw 'Array inside Array can\'t be converted to XML, wrap child Array into Object';
+			}
+
+			xml += helper.stringify(itemTag, value);
+
 		}
 
-		return xmlString;
+		return xml;
 
 	},
 
-	'objectToObject' : function(object) {
+	'stringifynull' : function() {
+		return '';
+	},
+
+	'stringifyFunction' : function() {
+		return '';
+	},
+
+	'stringifyString' : function(key, value) {
+		var helper = XmlHelper;
+		return '\n' + helper.open(key) + helper.escape(value) + helper.close(key);
+	},
+
+	'stringifyNumber' : function(key, value) {
+		return XmlHelper.stringifyString(key, value);
+	},
+
+	'objectify' : function(value) {
+
+		var helper = XmlHelper;
+
+		var func = getClass(value) + 'ToObject';
+
+		if (typeof (helper[func]) == 'function') {
+			return helper[func](value);
+		} else {
+			if (typeof (helper[func]) == 'object' && typeof (helper[func].proceed) == 'function') {
+				return helper[func].proceed(value);
+			} else {
+				throw 'Error: function "' + func + '" not found within helper, can\'t convert ' + getClass(value)
+						+ ' to Object';
+			}
+		}
+	},
+
+	'ObjectToObject' : function(object) {
 		return object;
 	},
 
-	'arrayToObject' : function(object) {
-		return object;
+	'ArrayToObject' : function(array) {
+		return array;
 	},
 
-	'documentToObject' : function(object) {
+	'DocumentToObject' : function(object) {
 		return object.firstChild.toObject();
 	},
 
-	'elementToObject' : {
+	'ElementToObject' : {
 
 		'proceed' : function(element) {
 
-			var I = XmlHelper.elementToObject;
+			var I = XmlHelper.ElementToObject;
 
 			var object = {};
 			var nodes = element.childNodes;
@@ -207,7 +236,7 @@ XmlHelper = {
 				if (node.childNodes.length == 0) {
 					var value = '';
 				} else {
-					var value = helper.elementToObject.proceed(node);
+					var value = helper.objectify(node);
 				}
 			}
 
