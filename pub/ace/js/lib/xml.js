@@ -150,8 +150,7 @@ XmlHelper = {
 		for ( var key in object) {
 			if (object.hasOwnProperty(key)) {
 
-				var value = object[key];
-				value = getClass(value) == 'Object' && value.isEmpty() ? '' : value;
+				var value = helper.objectValue(object[key]);
 
 				switch (getClass(value)) {
 
