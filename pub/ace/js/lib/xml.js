@@ -26,7 +26,7 @@ Object.prototype.toXmlString = function(rootTag) {
 		}
 	}
 
-	if (object instanceof Array) {
+	if (getClass(object) == 'Array') {
 		throw 'Array can\'t be a root element, Object expected';
 	}
 
