@@ -1,3 +1,4 @@
+
 stringify fallback
 toObject fallback
 	if (typeof docFrag != 'undefined') {

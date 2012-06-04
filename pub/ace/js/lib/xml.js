@@ -1,6 +1,7 @@
 /*
  * 
- * Intended for data XML only (no support of attributes and namespaces)
+ * Intended for data XML only (no support of attributes, namespaces and embedded text)
+ * 
  * adds 3 function to any Object:
  * 1. toXmlString(rootTag) - rootTag is required // generate raw XML from Object
  * 2. toObject() // convert Element to standard Object
@@ -123,7 +124,7 @@ XmlHelper = {
 				xmlString += valueClass == 'Object' ? '\n' : '';
 
 				switch (valueClass) {
-				case false:
+				case 'null':
 				case 'Function':
 					break;
 				case 'String':
