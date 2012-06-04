@@ -163,7 +163,7 @@ XmlHelper = {
 
 		var helper = XmlHelper;
 
-		var func = getClass(value) + 'ToObject';
+		var func = 'objectify' + getClass(value);
 
 		if (typeof (helper[func]) == 'function') {
 			return helper[func](value);
@@ -177,23 +177,23 @@ XmlHelper = {
 		}
 	},
 
-	'ObjectToObject' : function(object) {
+	'objectifyObject' : function(object) {
 		return object;
 	},
 
-	'ArrayToObject' : function(array) {
+	'objectifyArray' : function(array) {
 		return array;
 	},
 
-	'DocumentToObject' : function(object) {
+	'objectifyDocument' : function(object) {
 		return object.firstChild.toObject();
 	},
 
-	'ElementToObject' : {
+	'objectifyElement' : {
 
 		'proceed' : function(element) {
 
-			var I = XmlHelper.ElementToObject;
+			var I = XmlHelper.objectifyElement;
 
 			var object = {};
 			var nodes = element.childNodes;

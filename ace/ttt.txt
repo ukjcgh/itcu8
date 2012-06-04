@@ -1,4 +1,8 @@
 
+addToObject in objectifyElement?
+recursive toObject?
+
+ObjecToObject -> objectifyObject
 
 toObject fallback should it be inside ElementToObject?
 
@@ -11,6 +15,8 @@ toObject fallback should it be inside ElementToObject?
 	exception?
 		return '';
 	}
+	
+рендерить таблицу на месте, что бы не мигала при удалении и апе
 	
 использовать код сайта сразу как имя тега
 - ограничивает сиволы в коде потому что тег - это все недостатки?
