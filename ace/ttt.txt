@@ -8,6 +8,13 @@
 	exception?
 		return '';
 	}
+	
+"<data>
+	<f1>1</f1>
+	<f2>2</f2>
+	<f3>
+	</f3>
+</data>" - check if is empty object?\, then just <f3></f3>
 
 может все-таки разбить функцию toXmlString для массива и объекта отдельно?
 

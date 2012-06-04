@@ -1,5 +1,72 @@
 /*
- * Intended for data XML only (no attributes and namespaces)
+ * 
+ * Intended for data XML only (no support of attributes and namespaces)
+ * adds 3 function to any Object:
+ * 1. toXmlString(rootTag) - rootTag is required // generate raw XML from Object
+ * 2. toObject() // convert Element to standard Object
+ * 3. toXmlDocument() // create XML Document from Object to use it for XSLTProcessor
+ * 
+ * Use this if you need edit XML before pass it to XSLTProcessor... toObject() -> edit -> toXmlDocument()
+ * 
+ */
+
+Object.prototype.toXmlString = function(rootTag) {
+
+	var object = this;
+
+	if (typeof rootTag == 'undefined') {
+		if (getClass(object) == 'Document') {
+			rootTag = object.firstChild.nodeName;
+			object = object.firstChild;
+		} else {
+			throw 'rootTag is required paramater';
+		}
+	}
+
+	if (object instanceof Array) {
+		throw 'Array can\'t be a root element, Object expected';
+	}
+
+	// convert any other object to standard Object so that it is iterable in standard way
+	object = object.toObject();
+
+	return XmlHelper.stringifyObject(object, rootTag);
+
+};
+
+Object.prototype.toObject = function() {
+
+	switch (getClass(this)) {
+
+	case 'Object':
+	case 'Array':
+		var object = this;
+		break;
+
+	case 'Document':
+		var object = this.firstChild.toObject();
+		break;
+
+	case 'Element':
+		var object = XmlHelper.elementToObject.proceed(this);
+		break;
+
+	default:
+		throw getClass(this) + ' can\'t be converted to Object (not supported)';
+		break;
+
+	}
+
+	return object;
+
+};
+
+Object.prototype.toXmlDocument = function(rootTag) {
+	return (new DOMParser()).parseFromString(this.toXmlString(rootTag), "text/xml");
+};
+
+/*
+ * helper functions
  */
 
 XmlHelper = {
@@ -28,43 +95,13 @@ XmlHelper = {
 		}
 	},
 
-	'indent' : function(n) {
-		return (new Array(n + 1)).join('\t');
-	},
+	'stringifyArray' : function(array, itemTag) {
 
-};
+		var xml = XmlHelper;
+		var xmlString = '';
 
-Object.prototype.toXmlString = function(rootTag, level) {
-
-	// helper
-	var xml = XmlHelper;
-
-	// initialize and validate variables
-	var object = this;
-	if (typeof rootTag == 'undefined') {
-		if (getClass(object) == 'Document') {
-			rootTag = object.firstChild.nodeName;
-			object = object.firstChild;
-		} else {
-			throw 'rootTag is required paramater';
-		}
-	}
-	level = typeof level == 'undefined' ? 1 : level;
-	if (level == 1 && object instanceof Array) {
-		throw 'Array can\'t be a root element, Object expected';
-	}
-	var xmlString = '';
-
-	// convert any other object to standard Object so that it is iterable in standard way
-	object = object.toObject();
-
-	// CONVERSION
-	switch (getClass(object)) {
-
-	case 'Array':
-
-		for ( var key = 0; key < object.length; key++) {
-			switch (getClass(object[key])) {
+		for ( var key = 0; key < array.length; key++) {
+			switch (getClass(array[key])) {
 
 			case 'NULL':
 			case 'Function':
@@ -72,11 +109,11 @@ Object.prototype.toXmlString = function(rootTag, level) {
 
 			case 'String':
 			case 'Number':
-				xmlString += '\n' + xml.indent(level - 1) + xml.open(rootTag) + xml.escape(object[key]) + xml.close(rootTag);
+				xmlString += '\n' + xml.open(itemTag) + xml.escape(array[key]) + xml.close(itemTag);
 				break;
 
 			case 'Object':
-				xmlString += object[key].toXmlString(rootTag, level);
+				xmlString += '\n' + xml.stringifyObject(array[key], itemTag);
 				break;
 
 			case 'Array':
@@ -90,9 +127,14 @@ Object.prototype.toXmlString = function(rootTag, level) {
 			}
 		}
 
-		break;
+		return xmlString;
 
-	case 'Object':
+	},
+
+	'stringifyObject' : function(object, objectTag) {
+
+		var xml = XmlHelper;
+		var xmlString = '';
 
 		for ( var key in object) {
 			if (object.hasOwnProperty(key)) {
@@ -104,12 +146,14 @@ Object.prototype.toXmlString = function(rootTag, level) {
 
 				case 'String':
 				case 'Number':
-					xmlString += '\n' + xml.indent(level) + xml.open(key) + xml.escape(object[key]) + xml.close(key);
+					xmlString += '\n' + xml.open(key) + xml.escape(object[key]) + xml.close(key);
 					break;
 
 				case 'Object':
+					xmlString += '\n' + xml.stringifyObject(object[key], key);
+					break;
 				case 'Array':
-					xmlString += object[key].toXmlString(key, level + 1);
+					xmlString += xml.stringifyArray(object[key], key);
 					break;
 
 				default:
@@ -120,86 +164,75 @@ Object.prototype.toXmlString = function(rootTag, level) {
 			}
 		}
 
-		xmlString = xml.indent(level - 1) + xml.open(rootTag) + xmlString + '\n' + xml.indent(level - 1) + xml.close(rootTag);
-		if (level > 1) {
-			xmlString = '\n' + xmlString;
-		}
+		// wrap in rootTag
+		xmlString = xml.open(objectTag) + xmlString.replace(/\n/g, '\n\t') + '\n' + xml.close(objectTag);
 
-		break;
+		return xmlString;
 
-	default:
-		throw 'Unexpected object type';
-		break;
+	},
 
-	}
+	'elementToObject' : {
 
-	return xmlString;
+		'proceed' : function(element) {
 
-};
+			var I = XmlHelper.elementToObject;
 
-Object.prototype.toObject = function() {
+			var object = {};
+			var nodes = element.childNodes;
 
-	switch (getClass(this)) {
+			if (nodes.length == 1 && nodes[0].nodeName == '#text') {
+				throw 'Node Element:#text can\'t be converted to Object';
+			} else {
+				for ( var i = 0; i < nodes.length; i++) {
 
-	case 'Object':
-	case 'Array':
-		var object = this;
-		break;
+					var node = nodes.item(i);
+					var key = I.nodeKey(node);
 
-	case 'Document':
-		return this.firstChild.toObject();
-		break;
-
-	case 'Element':
-		var object = {};
-		var nodes = this.childNodes;
-
-		if (nodes.length == 1 && nodes[0].nodeName == '#text') {
-			throw 'Node Element:#text can\'t be converted to Object';
-		} else {
-			for ( var i = 0; i < nodes.length; i++) {
-
-				// skip text between nodes
-				if (nodes[i].nodeName == '#text') {
-					continue;
-				}
-
-				// get key and value
-				var key = nodes[i].nodeName;
-				if (nodes[i].childNodes.length == 1 && nodes[i].childNodes[0].nodeName == '#text') {
-					var value = nodes[i].childNodes[0].nodeValue;
-				} else {
-					if (nodes[i].childNodes.length == 0) {
-						var value = '';
-					} else {
-						var value = nodes[i].toObject();
+					// skip text between nodes
+					if (key == '#text') {
+						continue;
 					}
-				}
 
-				// fill-in object
-				if (object.hasOwnProperty(key)) {// if already isset, convert to Array
-					if (getClass(object[key]) !== 'Array') {
-						object[key] = [ object[key] ];
-					}
-					object[key].push(value);
+					var value = I.nodeValue(node);
+
+					I.addToObject(object, key, value);
+
+				}
+			}
+
+			return object;
+
+		},
+
+		'nodeKey' : function(node) {
+			return node.nodeName;
+		},
+
+		'nodeValue' : function(node) {
+			if (node.childNodes.length == 1 && node.childNodes[0].nodeName == '#text') {
+				var value = node.childNodes[0].nodeValue;
+			} else {
+				if (node.childNodes.length == 0) {
+					var value = '';
 				} else {
-					object[key] = value;
+					var value = XmlHelper.elementToObject.proceed(node);
 				}
+			}
+			return value;
+		},
 
+		'addToObject' : function(object, key, value) {
+			if (object.hasOwnProperty(key)) {// if already isset
+				// convert to Array
+				if (getClass(object[key]) !== 'Array') {
+					object[key] = [ object[key] ];
+				}
+				object[key].push(value);
+			} else {
+				object[key] = value;
 			}
 		}
-		break;
-
-	default:
-		throw getClass(this) + ' can\'t be converted to Object (not supported)';
-		break;
 
 	}
 
-	return object;
-
-}
-
-Object.prototype.toXmlDocument = function(rootTag) {
-	return (new DOMParser()).parseFromString(this.toXmlString(rootTag), "text/xml");
-}
+};

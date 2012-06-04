@@ -24,8 +24,8 @@ function createDocument(rootNode) {
 
 function getClass(object) {
 
-	if (object === null) {
-		return 'NULL';
+	if (object === null || typeof (object) == 'undefined') {
+		return false;
 	}
 
 	var info = object.constructor.toString();
