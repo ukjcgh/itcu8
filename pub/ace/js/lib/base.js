@@ -47,6 +47,8 @@ function getClass(object) {
 		return 'Element';
 	}
 
+	return 'unknown';
+
 }
 
 function template(xslFile, xml) {
