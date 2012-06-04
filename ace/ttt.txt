@@ -1,10 +1,5 @@
 
-addToObject in objectifyElement?
 recursive toObject?
-
-ObjecToObject -> objectifyObject
-
-toObject fallback should it be inside ElementToObject?
 
 	if (typeof docFrag != 'undefined') {
 	//!! use serializer?

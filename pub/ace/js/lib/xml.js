@@ -193,7 +193,8 @@ XmlHelper = {
 
 		'proceed' : function(element) {
 
-			var I = XmlHelper.objectifyElement;
+			var helper = XmlHelper;
+			var I = helper.objectifyElement;
 
 			var object = {};
 			var nodes = element.childNodes;
@@ -213,7 +214,7 @@ XmlHelper = {
 
 					var value = I.nodeValue(node);
 
-					I.addToObject(object, key, value);
+					helper.addToObject(object, key, value);
 
 				}
 			}
@@ -242,20 +243,20 @@ XmlHelper = {
 
 			return value;
 
-		},
-
-		'addToObject' : function(object, key, value) {
-			if (object.hasOwnProperty(key)) {// if already isset
-				// convert to Array
-				if (getClass(object[key]) !== 'Array') {
-					object[key] = [ object[key] ];
-				}
-				object[key].push(value);
-			} else {
-				object[key] = value;
-			}
 		}
 
 	},
+
+	'addToObject' : function(object, key, value) {
+		if (object.hasOwnProperty(key)) {// if already isset
+			// convert to Array
+			if (getClass(object[key]) !== 'Array') {
+				object[key] = [ object[key] ];
+			}
+			object[key].push(value);
+		} else {
+			object[key] = value;
+		}
+	}
 
 };
