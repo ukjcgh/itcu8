@@ -135,7 +135,12 @@ XmlHelper = {
 					xmlString += helper.stringifyObject(value, valueTag);
 					break;
 				default:
-					throw 'Unexpected value type in Object, can\'t convert it to XML';
+					var fallBack = 'stringify' + valueClass;
+					if (typeof (helper[fallBack])) {
+						xmlString += helper[fallBack](object, key);
+					} else {
+						throw 'Unexpected value type in Object, can\'t convert it to XML';
+					}
 					break;
 				}
 

@@ -22,10 +22,14 @@ function createDocument(rootNode) {
 	return document.implementation.createDocument(null, rootNode, null);
 }
 
+// always return string
 function getClass(object) {
 
-	if (object === null || typeof (object) == 'undefined') {
-		return false;
+	if (object === null) {
+		return 'null';
+	}
+	if (typeof (object) == 'undefined') {
+		return 'undefined';
 	}
 
 	var info = object.constructor.toString();
