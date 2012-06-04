@@ -68,11 +68,12 @@ function template(xslFile, xml) {
 	var docFrag = proc.transformToFragment(xml, document);
 
 	if (typeof docFrag != 'undefined') {
-		var tmpdiv = newel('div');
-		tmpdiv.appendChild(docFrag);
-		return tmpdiv.innerHTML;
+		// use div.innerHTML to avoid xmlns attributes in firefox
+		var div = newel('div');
+		div.appendChild(docFrag);
+		return div.innerHTML;
 	} else {
-		return '';
+		throw 'transformToFragment failed, check your template "' + xslFile + '" and passed XML';
 	}
 
 }

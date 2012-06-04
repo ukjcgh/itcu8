@@ -1,4 +1,6 @@
 
+configXml is not necessary
+
 	if (typeof docFrag != 'undefined') {
 	//!! use serializer?
 		var tmpdiv = newel('div');
