@@ -16,13 +16,13 @@ function grid_edit_action(code) {
 
 function grid_save_action(data) {
 	server.request('model/update', data);
-	document.location.reload();
+	grid_show();
 }
 
 function grid_delete_action(code) {
 	if (confirm('Are you sure you need to delete "' + code + '" website?')) {
 		server.request('model/delete', [ code ]);
-		document.location.reload();
+		grid_show();
 	}
 }
 
@@ -37,25 +37,24 @@ function grid_add_action() {
 
 function grid_addsave_action(data) {
 	server.request('model/insert', data);
-	document.location.reload();
+	grid_show();
 }
 
 function grid_show() {
-	configXml = server.requestXml('model/config');
-	config = configXml.toObject();
-	dataXml = server.requestXml('model/data');
-	data = dataXml.toObject();
 
-	xml = createDocument('data');
-	with (xml.firstChild) {
-		appendChild(configXml.querySelector('grid'));
-		appendChild(dataXml.firstChild);
-	}
+	config = server.requestXml('model/config').toObject();
+	data = server.requestXml('model/data').toObject();
 
-	html = template('grid', xml);
+	var xml = {
+		'grid' : config.grid,
+		'items' : data
+	}.toXmlDocument('data');
+
+	var html = template('grid', xml);
 	document.body.innerHTML = html;
 
 	grid_init();
+
 }
 
 grid_init = function() {
