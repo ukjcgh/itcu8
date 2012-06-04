@@ -7,7 +7,14 @@ class router {
 		$request = single('Request');
 		$response = single('Response');
 
-		$action_filename = IDE_DIR . 'exegete/actions/' . $request->getAction(). '.php';
+		$action = $request->get('action');
+		if(is_null($action)) $action = 'index';
+
+		if(preg_match('~[^a-zA-Z/]~', $action)){
+			trigger_error('Invalid action name "' . $action . '"', E_USER_ERROR);
+		}
+
+		$action_filename = IDE_DIR . 'exegete/actions/' . $action . '.php';
 
 		if(is_readable($action_filename)) {
 			include $action_filename;

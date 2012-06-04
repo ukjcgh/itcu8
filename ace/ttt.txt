@@ -1,5 +1,7 @@
 
-server.getXml, какой объект удоюнее возвращать? надо ли контроливать на сервере респонс?
+throw.. alway should start from Error, separate function?
+
+server.getXml, какой объект удобнее возвращать? надо ли контроливать на сервере респонс?
 	
 использовать код сайта сразу как имя тега
 - ограничивает сиволы в коде потому что тег - это все недостатки?
@@ -7,6 +9,9 @@ server.getXml, какой объект удоюнее возвращать? на
 
 refact grid_show (use new xml functions) и т д
 удалить base.js:createDocument 
+
+grid.js as object
+router.php
 
 javascript callstack
 

@@ -2,7 +2,6 @@
 
 class Request extends \data\hand {
 
-	protected $action;
 	protected $isAjax;
 	protected $meta;
 
@@ -11,7 +10,7 @@ class Request extends \data\hand {
 
 		if(isset($_SERVER['HTTP_AJAX_TYPE'])){
 			$this->isAjax = true;
-			$requestJson = isset($_POST['request']) ? $_POST['request'] : null;
+			$requestJson = $this->post('request');
 			$request = json_decode($requestJson);
 			if(isset($request->data)){
 				$this->data()->import($request->data);
@@ -20,15 +19,6 @@ class Request extends \data\hand {
 			$this->meta = $request;
 		}
 
-		$this->action = isset($_GET['action']) ? $_GET['action'] : 'default';
-		if(preg_match('~[^a-zA-Z/]~', $this->action)){
-			trigger_error('Invalid action name "' . $this->action . '"', E_USER_ERROR);
-		}
-
-	}
-
-	public function getAction(){
-		return $this->action;
 	}
 
 	public function isAjax(){
@@ -37,6 +27,22 @@ class Request extends \data\hand {
 
 	public function meta($name){
 		return isset($this->meta->$name) ? $this->meta->$name : null;
+	}
+
+	public function get($var = null){
+		if(is_null($var)){
+			return $_GET;
+		} else {
+			return isset($_GET[$var]) ? $_GET[$var] : null;
+		}
+	}
+
+	public function post($var = null){
+		if(is_null($var)){
+			return $_POST;
+		} else {
+			return isset($_POST[$var]) ? $_POST[$var] : null;
+		}
 	}
 
 }
