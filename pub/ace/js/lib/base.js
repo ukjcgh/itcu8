@@ -18,10 +18,6 @@ function newel(tag) {
 	return document.createElement(tag);
 }
 
-function createDocument(rootNode) {
-	return document.implementation.createDocument(null, rootNode, null);
-}
-
 // always return string
 function getClass(object) {
 

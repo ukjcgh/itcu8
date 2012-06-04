@@ -5,9 +5,6 @@ server.getXml, какой объект удобнее возвращать? на
 - ограничивает сиволы в коде потому что тег - это все недостатки?
 - что если просто список хранить, не надо придумывать коды, а с кодами как это делать? как удаление будет работать?
 
-refact grid_show (use new xml functions) и т д
-удалить base.js:createDocument 
-
 grid.js as object
 router.php
 isAjax in response - may be router should check isAjax and send response?
