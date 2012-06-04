@@ -101,7 +101,11 @@ XmlHelper = {
 		var xmlString = '';
 
 		for ( var key = 0; key < array.length; key++) {
-			switch (getClass(array[key])) {
+
+			var value = array[key];
+			value = getClass(value) == 'Object' && value.isEmpty() ? '' : value;
+
+			switch (getClass(value)) {
 
 			case 'NULL':
 			case 'Function':
@@ -109,11 +113,11 @@ XmlHelper = {
 
 			case 'String':
 			case 'Number':
-				xmlString += '\n' + xml.open(itemTag) + xml.escape(array[key]) + xml.close(itemTag);
+				xmlString += '\n' + xml.open(itemTag) + xml.escape(value) + xml.close(itemTag);
 				break;
 
 			case 'Object':
-				xmlString += '\n' + xml.stringifyObject(array[key], itemTag);
+				xmlString += '\n' + xml.stringifyObject(value, itemTag);
 				break;
 
 			case 'Array':
@@ -138,7 +142,11 @@ XmlHelper = {
 
 		for ( var key in object) {
 			if (object.hasOwnProperty(key)) {
-				switch (getClass(object[key])) {
+
+				var value = object[key];
+				value = getClass(value) == 'Object' && value.isEmpty() ? '' : value;
+
+				switch (getClass(value)) {
 
 				case 'NULL':
 				case 'Function':
@@ -146,14 +154,14 @@ XmlHelper = {
 
 				case 'String':
 				case 'Number':
-					xmlString += '\n' + xml.open(key) + xml.escape(object[key]) + xml.close(key);
+					xmlString += '\n' + xml.open(key) + xml.escape(value) + xml.close(key);
 					break;
 
 				case 'Object':
-					xmlString += '\n' + xml.stringifyObject(object[key], key);
+					xmlString += '\n' + xml.stringifyObject(value, key);
 					break;
 				case 'Array':
-					xmlString += xml.stringifyArray(object[key], key);
+					xmlString += xml.stringifyArray(value, key);
 					break;
 
 				default:
@@ -161,6 +169,7 @@ XmlHelper = {
 					break;
 
 				}
+
 			}
 		}
 

@@ -71,6 +71,14 @@ function template(xslFile, xml) {
 
 }
 
+Object.prototype.isEmpty = function() {
+	for ( var key in this) {
+		// own properties always on top in Chrome and Firefox so it is enough to check first one
+		return !this.hasOwnProperty(key);
+	}
+	return true;
+};
+
 initFuncs = [];
 setTimeout(wait = function() {
 	if (document.readyState === "complete") {
