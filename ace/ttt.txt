@@ -1,15 +1,5 @@
 
 configXml is not necessary
-
-	if (typeof docFrag != 'undefined') {
-	//!! use serializer?
-		var tmpdiv = newel('div');
-		tmpdiv.appendChild(docFrag);
-		return tmpdiv.innerHTML;
-	} else {
-	exception?
-		return '';
-	}
 	
 рендерить таблицу на месте, что бы не мигала при удалении и апе
 	
