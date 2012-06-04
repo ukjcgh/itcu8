@@ -12,6 +12,7 @@ refact grid_show (use new xml functions) и т д
 
 grid.js as object
 router.php
+isAjax in response - may be router should check isAjax and send response?
 
 javascript callstack
 

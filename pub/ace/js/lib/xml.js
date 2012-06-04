@@ -22,12 +22,12 @@ Object.prototype.toXmlString = function(rootTag) {
 			rootTag = object.firstChild.nodeName;
 			object = object.firstChild;
 		} else {
-			throw 'rootTag is required paramater';
+			throw 'Error: rootTag is required paramater';
 		}
 	}
 
 	if (getClass(object) == 'Array') {
-		throw 'Array can\'t be a root element, Object expected';
+		throw 'Error: Array can\'t be a root element, Object expected';
 	}
 
 	// convert any other object to standard Object so that it is iterable in standard way
@@ -82,10 +82,10 @@ XmlHelper = {
 	'checkTag' : function(tag) {
 		tag = tag + '';
 		if ((new RegExp('[^0-9A-z_]', 'g')).test(tag)) {
-			throw 'Invalid symbol in tagName "' + tag + '"';
+			throw 'Error: Invalid symbol in tagName "' + tag + '"';
 		}
 		if (!isNaN(tag.charAt(0))) {
-			throw 'First symbol in tagName "' + tag + '" can\'t be a digit';
+			throw 'Error: First symbol in tagName "' + tag + '" can\'t be a digit';
 		}
 	},
 
@@ -134,7 +134,7 @@ XmlHelper = {
 			var value = array[key];
 
 			if (getClass(value) == 'Array') {
-				throw 'Array inside Array can\'t be converted to XML, wrap child Array into Object';
+				throw 'Error: Array inside Array can\'t be converted to XML, wrap child Array into Object';
 			}
 
 			xml += helper.stringify(itemTag, value);
@@ -215,7 +215,7 @@ XmlHelper = {
 			var nodes = element.childNodes;
 
 			if (nodes.length == 1 && nodes[0].nodeName == '#text') {
-				throw 'Node Element:#text can\'t be converted to Object';
+				throw 'Error: Node Element:#text can\'t be converted to Object';
 			} else {
 				for ( var i = 0; i < nodes.length; i++) {
 

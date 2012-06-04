@@ -73,7 +73,7 @@ function template(xslFile, xml) {
 		div.appendChild(docFrag);
 		return div.innerHTML;
 	} else {
-		throw 'transformToFragment failed, check your template "' + xslFile + '" and passed XML';
+		throw 'Error: transformToFragment failed, check your template "' + xslFile + '" and passed XML';
 	}
 
 }

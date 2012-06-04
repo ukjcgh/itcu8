@@ -6,7 +6,7 @@ server.request = function(action, data) {
 		data = {};
 	} else {
 		if (typeof data != 'object') {
-			throw 'Can\'t send scalar value as data';
+			throw 'Error: Can\'t send scalar value as data';
 		}
 	}
 
