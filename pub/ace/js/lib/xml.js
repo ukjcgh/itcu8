@@ -112,6 +112,8 @@ XmlHelper = {
 					throw 'Array inside Array can\'t be converted to XML, wrap child Array into Object';
 				}
 
+				xmlString += valueClass == 'Object' ? '\n' : '';
+
 				switch (valueClass) {
 				case 'null':
 				case 'Function':
@@ -121,17 +123,15 @@ XmlHelper = {
 					xmlString += '\n' + helper.open(valueTag) + helper.escape(value) + helper.close(valueTag);
 					break;
 				case 'Array':
+				case 'Object':
 					xmlString += helper.stringifyObject(value, valueTag);
 					break;
-				case 'Object':
-					xmlString += '\n' + helper.stringifyObject(value, valueTag);
-					break;
 				default:
-					var fallBack = 'stringify' + valueClass;
-					if (typeof (helper[fallBack])) {
-						xmlString += helper[fallBack](object, key);
+					var fallback = 'stringify' + valueClass;
+					if (typeof (helper[fallback])) {
+						xmlString += helper[fallback](object, key);
 					} else {
-						throw 'Unexpected value type in Object, can\'t convert it to XML';
+						throw 'Unexpected value type in Object, can\'t convert it to XML string';
 					}
 					break;
 				}
