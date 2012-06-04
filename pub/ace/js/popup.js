@@ -1,34 +1,34 @@
 popup = {
 
 	show : function(html) {
-		if (!el('.popup-back')) {
-			var body = el('body');
+		if (!$('.popup-back')) {
+			var body = $('body');
 
-			var popupBackDiv = newel('div');
+			var popupBackDiv = newElement('div');
 			popupBackDiv.className = 'popup-back';
 			body.appendChild(popupBackDiv);
 
-			var popupDiv = newel('div');
+			var popupDiv = newElement('div');
 			popupDiv.className = 'popup';
 			body.appendChild(popupDiv);
 
 			popupDiv.innerHTML = '<div class="head"><a href="#">close</a></div>';
 			popupDiv.innerHTML += '<div class="content"></div>';
 
-			el('.popup .head a').onclick = function() {
+			$('.popup .head a').onclick = function() {
 				popup.hide();
 				return false;
 			};
 		}
-		el('.popup .content').innerHTML = html;
-		el('.popup-back').style.display = 'block';
-		el('.popup').style.display = 'block';
+		$('.popup .content').innerHTML = html;
+		$('.popup-back').style.display = 'block';
+		$('.popup').style.display = 'block';
 	},
 
 	hide : function() {
-		if (el('.popup-back')) {
-			el('.popup').style.display = 'none';
-			el('.popup-back').style.display = 'none';
+		if ($('.popup-back')) {
+			$('.popup').style.display = 'none';
+			$('.popup-back').style.display = 'none';
 		}
 	}
 }

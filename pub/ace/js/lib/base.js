@@ -1,17 +1,19 @@
-function els(selectors) {
-	var list = document.querySelectorAll(selectors);
-
-	// convert list to regular array
-	var els = [];
-	for ( var i = 0; i < list.length; i++) {
-		els.push(list.item(i));
-	}
-
-	return els;
+// native $ gets element by id, first element by selector is more convenient
+function $(selectors) {
+	return $$(selectors)[0];
 }
 
-function el(selector) {
-	return document.querySelector(selector);
+// convert NodeList to Array coz familiar
+function $$(selectors) {
+
+	var list = document.querySelectorAll(selectors);
+
+	var elements = [];
+	for ( var i = 0; i < list.length; i++) {
+		elements.push(list.item(i));
+	}
+
+	return elements;
 }
 
 function newElement(name) {

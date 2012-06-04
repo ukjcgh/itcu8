@@ -59,7 +59,7 @@ function grid_show() {
 
 grid_init = function() {
 	var initLinks = function(selector, func) {
-		var links = els(selector);
+		var links = $$(selector);
 		for ( var i in links) {
 			links[i].onclick = (function(links, i) {
 				return function() {
@@ -78,20 +78,20 @@ grid_init = function() {
 
 function grid_init_form(submitFunc) {
 
-	if (first = el('.popup *[name]')) {
+	if (first = $('.popup *[name]')) {
 		first.focus();
 	}
 
 	var submit = function() {
 		var data = {};
-		var fields = els('.form *[name]');
+		var fields = $$('.form *[name]');
 		for ( var i in fields) {
 			data[fields[i].name] = fields[i].value;
 		}
 		submitFunc(data);
 	};
 
-	var textFields = els('.popup input[type="text"]');
+	var textFields = $$('.popup input[type="text"]');
 	for ( var i in textFields) {
 		textFields[i].onkeypress = function(e) {
 			if (e.keyCode == 13) {
@@ -100,7 +100,7 @@ function grid_init_form(submitFunc) {
 		}
 	}
 
-	el('.form-save-button').onclick = function() {
+	$('.form-save-button').onclick = function() {
 		submit();
 	};
 }

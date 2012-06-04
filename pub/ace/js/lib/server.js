@@ -72,17 +72,17 @@ server.validateResponse = function(request, action) {
 server.indicator = {
 
 	'show' : function() {
-		if (!el('.server-indicator')) {
+		if (!$('.server-indicator')) {
 			var indicatorDiv = newElement('div');
 			indicatorDiv.className = 'server-indicator';
 			indicatorDiv.innerHTML = 'Processing..';
-			el('body').appendChild(indicatorDiv);
+			$('body').appendChild(indicatorDiv);
 		}
-		el('.server-indicator').style.display = 'block';
+		$('.server-indicator').style.display = 'block';
 	},
 
 	'hide' : function() {
-		el('.server-indicator').style.display = 'none';
+		$('.server-indicator').style.display = 'none';
 	}
 
 }

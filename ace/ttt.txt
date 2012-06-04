@@ -1,4 +1,5 @@
 
+var i in links
 $ - use this standard function
 
 server.getXml, какой объект удобнее возвращать? надо ли контроливать на сервере респонс?
