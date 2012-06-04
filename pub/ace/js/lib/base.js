@@ -3,11 +3,12 @@ function $(selectors) {
 	return $$(selectors)[0];
 }
 
-// convert NodeList to Array coz familiar
+// native $$ returns NodeList, Array is more familiar
 function $$(selectors) {
 
 	var list = document.querySelectorAll(selectors);
 
+	// conver NodeList to Array
 	var elements = [];
 	for ( var i = 0; i < list.length; i++) {
 		elements.push(list.item(i));
