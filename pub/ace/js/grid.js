@@ -60,7 +60,7 @@ function grid_show() {
 grid_init = function() {
 	var initLinks = function(selector, func) {
 		var links = $$(selector);
-		for ( var i in links) {
+		for ( var i = 0; i < links.length; i++) {
 			links[i].onclick = (function(links, i) {
 				return function() {
 					func(links[i].getAttribute('code'));
@@ -85,14 +85,14 @@ function grid_init_form(submitFunc) {
 	var submit = function() {
 		var data = {};
 		var fields = $$('.form *[name]');
-		for ( var i in fields) {
+		for ( var i = 0; i < fields.length; i++) {
 			data[fields[i].name] = fields[i].value;
 		}
 		submitFunc(data);
 	};
 
 	var textFields = $$('.popup input[type="text"]');
-	for ( var i in textFields) {
+	for ( var i = 0; i < textFields.length; i++) {
 		textFields[i].onkeypress = function(e) {
 			if (e.keyCode == 13) {
 				submit();
