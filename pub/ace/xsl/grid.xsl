@@ -25,9 +25,9 @@
 						</td>
 					</xsl:for-each>
 					<td>
-						<a class="edit-link">edit</a>
+						<a class="edit-link" code="{code}">edit</a>
 						/
-						<a class="delete-link">delete</a>
+						<a class="delete-link" code="{code}">delete</a>
 					</td>
 				</tr>
 			</xsl:for-each>

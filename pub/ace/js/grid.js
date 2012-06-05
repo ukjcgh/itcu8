@@ -64,8 +64,7 @@ grid_init = function() {
 		for ( var i = 0; i < links.length; i++) {
 			links[i].onclick = (function(links, i) {
 				return function() {
-					var code = links[i].findParent('tr').$('td').innerHTML;
-					func(code);
+					func(links[i].getAttribute('code'));
 					return false;
 				}
 			})(links, i);
