@@ -75,7 +75,7 @@ Object.prototype.isEmpty = function() {
 };
 
 function throwError(message) {
-	// console.error adds trace in Chrome
+	// console.error adds trace in Chrome even in console
 	console.error('Error: ' + message);
 	throw 'script terminated';
 }
