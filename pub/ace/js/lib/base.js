@@ -1,3 +1,4 @@
+// standard $ selector returns element by id, first element from css selector is more convenient
 function $(selectors) {
 	return $$(selectors)[0];
 }

@@ -22,7 +22,11 @@ Object.prototype.toXmlString = function(rootTag) {
 			rootTag = object.firstChild.nodeName;
 			object = object.firstChild;
 		} else {
-			throwError('rootTag is required paramater');
+			if (getClass(object) == 'Element') {
+				rootTag = object.nodeName;
+			} else {
+				throwError('rootTag is required paramater');
+			}
 		}
 	}
 
