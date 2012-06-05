@@ -10,7 +10,9 @@ server.request = function(action, data) {
 		}
 	}
 
-	server.indicator.show();
+	var helper = serverHelper;
+
+	helper.indicator.show();
 
 	// init request
 	var xhr = new XMLHttpRequest();
@@ -23,10 +25,10 @@ server.request = function(action, data) {
 	request.data = data;
 	xhr.send('request=' + encodeURIComponent(JSON.stringify(request)));
 
-	server.indicator.hide();
+	helper.indicator.hide();
 
 	// fetch response
-	var response = server.validateResponse(xhr, action);
+	var response = helper.validateResponse(xhr, action);
 
 	return response.data;
 }
@@ -40,49 +42,57 @@ server.requestXml = function(action, data) {
 	} else {
 		throwError('XML not found in response of "' + action + '"');
 	}
-}
+};
 
-server.validateResponse = function(request, action) {
-	var msg = 'server.request("' + action + '") failed. ';
+/*
+ * Helper functions
+ */
 
-	if (request.status != 200) {
-		throwError(msg + '\n      HTTP: ' + request.status + ' ' + request.statusText);
-	}
+serverHelper = {
 
-	try {
-		response = JSON.parse(request.responseText);
-	} catch (e) {
-		throwError(msg + 'The server has sent invalid JSON. See response below:\n' + request.responseText);
-	}
+	'validateResponse' : function(request, action) {
+		var msg = 'server.request("' + action + '") failed. ';
 
-	if (response.error) {
-		throwError(msg + 'Server has sent error: ' + response.error);
-	}
-
-	if (response['user-error']) {
-		alert(response['user-error']);
-		// just interrupt
-		throwError(msg + 'This exception thrown out only to stop further execution of the script in case of user error: '
-				+ response['user-error']);
-	}
-
-	return response;
-}
-
-server.indicator = {
-
-	'show' : function() {
-		if (!$('.server-indicator')) {
-			var indicatorDiv = newElement('div');
-			indicatorDiv.className = 'server-indicator';
-			indicatorDiv.innerHTML = 'Processing..';
-			$('body').appendChild(indicatorDiv);
+		if (request.status != 200) {
+			throwError(msg + '\n      HTTP: ' + request.status + ' ' + request.statusText);
 		}
-		$('.server-indicator').style.display = 'block';
+
+		try {
+			response = JSON.parse(request.responseText);
+		} catch (e) {
+			throwError(msg + 'The server has sent invalid JSON. See response below:\n' + request.responseText);
+		}
+
+		if (response.error) {
+			throwError(msg + 'Server has sent error: ' + response.error);
+		}
+
+		if (response['user-error']) {
+			alert(response['user-error']);
+			// just interrupt
+			throwError(msg + 'This exception thrown out only to stop further execution of the script in case of user error: '
+					+ response['user-error']);
+		}
+
+		return response;
 	},
 
-	'hide' : function() {
-		$('.server-indicator').style.display = 'none';
+	'indicator' : {
+
+		'show' : function() {
+			if (!$('.server-indicator')) {
+				var indicatorDiv = newElement('div');
+				indicatorDiv.className = 'server-indicator';
+				indicatorDiv.innerHTML = 'Processing..';
+				$('body').appendChild(indicatorDiv);
+			}
+			$('.server-indicator').style.display = 'block';
+		},
+
+		'hide' : function() {
+			$('.server-indicator').style.display = 'none';
+		}
+
 	}
 
-}
+};

@@ -62,9 +62,7 @@ Object.prototype.toXmlDocument = function(rootTag) {
 };
 
 /*
- * 
  * Helper functions
- * 
  */
 
 XmlHelper = {
