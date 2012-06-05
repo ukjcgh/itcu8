@@ -31,10 +31,13 @@ server.request = function(action, data) {
 	var response = helper.validateResponse(xhr, action);
 
 	return response.data;
+
 }
 
 server.requestXml = function(action, data) {
+
 	var response = server.request(action, data);
+
 	if (response.xml) {
 		// parse using DOMParser coz error handling is better
 		var parser = new DOMParser();
@@ -42,6 +45,7 @@ server.requestXml = function(action, data) {
 	} else {
 		throwError('XML not found in response of "' + action + '"');
 	}
+
 };
 
 /*

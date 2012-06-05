@@ -1,7 +1,5 @@
 дальше точить функционал или порефакторить еще?
 
-server.getXml, какой объект удобнее возвращать? надо ли контроливать на сервере респонс?
-	
 grid.js as object
 router.php
 isAjax in response - may be router should check isAjax and send response?
