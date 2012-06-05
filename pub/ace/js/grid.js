@@ -58,12 +58,14 @@ function grid_show() {
 }
 
 grid_init = function() {
+
 	var initLinks = function(selector, func) {
 		var links = $$(selector);
 		for ( var i = 0; i < links.length; i++) {
 			links[i].onclick = (function(links, i) {
 				return function() {
-					func(links[i].getAttribute('code'));
+					var code = links[i].findParent('tr').$('td').innerHTML;
+					func(code);
 					return false;
 				}
 			})(links, i);
@@ -73,7 +75,15 @@ grid_init = function() {
 
 	initLinks('.edit-link', grid_edit_action);
 	initLinks('.delete-link', grid_delete_action);
-	initLinks('.add-link', grid_add_action);
+
+	with ($('.add-link')) {
+		onclick = function() {
+			grid_add_action();
+			return false;
+		};
+		href = '#';
+	}
+
 }
 
 function grid_init_form(submitFunc) {

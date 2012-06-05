@@ -1,10 +1,31 @@
 // standard $ selector returns element by id, first element from css selector is more convenient
-function $(selectors) {
-	return $$(selectors)[0];
+function $(selectors, context) {
+	return $$(selectors, context)[0];
 }
 
-function $$(selectors) {
-	return document.querySelectorAll(selectors);
+function $$(selectors, context) {
+	context = context == null ? document : context;
+	return context.querySelectorAll(selectors);
+}
+
+Element.prototype.$ = function(selectors) {
+	return window.$(selectors, this);
+}
+
+Element.prototype.$$ = function(selectors) {
+	return window.$$(selectors, this);
+}
+
+Element.prototype.findParent = function(nodeName) {
+	if (this.parentNode.nodeName.toLowerCase() == nodeName.toLowerCase()) {
+		return this.parentNode;
+	} else {
+		if (this.parentNode.findParent) {
+			return this.parentNode.findParent(nodeName);
+		} else {
+			return null;
+		}
+	}
 }
 
 function newElement(name) {
