@@ -17,7 +17,11 @@ class router {
 		$action_filename = IDE_DIR . 'exegete/actions/' . $action . '.php';
 
 		if(is_readable($action_filename)) {
-			include $action_filename;
+			try{
+				include $action_filename;
+			} catch(userExeption $e){
+				$response->meta('user-error', $e->getMessage());
+			}
 		} else {
 			trigger_error('Action "' . $action_filename . '" Not Found', E_USER_ERROR);
 		}

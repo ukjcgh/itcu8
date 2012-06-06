@@ -11,13 +11,17 @@ class Response extends \data\hand {
 	}
 
 	public function __toString(){
+		$data = $this->data();
 		if($this->isAjax){
 			$post = $this->meta;
-			$post->data = $this->data()->export(); // export to avoid recursion (stringify of itself)
+			$post->data = $data->export(); // export to avoid recursion (stringify of itself)
 			stringify_objects($post->data);
 			return json_encode($post);
 		} else {
-			return (string)$this->data()->html;
+			if($this->meta('user-error')){
+				$data->html = $this->meta('user-error') . $data->html;
+			}
+			return (string)$data->html;
 		}
 	}
 
