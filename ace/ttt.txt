@@ -1,3 +1,4 @@
+exception in case of user eeor already noin necessary coz "script termination"
 
 add action.. catch errors, save then add - is "save" logical with commit?
 	
