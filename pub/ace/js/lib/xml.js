@@ -164,6 +164,10 @@ XmlHelper = {
 		return XmlHelper.stringifyString(key, value);
 	},
 
+	'stringifyBoolean' : function(key, value) {
+		return XmlHelper.stringifyString(key, value ? 1 : 0);
+	},
+
 	'objectify' : function(value) {
 
 		if (typeof (value) != 'object') {
