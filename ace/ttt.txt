@@ -1,3 +1,6 @@
+
+update($data,$item) - поменять порядок параметров
+
 exception in case of user eeor already noin necessary coz "script termination"
 
 add action.. catch errors, save then add - is "save" logical with commit?
@@ -109,6 +112,7 @@ w3schools.com
 habrahabr
 wikipedia
 sites with frameworks overview
+другие сайты для стартапов, может конкурсы
 
 Может и подзаработать?
 модерация экстеншенов, сильно матерится на левые.. а я буду брать деньги за то что их проверяю и утверждаю
