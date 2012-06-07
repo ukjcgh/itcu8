@@ -41,8 +41,6 @@ function single($class){
 	return $objects[$class];
 }
 
-class userExeption extends Exception {};
-
-function userError($message){
-	throw new userExeption($message);
+function error($message){
+	trigger_error($message, E_USER_ERROR);
 }

@@ -14,7 +14,7 @@ class model extends \data\hand {
 	public function init($entity){
 		$this->entity = $entity;
 		if(preg_match('~[^a-zA-Z/]~', $this->entity)){
-			trigger_error('Invalid entity name "' . $this->entity . '"', E_USER_ERROR);
+			error('Invalid entity name "' . $this->entity . '"');
 		}
 		$this->configFile = IDE_DIR.'config/models/'.$this->entity.'.xml';
 		$this->sourceFile = APP_DIR.$this->entity.'.xml';
@@ -42,25 +42,25 @@ class model extends \data\hand {
 	public function save($data = null){
 		$data = is_null($data) ? $this->data() : $data;
 		if(!isset($data->code)){
-			userError('Can\'t save "'.$this->entity.'". Code is not specified');
+			error('Can\'t save "'.$this->entity.'". Code is not specified');
 		}
 		$item = $this->getItem($data->code);
 		if(!$item){
 			$this->_insert($data);
 		} else {
-			$this->update($data);
+			$this->_update($data, $item);
 		}
 	}
 
 	public function insert($data = null){
 		$data = is_null($data) ? $this->data() : $data;
 		if(!isset($data->code)){
-			userError('Can\'t insert to "'.$this->entity.'". Code is not specified');
+			error('Can\'t insert into "'.$this->entity.'". Code is not specified');
 		}
 		if(!($item = $this->getItem($data->code))){
 			$this->_insert($data);
 		} else {
-			userError('Can\'t insert to "'.$this->entity.'". Item code="'.$data->code.'" already exists');
+			error('Can\'t insert into "'.$this->entity.'". Item code="'.$data->code.'" already exists');
 		}
 	}
 
@@ -79,12 +79,12 @@ class model extends \data\hand {
 	public function update($data = null){
 		$data = is_null($data) ? $this->data() : $data;
 		if(!isset($data->code)){
-			userError('Can\'t insert to "'.$this->entity.'". Code is not specified');
+			error('Can\'t insert to "'.$this->entity.'". Code is not specified');
 		}
 		if($item = $this->getItem($data->code)){
 			$this->_update($data, $item);
 		} else {
-			userError('Can\'t update "'.$this->entity.'". Item code="'.$data->code.'" doesn\'t exists');
+			error('Can\'t update "'.$this->entity.'". Item code="'.$data->code.'" doesn\'t exists');
 		}
 	}
 
@@ -112,27 +112,33 @@ class model extends \data\hand {
 		$data = $this->data();
 		$code = $code !== false ? $code : (isset($data->code) ? $data->code : false);
 		if($code === false){
-			userError('Can\'t detele item. Code is not specified');
+			error('Can\'t detele item. Code is not specified');
 		}
 		if(($position = $this->getItemPosition($code)) !== false){
 			unset($this->getSource()->item[$position]);
 		} else {
-			userError('Can\'t detele item "'.$code.'", not found');
+			error('Can\'t detele item "'.$code.'", not found');
 		}
 	}
 
 	public function commit(){
-		file_put_contents($this->sourceFile, $this->source->asNiceXml());
+		file_put_contents($this->sourceFile, $this->getSource()->asNiceXml());
 		$this->source = null;
 	}
 
 	public function getConfig(){
 		if(!$this->config) $this->config = new \xml\element($this->configFile, 0, true);
+		if(!$this->config) {
+			error('Can\'t load config of "' . $this->entity . '"');
+		}
 		return $this->config;
 	}
 
 	public function getSource(){
 		if(!$this->source) $this->source = new \xml\element($this->sourceFile, 0, true);
+		if(!$this->source) {
+			error('Can\'t load source of "' . $this->entity . '"');
+		}
 		return $this->source;
 	}
 

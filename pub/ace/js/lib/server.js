@@ -74,8 +74,7 @@ serverHelper = {
 		if (response['user-error']) {
 			alert(response['user-error']);
 			// just interrupt
-			throwError(msg + 'This exception thrown out only to stop further execution of the script in case of user error: '
-					+ response['user-error']);
+			terminate(1);
 		}
 
 		return response;

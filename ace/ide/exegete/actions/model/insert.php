@@ -6,5 +6,5 @@ if(!$model->load($request->code)){
 	$model->save();
 	$model->commit();
 } else {
-	userError('Item with code "'. $request->code .'" already exists, try different one');
+	$response->meta('user-error', 'Item with code "'. $request->code .'" already exists, try different one');
 }

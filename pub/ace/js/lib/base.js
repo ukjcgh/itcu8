@@ -96,10 +96,14 @@ Object.prototype.isEmpty = function() {
 	return true;
 };
 
+function terminate(isUserError) {
+	throw 'script termination' + (isUserError ? ' due to user error' : '');
+}
+
 function throwError(message) {
 	// console.error adds trace in Chrome even in console
 	console.error('Error: ' + message);
-	throw 'script termination';
+	terminate();
 }
 
 initFuncs = [];
