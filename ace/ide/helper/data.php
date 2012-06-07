@@ -14,8 +14,15 @@ class data {
 		return \object\property::get($this, 'hand');
 	}
 
-	public function import($data){
+	public function import($data, $clean = 1){
+		if($clean) $this->clean();
 		foreach ($data as $k=>$v) $this->$k = $v;
+		return $this;
+	}
+
+	public function clean(){
+		foreach ($this as $k=>$v) unset($this->$k);
+		return $this;
 	}
 
 	public function export(){

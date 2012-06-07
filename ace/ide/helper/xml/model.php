@@ -50,6 +50,7 @@ class model extends \data\hand {
 		} else {
 			$this->_update($data, $item);
 		}
+		return $this;
 	}
 
 	public function insert($data = null){
@@ -62,6 +63,7 @@ class model extends \data\hand {
 		} else {
 			error('Can\'t insert into "'.$this->entity.'". Item code="'.$data->code.'" already exists');
 		}
+		return $this;
 	}
 
 	protected function _insert($data){
@@ -86,6 +88,7 @@ class model extends \data\hand {
 		} else {
 			error('Can\'t update "'.$this->entity.'". Item code="'.$data->code.'" doesn\'t exists');
 		}
+		return $this;
 	}
 
 	protected function _update($data, $item){
@@ -119,11 +122,13 @@ class model extends \data\hand {
 		} else {
 			error('Can\'t detele item "'.$code.'", not found');
 		}
+		return $this;
 	}
 
 	public function commit(){
 		file_put_contents($this->sourceFile, $this->getSource()->asNiceXml());
 		$this->source = null;
+		return $this;
 	}
 
 	public function getConfig(){
