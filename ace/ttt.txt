@@ -1,4 +1,5 @@
 
+how divide internal validation and user validation? controller? model->userInsert? model->insertValidation?
 allow to change code field
 validation, forms
 save then commit - is "save" logical with commit?
