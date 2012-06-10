@@ -40,37 +40,53 @@ class model extends \data\hand {
 
 	// insert or update
 	public function save($data = null){
+		$probe = $this->probeSave($data);
+		$this->_save($probe);
+		return $this;
+	}
+
+	public function probeSave($data = null){
 		$data = is_null($data) ? $this->data() : $data;
 		if(!isset($data->code)){
 			error('Can\'t save "'.$this->entity.'". Code is not specified');
 		}
-		$item = $this->getItem($data->code);
-		if(!$item){
-			$this->_insert($data);
-		} else {
-			$this->_update($data, $item);
+		$probe = array('data' => $data);
+		if($item = $this->getItem($data->code)){
+			$probe['item'] = $item;
 		}
-		return $this;
+		return $probe;
+	}
+
+	protected function _save($probe){
+		if(isset($probe['item'])){
+			$this->_update($probe);
+		} else {
+			$this->_insert($probe);
+		}
 	}
 
 	public function insert($data = null){
+		$probe = $this->probeInsert($data);
+		$this->_insert($probe);
+		return $this;
+	}
+
+	public function probeInsert($data = null){
 		$data = is_null($data) ? $this->data() : $data;
 		if(!isset($data->code)){
 			error('Can\'t insert into "'.$this->entity.'". Code is not specified');
 		}
-		if(!($item = $this->getItem($data->code))){
-			$this->_insert($data);
-		} else {
+		if($this->getItem($data->code)){
 			error('Can\'t insert into "'.$this->entity.'". Item code="'.$data->code.'" already exists');
 		}
-		return $this;
+		return array('data'=>$data);
 	}
 
-	protected function _insert($data){
+	protected function _insert($probe){
 		$item = $this->getSource()->addChild('item');
 		foreach($this->getConfig()->forms->add->fields->children() as $field=>$stuff) {
-			if(isset($data->$field)){
-				$item->$field = $data->$field;
+			if(isset($probe['data']->$field)){
+				$item->$field = $probe['data']->$field;
 			} else {
 				//TODO: default value from config
 				$item->$field = '';
@@ -79,38 +95,50 @@ class model extends \data\hand {
 	}
 
 	public function update($data = null){
+		$probe = $this->probeUpdate($data);
+		$this->_update($probe);
+		return $this;
+	}
+
+	public function probeUpdate($data = null){
 		$data = is_null($data) ? $this->data() : $data;
 		if(!isset($data->code)){
 			error('Can\'t insert to "'.$this->entity.'". Code is not specified');
 		}
-		if($item = $this->getItem($data->code)){
-			$this->_update($data, $item);
-		} else {
+		if(!($item = $this->getItem($data->code))){
 			error('Can\'t update "'.$this->entity.'". Item code="'.$data->code.'" doesn\'t exists');
 		}
-		return $this;
+		return array('data'=>$data, 'item'=>$item);
 	}
 
-	protected function _update($data, $item){
+	protected function _update($probe){
 		foreach($this->getConfig()->forms->edit->fields->children() as $field=>$stuff) {
-			if(isset($data->$field)){
-				$item->$field = $data->$field;
+			if(isset($probe['data']->$field)){
+				$probe['item']->$field = $probe['data']->$field;
 			}
 		}
 	}
 
-	public function delete($code = false){
+	public function delete($code = null){
+		$probe = $this->probeDelete($code);
+		$this->_delete($probe);
+		return $this;
+	}
+
+	public function probeDelete($code = null){
 		$data = $this->data();
-		$code = $code !== false ? $code : (isset($data->code) ? $data->code : false);
-		if($code === false){
+		$code = is_null($code) ? (isset($data->code) ? $data->code : null) : $code;
+		if(is_null($code)){
 			error('Can\'t detele item from "'.$this->entity.'". Code is not specified');
 		}
-		if(($position = $this->getItemPosition($code)) !== false){
-			unset($this->getSource()->item[$position]);
-		} else {
+		if(($position = $this->getItemPosition($code)) === false){
 			error('Can\'t detele item "'.$code.'" from "'.$this->entity.'", not found');
 		}
-		return $this;
+		return array('position' => $position);
+	}
+
+	protected function _delete($probe){
+		unset($this->getSource()->item[$probe['position']]);
 	}
 
 	public function getItemPosition($code){
