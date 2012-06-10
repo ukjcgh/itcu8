@@ -99,6 +99,20 @@ class model extends \data\hand {
 		}
 	}
 
+	public function delete($code = false){
+		$data = $this->data();
+		$code = $code !== false ? $code : (isset($data->code) ? $data->code : false);
+		if($code === false){
+			error('Can\'t detele item from "'.$this->entity.'". Code is not specified');
+		}
+		if(($position = $this->getItemPosition($code)) !== false){
+			unset($this->getSource()->item[$position]);
+		} else {
+			error('Can\'t detele item "'.$code.'" from "'.$this->entity.'", not found');
+		}
+		return $this;
+	}
+
 	public function getItemPosition($code){
 		$i = 0;
 		foreach ($this->getSource()->item as $item){
@@ -109,20 +123,6 @@ class model extends \data\hand {
 			$i++;
 		}
 		return false;
-	}
-
-	public function delete($code = false){
-		$data = $this->data();
-		$code = $code !== false ? $code : (isset($data->code) ? $data->code : false);
-		if($code === false){
-			error('Can\'t detele item. Code is not specified');
-		}
-		if(($position = $this->getItemPosition($code)) !== false){
-			unset($this->getSource()->item[$position]);
-		} else {
-			error('Can\'t detele item "'.$code.'", not found');
-		}
-		return $this;
 	}
 
 	public function commit(){

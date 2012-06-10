@@ -1,5 +1,5 @@
 <?php
 
-$model = object('xml\model')->init('websites');
-$model->delete($request->{0});
-$model->commit();
+$model = object('xml\model')->init('websites')
+->delete($request->{0})
+->commit();
