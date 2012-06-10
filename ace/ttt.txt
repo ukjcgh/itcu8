@@ -1,4 +1,5 @@
 
+add validateInsert func so inster will be more clean
 validate delete action? not found
 show space symbols in grid cells
 allow to change code field
