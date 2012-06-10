@@ -4,7 +4,7 @@ show space symbols in grid cells
 allow to change code field
 validation, forms
 how to divide internal validation and user validation? controller? model->validateInsert?
-	- пока что контроллер. validateInsert - это будет при валидации формы validateForm
+	- пока что контроллер. validateInsert - это будет при валидации формы validateForm. + еще не достаточно примеров, наворотить надо
 default value for form field
 save then commit - is "save" logical with commit? may be add commit into save?
 how to update any field that is not mentioned in config->form
