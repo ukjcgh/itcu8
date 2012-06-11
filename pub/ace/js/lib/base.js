@@ -88,6 +88,10 @@ function template(xslFile, xml) {
 
 }
 
+function htmlencode(string) {
+	return string.replace(/</g, '&lt;');
+}
+
 Object.prototype.isEmpty = function() {
 	for ( var key in this) {
 		// own properties always on top in Chrome and Firefox so it is enough to check first one
@@ -95,6 +99,16 @@ Object.prototype.isEmpty = function() {
 	}
 	return true;
 };
+
+Object.prototype.export = function() {
+	var data = getClass(this) == 'Array' ? [] : {};
+	for ( var key in this) {
+		if (this.hasOwnProperty(key)) {
+			data[key] = typeof (this[key]) == 'object' ? this[key].export() : this[key];
+		}
+	}
+	return data;
+}
 
 function terminate(isUserError) {
 	throw 'script termination' + (isUserError ? ' due to user error' : '');

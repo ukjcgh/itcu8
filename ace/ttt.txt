@@ -1,9 +1,11 @@
 
+firefox не показывает html в гриде 
+show space symbols in grid cells
+trim - setting for field 'allow spaces at the edges'
+allow to change code field
 toXmlString in js & asNiceXml in php really different.....
 file_get_contents in js?
-show space symbols in grid cells
-allow to change code field
-validation, forms
+validation, forms, see insert action there is duplication of validation
 how to divide internal validation and user validation? controller? model->validateInsert?
 	- пока что контроллер. validateInsert - это будет при валидации формы validateForm. + еще не достаточно примеров, наворотить надо
 default value for form field

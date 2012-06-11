@@ -45,9 +45,29 @@ function grid_show() {
 	config = server.requestXml('model/config').toObject();
 	data = server.requestXml('model/data').toObject();
 
+	// show and highlight space characters
+	var items = {
+		'item' : []
+	};
+	for ( var i = 0; i < data.item.length; i++) {
+		var item = data.item[i];
+		items.item[i] = {};
+		for ( var j in item) {
+			if (item.hasOwnProperty(j)) {
+				var htmlValue = htmlencode(item[j]).replace(/ /g, '<span style="color:Red">&#9012;</span>').replace(
+						/[\n\r]/g, '<span style="color:Red">&#10550;</span><br>').replace(/\t/g,
+						'<span style="color:Red">&#11012;</span>');
+				items.item[i][j] = {
+					'value' : item[j],
+					'htmlValue' : htmlValue
+				};
+			}
+		}
+	}
+
 	var xml = {
 		'grid' : config.grid,
-		'items' : data
+		'items' : items
 	}.toXmlDocument('data');
 
 	var html = template('grid', xml);
@@ -75,13 +95,14 @@ grid_init = function() {
 	initLinks('.edit-link', grid_edit_action);
 	initLinks('.delete-link', grid_delete_action);
 
-	with ($('.add-link')) {
-		onclick = function() {
-			grid_add_action();
-			return false;
-		};
-		href = '#';
-	}
+	if ($('.add-link'))
+		with ($('.add-link')) {
+			onclick = function() {
+				grid_add_action();
+				return false;
+			};
+			href = '#';
+		}
 
 }
 

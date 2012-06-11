@@ -6,10 +6,6 @@ table {
 table td,table th {
 	background-color: #fff;
 	padding: 0 7px 0 7px;
-}
-
-td.data-cell {
-	white-space: pre;
 	vertical-align: top;
 }
 

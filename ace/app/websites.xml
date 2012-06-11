@@ -20,4 +20,10 @@
 		<domain>baks</domain>
 		<path>....</path>
 	</item>
+	<item>
+		<code/>
+		<domain> cvvv
+		</domain>
+		<path/>
+	</item>
 </items>
