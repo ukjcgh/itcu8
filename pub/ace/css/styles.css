@@ -8,6 +8,11 @@ table td,table th {
 	padding: 0 7px 0 7px;
 }
 
+td.data-cell {
+	white-space: pre;
+	vertical-align: top;
+}
+
 a {
 	color: rgb(40, 40, 198);
 	text-decoration: none;

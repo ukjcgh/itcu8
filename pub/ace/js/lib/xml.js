@@ -43,6 +43,9 @@ Object.prototype.toXmlString = function(rootTag) {
 	// remove "\n" at the beginning
 	xml = xml.substring(1);
 
+	// restore \n in string values
+	xml = xml.replace(/&#10;/g, '\n');
+
 	return xml;
 
 };
@@ -57,7 +60,7 @@ Object.prototype.toObject = function() {
 
 Object.prototype.toXmlDocument = function(rootTag) {
 
-	return (new DOMParser()).parseFromString(this.toXmlString(rootTag), "text/xml");
+	return (new DOMParser()).parseFromString(getClass(this) == 'String' ? this : this.toXmlString(rootTag), "text/xml");
 
 };
 
@@ -78,7 +81,8 @@ XmlHelper = {
 	},
 
 	'escape' : function(value) {
-		return (value + '').replace(/&/g, '&amp;').replace(/</g, '&lt;');
+		// replace(/\n/g, '&#10;') - to avoid indent in string values
+		return (value + '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/\n/g, '&#10;');
 	},
 
 	'checkTag' : function(tag) {
@@ -101,7 +105,7 @@ XmlHelper = {
 		var func = 'stringify' + getClass(value);
 
 		if (typeof (helper[func]) == 'function') {
-			return xml = helper[func](key, value);
+			return helper[func](key, value);
 		} else {
 			throwError('function "' + func + '" not found within helper, can\'t stringify value');
 		}

@@ -1,6 +1,6 @@
 
-и что теперь с пробами делать? есть ли там смысл выкидывать эксепшены и ловить в роутере?
-validate delete action? not found
+toXmlString in js & asNiceXml in php really different.....
+file_get_contents in js?
 show space symbols in grid cells
 allow to change code field
 validation, forms

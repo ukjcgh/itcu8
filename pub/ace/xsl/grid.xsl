@@ -20,7 +20,7 @@
 					<xsl:variable name="item" select="." />
 					<xsl:for-each select="//grid/columns/*">
 						<xsl:variable name="fieldCode" select="name()" />
-						<td>
+						<td class="data-cell">
 							<xsl:value-of select="$item/*[name()=$fieldCode]" />
 						</td>
 					</xsl:for-each>
