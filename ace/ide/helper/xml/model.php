@@ -94,19 +94,20 @@ class model extends \data\hand {
 		}
 	}
 
-	public function update($data = null){
-		$probe = $this->probeUpdate($data);
+	public function update($code = null, $data = null){
+		$probe = $this->probeUpdate($code, $data);
 		$this->_update($probe);
 		return $this;
 	}
 
-	public function probeUpdate($data = null){
+	public function probeUpdate($code = null, $data = null){
 		$data = is_null($data) ? $this->data() : $data;
-		if(!isset($data->code)){
-			error('Can\'t insert to "'.$this->entity.'". Code is not specified');
+		$code = is_null($code) ? $data->code : $code;
+		if(is_null($code)){
+			error('Can\'t update "'.$this->entity.'". Code is not specified');
 		}
-		if(!($item = $this->getItem($data->code))){
-			error('Can\'t update "'.$this->entity.'". Item code="'.$data->code.'" doesn\'t exists');
+		if(!($item = $this->getItem($code))){
+			error('Can\'t update "'.$this->entity.'". Item code="'.$code.'" doesn\'t exists');
 		}
 		return array('data'=>$data, 'item'=>$item);
 	}

@@ -11,7 +11,7 @@ function grid_edit_action(code) {
 	}).toXmlDocument('data');
 	var form = template('grid/form', xml);
 	popup.show(form);
-	grid_init_form(grid_save_action);
+	grid_init_form(grid_save_action, code);
 }
 
 function grid_save_action(data) {
@@ -86,7 +86,7 @@ grid_init = function() {
 
 }
 
-function grid_init_form(submitFunc) {
+function grid_init_form(submitFunc, code) {
 
 	if (first = $('.popup *[name]')) {
 		first.focus();
@@ -97,6 +97,14 @@ function grid_init_form(submitFunc) {
 		var fields = $$('.form *[name]');
 		for ( var i = 0; i < fields.length; i++) {
 			data[fields[i].name] = fields[i].value;
+		}
+
+		// if edit
+		if (typeof code !== 'undefined') {
+			data = {
+				'code' : code,
+				'data' : data
+			};
 		}
 		submitFunc(data);
 	};

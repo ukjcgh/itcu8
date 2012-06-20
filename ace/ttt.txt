@@ -1,6 +1,5 @@
 
 trim - setting for field 'allow spaces at the edges' or 'trim spaces'
-allow to change code field
 toXmlString in js & asNiceXml in php really different.....
 file_get_contents in js?
 validation, forms, see insert action there is duplication of validation
