@@ -1,7 +1,5 @@
 
-safe from space characters in fields like code or domain
-show space symbols in grid cells
-trim - setting for field 'allow spaces at the edges'
+trim - setting for field 'allow spaces at the edges' or 'trim spaces'
 allow to change code field
 toXmlString in js & asNiceXml in php really different.....
 file_get_contents in js?
@@ -52,6 +50,7 @@ how to simplify request so if logged in user click button and on server just run
 а может ide не делать встроенной а отдельно... совсем отдельное приложение, в котором можно работать с проектами через браузер
 
 ################ in future
+safe from space characters in fields like code or domain
 publisher: что если очень много апдейтов и он завелся (импорт например).. если они продолжаются то подождать?
 конфиг компилить после редактировании, паблишить, все паблишить
 утечка памяти в жс, проверить или нет
