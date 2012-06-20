@@ -3,12 +3,8 @@
 	<xsl:template match="/data">
 		<xsl:value-of disable-output-escaping="yes" select="concat('&lt;!DOCTYPE ', doctype, '&gt;')" />
 		<html>
-			<head>
-				<xsl:value-of select="head" disable-output-escaping="yes" />
-			</head>
-			<body>
-				<xsl:value-of select="body" disable-output-escaping="yes" />
-			</body>
+			<xsl:copy-of select="head" />
+			<body></body>
 		</html>
 	</xsl:template>
 </xsl:transform>

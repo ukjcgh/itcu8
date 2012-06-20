@@ -21,13 +21,13 @@
 					<xsl:for-each select="//grid/columns/*">
 						<xsl:variable name="fieldCode" select="name()" />
 						<td>
-							<xsl:value-of select="$item/*[name()=$fieldCode]/htmlValue" disable-output-escaping="yes" />
+							<xsl:value-of select="$item/*[name()=$fieldCode]" />
 						</td>
 					</xsl:for-each>
 					<td>
-						<a class="edit-link" code="{code/value}">edit</a>
+						<a class="edit-link" code="{code}">edit</a>
 						/
-						<a class="delete-link" code="{code/value}">delete</a>
+						<a class="delete-link" code="{code}">delete</a>
 					</td>
 				</tr>
 			</xsl:for-each>

@@ -1,5 +1,5 @@
 
-firefox не показывает html в гриде 
+safe from space characters in fields like code or domain
 show space symbols in grid cells
 trim - setting for field 'allow spaces at the edges'
 allow to change code field

@@ -23,6 +23,9 @@ class master extends \data\hand {
 				$data->insertArray($key, $value);
 			} elseif($value instanceof \SimpleXMLElement) {
 				$data->insertXmlElement($value, $key);
+			} elseif($value instanceof \data and $value->hand() instanceof \blocks\master) {
+				$xmlElem = new \xml\element("<$key>" . $value->transform(false) . "</$key>");
+				$data->insertXmlElement($xmlElem);
 			} else {
 				$data->$key = (string)$value;
 			}
@@ -30,7 +33,7 @@ class master extends \data\hand {
 		return $data;
 	}
 
-	public function transform() {
+	public function transform($html = true) {
 
 		$xslProc = new \XSLTProcessor();
 
@@ -38,7 +41,13 @@ class master extends \data\hand {
 		$xsltElem = simplexml_load_string(file_get_contents(IDE_DIR.'config/templates/'.$this->getXslFileName()), 'xml\element');
 
 		$outputNode = $xsltElem->addChild('output');
-		$outputNode->addAttribute('method', 'html');
+		$outputNode->addAttribute('indent', 'yes');
+		if($html){
+			$outputNode->addAttribute('method', 'html');
+		} else {
+			$outputNode->addAttribute('method', 'xml');
+			$outputNode->addAttribute('omit-xml-declaration', 'yes');
+		}
 
 		$xslProc->importStylesheet($xsltElem);
 
