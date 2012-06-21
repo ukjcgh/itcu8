@@ -1,4 +1,5 @@
 
+хслт на клиенте, будут ли вложенные темплейты?
 trim - setting for field 'allow spaces at the edges' or 'trim spaces'
 toXmlString in js & asNiceXml in php really different.....
 file_get_contents in js?
